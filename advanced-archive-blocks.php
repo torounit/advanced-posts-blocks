@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:     Advanced Archive Blocks
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Plugin URI:      https://github.com/torounit/advanced-archive-blocks
+ * Description:     Powerfull archive blocks.
+ * Author:          Toro_Unit
+ * Author URI:      https://torounit.com
  * Text Domain:     advanced-archive-blocks
  * Domain Path:     /languages
  * Version:         0.1.0
