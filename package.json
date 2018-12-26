@@ -1,0 +1,36 @@
+{
+  "name": "advanced-archive-blocks",
+  "version": "0.1.0",
+  "author": "YOUR NAME HERE",
+  "scripts": {
+    "build": "npm run build:production",
+    "build:production": "cross-env NODE_ENV=production webpack",
+    "dev": "webpack --watch"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-react-jsx": "^7.2.0",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.2.0",
+    "@wordpress/browserslist-config": "^2.2.2",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.3",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.10.0",
+    "eslint-config-wordpress": "^2.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-wordpress": "git://github.com/WordPress-Coding-Standards/eslint-plugin-wordpress.git",
+    "grunt": "~1.0.3",
+    "grunt-wp-i18n": "~1.0.3",
+    "grunt-wp-readme-to-markdown": "~2.0.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
