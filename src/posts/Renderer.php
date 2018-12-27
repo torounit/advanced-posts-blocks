@@ -62,9 +62,9 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 	 */
 	public function __construct( $name, $post_type = 'post' ) {
 		$this->post_type = get_post_type_object( $post_type );
-		foreach (  get_object_taxonomies( $post_type ) as $taxonomy ) {
+		foreach ( get_object_taxonomies( $post_type ) as $taxonomy ) {
 			$this->attributes[ $taxonomy ] = [
-				'type' => 'array',
+				'type'    => 'array',
 				'default' => [],
 			];
 		}
@@ -85,16 +85,15 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 		];
 
 		$args['tax_query'] = [];
-		if ( ! empty( $this->post_type->taxonomies ) ) {
-			foreach ( $this->post_type->taxonomies as $taxonomy ) {
-				if ( ! empty( $attributes[ $taxonomy ] ) ) {
-					$args['tax_query'][] = [
-						'taxonomy' => $this->taxonomy,
-						'field'    => 'term_id',
-						'terms'    => $attributes[ $taxonomy ],
-						'operator' => 'AND',
-					];
-				}
+
+		foreach ( get_object_taxonomies( $this->post_type->name ) as $taxonomy ) {
+			if ( ! empty( $attributes[ $taxonomy ] ) ) {
+				$args['tax_query'][] = [
+					'taxonomy' => $taxonomy,
+					'field'    => 'term_id',
+					'terms'    => $attributes[ $taxonomy ],
+					'operator' => 'AND',
+				];
 			}
 		}
 

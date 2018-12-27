@@ -5,19 +5,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	SelectControl,
 } from '@wordpress/components';
-
-const createOptionsFromTermList = ( termList ) => {
-	if ( Array.isArray ( termList ) )  {
-		return [
-			{ label: __( 'All' ), value: 0 },
-			...termList.map( ( { id, name } ) => ( { label: name, value: id } ) ),
-		];
-	}
-	return [
-		{ label: __( 'All' ), value: 0 },
-	];
-
-};
+import TermSelect from './TermSelect';
 
 export default function TermsControls(
 	{
@@ -28,11 +16,12 @@ export default function TermsControls(
 	} ) {
 	return [
 		onTermChange && (
-			<SelectControl
-				multiple={ true }
-				options={ createOptionsFromTermList( termList ) }
+			<TermSelect
+				noOptionLabel={ __( 'All' ) }
+				multiple={ false }
+				termList={ termList }
 				label={ taxonomy.labels.name }
-				value={ selectedTermId }
+				selectedTermId={ selectedTermId }
 				onChange={ onTermChange }
 			/> ),
 

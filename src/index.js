@@ -1,11 +1,63 @@
+/**
+ * External dependencies
+ */
+import { isUndefined, pickBy } from 'lodash';
+
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './posts/getEditComponent';
-import { select } from '@wordpress/data';
+import { select, withSelect, subscribe } from '@wordpress/data';
+const { getPostTypes } = select( 'core' );
 
-const { getEntityRecords, getPostTypes } = select( 'core' );
+const registerPostBlockType = ( postType ) => {
+	const name = `advanced-posts-blocks/${ postType.rest_base }`;
+	const edit = getEditComponent( name, postType );
+	registerBlockType(
+		name,
+		{
 
-const { subscribe } = wp.data;
+			title: postType.labels.archives,
+
+			icon: 'admin-post',
+
+			category: 'common',
+
+			supports: {
+				html: false,
+			},
+
+			edit: withSelect( ( ownSelect, props ) => {
+				const { attributes } = props;
+				const { postsToShow, order, orderBy } = attributes;
+				const { getEntityRecords, getTaxonomies } = select( 'core' );
+
+				let taxonomies = getTaxonomies() || [];
+				taxonomies = taxonomies.filter( ( taxonomy ) => {
+					return postType.taxonomies.includes( taxonomy.slug );
+				} );
+
+				const taxQuery = {};
+				for ( const taxonomy of postType.taxonomies ) {
+					taxQuery[ taxonomy ] = attributes[ taxonomy ];
+				}
+				const latestPostsQuery = pickBy( {
+					...taxQuery,
+					order,
+					orderby: orderBy,
+					per_page: postsToShow,
+				}, ( value ) => ! isUndefined( value ) );
+				return {
+					latestPosts: getEntityRecords( 'postType', postType.slug, latestPostsQuery ),
+					taxonomies,
+				};
+			} )( edit ),
+
+			save() {
+				return null;
+			},
+		}
+	);
+};
 
 const unsubscribe = subscribe( () => {
 	const postTypes = getPostTypes();
@@ -13,26 +65,7 @@ const unsubscribe = subscribe( () => {
 		unsubscribe();
 		postTypes
 			.filter( ( postType ) => postType.viewable )
-			.map( ( postType ) => {
-			const name = `advanced-posts-blocks/${ postType.rest_base }`;
-			registerBlockType(
-				name,
-				{
-					title: postType.labels.archives,
-					icon: 'admin-post',
-					category: 'common',
-					supports: {
-						html: false,
-					},
-					edit: getEditComponent( name, postType ),
-					save() {
-						return null;
-					},
-				}
-			);
-		} );
-
+			.map( registerPostBlockType );
 	}
 } );
-
 
