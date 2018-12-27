@@ -1,17 +1,18 @@
 /**
  * External dependencies
  */
-import { isUndefined, pickBy } from 'lodash';
+import { isUndefined, pickBy, identity } from 'lodash';
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './posts/getEditComponent';
 import { select, withSelect, subscribe } from '@wordpress/data';
+
 const { getPostTypes } = select( 'core' );
 
 const registerPostBlockType = ( postType ) => {
 	const name = `advanced-posts-blocks/${ postType.rest_base }`;
-	const edit = getEditComponent( name, postType );
+	const edit = getEditComponent( name );
 	registerBlockType(
 		name,
 		{
@@ -37,8 +38,11 @@ const registerPostBlockType = ( postType ) => {
 				} );
 
 				const taxQuery = {};
-				for ( const taxonomy of postType.taxonomies ) {
-					taxQuery[ taxonomy ] = attributes[ taxonomy ];
+				for ( const taxonomy of taxonomies ) {
+					const terms = attributes[ taxonomy.slug ];
+					if ( Array.isArray( terms ) && terms.length > 0 ) {
+						taxQuery[ taxonomy.rest_base ] = terms.filter( identity );
+					}
 				}
 				const latestPostsQuery = pickBy( {
 					...taxQuery,

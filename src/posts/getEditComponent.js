@@ -24,7 +24,7 @@ const TERM_LIST_QUERY = {
 	per_page: -1,
 };
 
-const getEditComponent = ( blockName, postType ) => {
+const getEditComponent = ( blockName ) => {
 	return class extends Component {
 		constructor() {
 			super( ...arguments );
@@ -103,6 +103,7 @@ const getEditComponent = ( blockName, postType ) => {
 				</InspectorControls>
 			);
 
+			console.log(latestPosts)
 			const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
 			if ( ! hasPosts ) {
 				return (
