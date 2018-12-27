@@ -11,14 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once dirname( __FILE__ ) . '/Renderer.php';
-require_once dirname( __FILE__ ) . '/posts/Renderer.php';
+require_once dirname( __FILE__ ) . '/blocks/posts/Renderer.php';
 
 
 add_action(
 	'wp_loaded',
 	function () {
-		new Posts\Renderer( 'advanced-posts-blocks/posts' );
+		new Renderer( 'advanced-posts-blocks/posts' );
 	}
 );
 
