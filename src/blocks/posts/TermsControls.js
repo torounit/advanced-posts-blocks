@@ -21,6 +21,5 @@ export default function TermsControls(
 				selectedTermId={ selectedTermId }
 				onChange={ onTermChange }
 			/> ),
-
 	];
 }

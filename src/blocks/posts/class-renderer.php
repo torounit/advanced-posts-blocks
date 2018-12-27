@@ -11,7 +11,6 @@ namespace Advanced_Posts_Blocks;
  * Class Renderer
  *
  * Posts blocks.
- *
  */
 class Renderer {
 
@@ -48,8 +47,8 @@ class Renderer {
 			'default' => 'date',
 		],
 		'align'       => [
-			'type' => 'string'
-		]
+			'type' => 'string',
+		],
 	];
 
 	/**
@@ -58,7 +57,6 @@ class Renderer {
 	 * @param string $name block name.
 	 */
 	public function __construct( string $name ) {
-
 		if ( $name ) {
 			$this->name = $name;
 		}
@@ -181,7 +179,6 @@ class Renderer {
 		}
 
 		return $class_names;
-
 	}
 
 	/**
@@ -231,17 +228,17 @@ class Renderer {
 		$path = [
 			$this->get_template_part_dir(),
 			$this->name,
-			$attributes['postType']
+			$attributes['postType'],
 		];
 
-		$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name )  );
+		$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name ) );
 
 		if ( ! $output ) {
 			$path = [
 				$this->get_template_part_dir(),
 				$this->name,
 			];
-			$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name )  );
+			$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name ) );
 		}
 
 		return $output;
