@@ -133,23 +133,23 @@ const getEditComponent = ( blockName, postType ) => {
 				</InspectorControls>
 			);
 
-			// const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
-			// if ( ! hasPosts ) {
-			// 	return (
-			// 		<Fragment>
-			// 			{ inspectorControls }
-			// 			<Placeholder
-			// 				icon="admin-post"
-			// 				label={ __( 'Posts' ) }
-			// 			>
-			// 				{ ! Array.isArray( latestPosts ) ?
-			// 					<Spinner /> :
-			// 					__( 'No posts found.' )
-			// 				}
-			// 			</Placeholder>
-			// 		</Fragment>
-			// 	);
-			// }
+			const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
+			if ( ! hasPosts ) {
+				return (
+					<Fragment>
+						{ inspectorControls }
+						<Placeholder
+							icon="admin-post"
+							label={ __( 'Posts' ) }
+						>
+							{ ! Array.isArray( latestPosts ) ?
+								<Spinner /> :
+								__( 'No posts found.' )
+							}
+						</Placeholder>
+					</Fragment>
+				);
+			}
 
 			return (
 				<Fragment>

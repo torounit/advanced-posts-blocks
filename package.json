@@ -17,6 +17,8 @@
     "babel-loader": "^8.0.4",
     "browser-sync": "^2.26.3",
     "cross-env": "^5.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^5.10.0",
     "eslint-config-wordpress": "^2.0.0",
     "eslint-plugin-import": "^2.14.0",
@@ -30,6 +32,8 @@
     "grunt": "~1.0.3",
     "grunt-wp-i18n": "~1.0.3",
     "grunt-wp-readme-to-markdown": "~2.0.1",
+    "jest": "^23.6.0",
+    "react-test-renderer": "^16.7.0",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2"
   }
