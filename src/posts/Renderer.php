@@ -30,11 +30,9 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 	 * @var array $attributes Attributes schema for blocks.
 	 */
 	protected $attributes = [
-//		'taxonomy'    => [
-//			'type' => 'string',
-//		],
 		'postType'    => [
-			'type' => 'string',
+			'type'    => 'string',
+			'default' => 'post',
 		],
 		'className'   => [
 			'type' => 'string',
@@ -53,45 +51,70 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 		],
 	];
 
-
 	/**
 	 * Constructor
 	 *
 	 * @param $name
-	 * @param string $post_type
 	 */
-	public function __construct( $name, $post_type = 'post' ) {
-		$this->post_type = get_post_type_object( $post_type );
-		foreach ( get_object_taxonomies( $post_type ) as $taxonomy ) {
-			$this->attributes[ $taxonomy ] = [
+	public function __construct( $name ) {
+		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {
+			$this->get_rest_base( $taxonomy );
+			$base                      = $this->get_rest_base( $taxonomy );
+			$this->attributes[ $base ] = [
 				'type'    => 'array',
 				'default' => [],
 			];
 		}
-		if ( $name ) {
-			$this->name = $name;
-			parent::__construct();
-		}
+		parent::__construct( $name );
+	}
+
+	/**
+	 * Get rest Base.
+	 *
+	 * @param \WP_Taxonomy $taxonomy
+	 *
+	 * @return bool|string
+	 */
+	public function get_rest_base( \WP_Taxonomy $taxonomy ) {
+		return ! empty( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
+	}
+
+	/**
+	 * Get taxonomies with connected.
+	 *
+	 * @param $post_type
+	 *
+	 * @return \WP_Taxonomy[]
+	 */
+	public function get_post_type_taxonomies( $post_type ) {
+		return array_map( 'get_taxonomy', get_object_taxonomies( $post_type ) );
 	}
 
 
+	/**
+	 * @param array $attributes
+	 *
+	 * @return false|string
+	 */
 	public function render( $attributes ) {
 		$args = [
 			'posts_per_page' => $attributes['postsToShow'],
 			'post_status'    => 'publish',
 			'order'          => $attributes['order'],
 			'orderby'        => $attributes['orderBy'],
-			'post_type'      => $this->post_type->name,
+			'post_type'      => $attributes['postType'],
 		];
+		$post_type = $attributes['postType'];
 
 		$args['tax_query'] = [];
-
-		foreach ( get_object_taxonomies( $this->post_type->name ) as $taxonomy ) {
-			if ( ! empty( $attributes[ $taxonomy ] ) ) {
+		foreach ( $this->get_post_type_taxonomies( $post_type ) as $taxonomy ) {
+			$this->get_rest_base( $taxonomy );
+			$base = $this->get_rest_base( $taxonomy );
+			if ( ! empty( $attributes[ $base ] ) ) {
 				$args['tax_query'][] = [
-					'taxonomy' => $taxonomy,
+					'taxonomy' => $taxonomy->name,
 					'field'    => 'term_id',
-					'terms'    => $attributes[ $taxonomy ],
+					'terms'    => $attributes[ $base ],
 					'operator' => 'AND',
 				];
 			}

@@ -6,11 +6,12 @@ import {
 	PanelBody,
 	Placeholder,
 	Spinner,
+	SelectControl,
 } from '@wordpress/components';
 import QueryControls from './QueryControls';
 import apiFetch from '@wordpress/api-fetch';
 import { addQueryArgs } from '@wordpress/url';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	InspectorControls,
 	ServerSideRender,
@@ -48,11 +49,11 @@ const getEditComponent = ( blockName ) => {
 					try {
 						const terms = await apiFetch( { path: addQueryArgs( `/wp/v2/${ restBase }`, TERM_LIST_QUERY ) } );
 						if ( this.isStillMounted ) {
-							this.setState( { [ taxonomy.slug ]: terms } );
+							this.setState( { [ restBase ]: terms } );
 						}
 					} catch ( e ) {
 						if ( this.isStillMounted ) {
-							this.setState( { [ taxonomy.slug ]: [] } );
+							this.setState( { [ restBase ]: [] } );
 						}
 					}
 				}
@@ -71,26 +72,38 @@ const getEditComponent = ( blockName ) => {
 		}
 
 		render() {
-			const { className, attributes, setAttributes, latestPosts, taxonomies } = this.props;
-			const { order, orderBy, term, postsToShow } = attributes;
+			const { className, attributes, setAttributes, latestPosts, taxonomies, selectedPostType, postTypes } = this.props;
+			const { order, orderBy, postsToShow } = attributes;
+			const { labels } = selectedPostType;
+
+			const PostTypeControls = (
+				<SelectControl
+					label="PostType"
+					value={ selectedPostType.slug }
+					options={ postTypes.map( type => ( { label: type.name, value: type.slug } ) ) }
+					onChange={ ( postType ) => {
+						setAttributes( { postType } );
+					} }
+				/>
+			);
 			const TermControls = taxonomies.map( ( taxonomy ) => (
 				<TermsControls
-					key={ taxonomy.slug }
+					key={ taxonomy.rest_base }
 					taxonomy={ taxonomy }
-					termList={ this.state[ taxonomy.slug ] }
-					selectedTermId={ term }
+					termList={ this.state[ taxonomy.rest_base ] || [] }
+					selectedTermId={ attributes[ taxonomy.rest_base ] }
 					onTermChange={ ( value ) => {
 						if ( ! Array.isArray( value ) ) {
 							value = [ value ];
 						}
-						setAttributes( { [ taxonomy.slug ]: '' !== value ? value : undefined } );
+						setAttributes( { [ taxonomy.rest_base ]: '' !== value ? value : undefined } );
 					} }
 				/>
 			) );
-
+			const title = sprintf( __( '%s Block Seetting', 'advanced-posts-blocks' ), labels.name );
 			const inspectorControls = (
 				<InspectorControls>
-					<PanelBody title={ __( 'Posts Settings' ) }>
+					<PanelBody title={ title }>
 						<QueryControls
 							{ ...{ order, orderBy } }
 							numberOfItems={ postsToShow }
@@ -98,12 +111,11 @@ const getEditComponent = ( blockName ) => {
 							onOrderByChange={ ( value ) => setAttributes( { orderBy: value } ) }
 							onNumberOfItemsChange={ ( value ) => setAttributes( { postsToShow: value } ) }
 						/>
+						{ PostTypeControls }
 						{ TermControls }
 					</PanelBody>
 				</InspectorControls>
 			);
-
-			console.log(latestPosts)
 			const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
 			if ( ! hasPosts ) {
 				return (
@@ -111,11 +123,10 @@ const getEditComponent = ( blockName ) => {
 						{ inspectorControls }
 						<Placeholder
 							icon="admin-post"
-							label={ __( 'Posts' ) }
+							label={ labels.name }
 						>
 							{ ! Array.isArray( latestPosts ) ?
-								<Spinner /> :
-								__( 'No posts found.' )
+								<Spinner /> : labels.not_found
 							}
 						</Placeholder>
 					</Fragment>

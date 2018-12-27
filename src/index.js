@@ -6,40 +6,39 @@ import { isUndefined, pickBy, identity } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './posts/getEditComponent';
-import { select, withSelect, subscribe } from '@wordpress/data';
+import { select, subscribe, withSelect } from '@wordpress/data';
 
-const { getPostTypes } = select( 'core' );
-
-const registerPostBlockType = ( postType ) => {
-	const name = `advanced-posts-blocks/${ postType.rest_base }`;
+let postTypes = [];
+const registerPostBlockType = () => {
+	const name = 'advanced-posts-blocks/posts';
 	const edit = getEditComponent( name );
 	registerBlockType(
 		name,
 		{
-
-			title: postType.labels.archives,
+			title: 'Advanced Posts Blocks',
 
 			icon: 'admin-post',
 
 			category: 'common',
 
 			supports: {
+				align: [ 'wide', 'full' ],
 				html: false,
 			},
 
 			edit: withSelect( ( ownSelect, props ) => {
 				const { attributes } = props;
-				const { postsToShow, order, orderBy } = attributes;
-				const { getEntityRecords, getTaxonomies } = select( 'core' );
-
+				const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
+				const { getEntityRecords, getTaxonomies, getPostType } = select( 'core' );
+				const selectedPostType = getPostType( postTypeName );
 				let taxonomies = getTaxonomies() || [];
 				taxonomies = taxonomies.filter( ( taxonomy ) => {
-					return postType.taxonomies.includes( taxonomy.slug );
+					return selectedPostType.taxonomies.includes( taxonomy.slug );
 				} );
 
 				const taxQuery = {};
 				for ( const taxonomy of taxonomies ) {
-					const terms = attributes[ taxonomy.slug ];
+					const terms = attributes[ taxonomy.rest_base ];
 					if ( Array.isArray( terms ) && terms.length > 0 ) {
 						taxQuery[ taxonomy.rest_base ] = terms.filter( identity );
 					}
@@ -51,8 +50,12 @@ const registerPostBlockType = ( postType ) => {
 					per_page: postsToShow,
 				}, ( value ) => ! isUndefined( value ) );
 				return {
-					latestPosts: getEntityRecords( 'postType', postType.slug, latestPostsQuery ),
+					latestPosts: getEntityRecords( 'postType', selectedPostType.slug, latestPostsQuery ),
 					taxonomies,
+					selectedPostType,
+					postTypes: postTypes
+						.filter( postType => postType.viewable )
+						.filter( postType => postType.rest_base !== 'media' ),
 				};
 			} )( edit ),
 
@@ -64,12 +67,9 @@ const registerPostBlockType = ( postType ) => {
 };
 
 const unsubscribe = subscribe( () => {
-	const postTypes = getPostTypes();
+	postTypes = select( 'core' ).getPostTypes();
 	if ( postTypes ) {
 		unsubscribe();
-		postTypes
-			.filter( ( postType ) => postType.viewable )
-			.map( registerPostBlockType );
+		registerPostBlockType();
 	}
 } );
-

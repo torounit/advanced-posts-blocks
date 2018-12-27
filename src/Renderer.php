@@ -27,8 +27,13 @@ abstract class Renderer {
 
 	/**
 	 * Constructor
+	 *
+	 * @param string $name
 	 */
-	public function __construct() {
+	public function __construct( $name = '' ) {
+		if ( $name ) {
+			$this->name = $name;
+		}
 		$this->register();
 	}
 
