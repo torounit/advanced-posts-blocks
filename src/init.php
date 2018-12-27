@@ -1,6 +1,6 @@
 <?php
 
-namespace Advanced_Archive_Blocks;
+namespace Advanced_Posts_Blocks;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,7 +18,7 @@ add_action( 'wp_loaded', function () {
 		if ( ! is_string( $base ) ) {
 			$base = $post_type;
 		}
-		new Posts\Renderer( 'advanced-archive-blocks/' . $base, $post_type );
+		new Posts\Renderer( 'advanced-posts-blocks/' . $base, $post_type );
 
 	}
 } );

@@ -14,11 +14,11 @@ const unsubscribe = subscribe( () => {
 		postTypes
 			.filter( ( postType ) => postType.viewable )
 			.map( ( postType ) => {
-			const name = `advanced-archive-blocks/${ postType.rest_base }`;
+			const name = `advanced-posts-blocks/${ postType.rest_base }`;
 			registerBlockType(
 				name,
 				{
-					title: postType.labels.archives,
+					title: postType.labels.postss,
 					icon: 'admin-post',
 					category: 'common',
 					supports: {

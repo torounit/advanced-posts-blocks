@@ -1,13 +1,13 @@
 <?php
 
-namespace Advanced_Archive_Blocks;
+namespace Advanced_Posts_Blocks;
 
 /**
  * Class Renderer
  *
  * Dynamic custom block base.
  *
- * @package Advanced_Archive_Blocks
+ * @package Advanced_Posts_Blocks
  */
 abstract class Renderer {
 

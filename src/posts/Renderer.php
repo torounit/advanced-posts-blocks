@@ -1,15 +1,15 @@
 <?php
 
-namespace Advanced_Archive_Blocks\Posts;
+namespace Advanced_Posts_Blocks\Posts;
 
 /**
  * Class Renderer
  *
  * Posts blocks.
  *
- * @package Advanced_Archive_Blocks\Blocks\Posts
+ * @package Advanced_Posts_Blocks\Blocks\Posts
  */
-class Renderer extends \Advanced_Archive_Blocks\Renderer {
+class Renderer extends \Advanced_Posts_Blocks\Renderer {
 
 	/**
 	 * @var string $name Name for block.

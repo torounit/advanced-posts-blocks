@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 
 		addtextdomain: {
 			options: {
-				textdomain: 'advanced-archive-blocks',
+				textdomain: 'advanced-posts-blocks',
 			},
 			update_all_domains: {
 				options: {
@@ -32,8 +32,8 @@ module.exports = function( grunt ) {
 				options: {
 					domainPath: '/languages',
 					exclude: [ '\.git/*', 'bin/*', 'node_modules/*', 'tests/*' ],
-					mainFile: 'advanced-archive-blocks.php',
-					potFilename: 'advanced-archive-blocks.pot',
+					mainFile: 'advanced-posts-blocks.php',
+					potFilename: 'advanced-posts-blocks.pot',
 					potHeaders: {
 						poedit: true,
 						'x-poedit-keywordslist': true

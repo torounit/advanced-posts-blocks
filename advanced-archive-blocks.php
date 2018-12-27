@@ -1,18 +1,18 @@
 <?php
 /**
- * Plugin Name:     Advanced Archive Blocks
- * Plugin URI:      https://github.com/torounit/advanced-archive-blocks
- * Description:     Powerfull archive blocks.
+ * Plugin Name:     Advanced Posts Blocks
+ * Plugin URI:      https://github.com/torounit/advanced-posts-blocks
+ * Description:     Powerfull posts blocks.
  * Author:          Toro_Unit
  * Author URI:      https://torounit.com
- * Text Domain:     advanced-archive-blocks
+ * Text Domain:     advanced-posts-blocks
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package         Advanced_Archive_Blocks
+ * @package         Advanced_Posts_Blocks
  */
 
-namespace Advanced_Archive_Blocks;
+namespace Advanced_Posts_Blocks;
 
 const PLUGIN_FILE = __FILE__;
 

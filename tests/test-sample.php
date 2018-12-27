@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Advanced_Archive_Blocks
+ * @package Advanced_Posts_Blocks
  */
 
 /**

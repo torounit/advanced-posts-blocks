@@ -5,7 +5,7 @@
  */
 global $post;
 ?>
-<div class="wp-block-advanced-archive-block-posts <?php echo esc_attr( $class_name ); ?>">
+<div class="wp-block-advanced-posts-block-posts <?php echo esc_attr( $class_name ); ?>">
 	<?php foreach ( $query->get_posts() as $post ) : ?>
 		<article class="">
 			<h4 class=""><a href="<?php the_permalink( $post ); ?>"><?php echo esc_html( get_the_title( $post ) ); ?></a></h4>
