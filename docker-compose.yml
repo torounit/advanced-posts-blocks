@@ -8,7 +8,7 @@ services:
     ports:
       - 18888:80
     volumes:
-      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - wordpress:/var/www/html
       - .:/var/www/html/wp-content/plugins/advanced-posts-blocks
       - ./:/home/www-data/app
@@ -40,6 +40,7 @@ services:
       MYSQL_PASSWORD: "wordpress"
     volumes:
       - mysql:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d
 
   installer:
     shm_size: 256mb
@@ -52,7 +53,7 @@ services:
       - .:/var/www/html/wp-content/plugins/advanced-posts-blocks
       - ./:/home/www-data/app
     command: >
-      bash /home/www-data/app/bin/wait-for.sh mysql:3306 -t 120 -- bash /home/www-data/app/bin/install.sh 18888
+      bash /home/www-data/app/docker/sh/wait-for.sh mysql:3306 -t 120 -- bash /home/www-data/app/docker/sh/install.sh 18888
 
   cli:
     shm_size: 256mb
