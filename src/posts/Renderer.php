@@ -1,4 +1,7 @@
 <?php
+/**
+ * Posts Renderer Class.
+ */
 
 namespace Advanced_Posts_Blocks\Posts;
 
@@ -12,22 +15,16 @@ namespace Advanced_Posts_Blocks\Posts;
 class Renderer extends \Advanced_Posts_Blocks\Renderer {
 
 	/**
-	 * @var string $name Name for block.
+	 * Name of Block.
+     *
+	 * @var string
 	 */
 	protected $name = '';
 
 	/**
-	 * @var |WP_Post_Type post type.
-	 */
-	protected $post_type = '';
-
-	/**
-	 * @var string post type.
-	 */
-	protected $taxonomy = '';
-
-	/**
-	 * @var array $attributes Attributes schema for blocks.
+	 * Attributes schema for blocks.
+	 *
+	 * @var array
 	 */
 	protected $attributes = [
 		'postType'    => [
@@ -54,9 +51,9 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 	/**
 	 * Constructor
 	 *
-	 * @param $name
+	 * @param string $name block name.
 	 */
-	public function __construct( $name ) {
+	public function __construct( string $name ) {
 		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
 			$base                      = $this->get_rest_base( $taxonomy );
@@ -71,7 +68,7 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 	/**
 	 * Get rest Base.
 	 *
-	 * @param \WP_Taxonomy $taxonomy
+	 * @param \WP_Taxonomy $taxonomy Taxonomy object.
 	 *
 	 * @return bool|string
 	 */
@@ -82,7 +79,7 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 	/**
 	 * Get taxonomies with connected.
 	 *
-	 * @param $post_type
+	 * @param array|string|\WP_Post $post_type Name of the type of taxonomy object, or an object (row from posts).
 	 *
 	 * @return \WP_Taxonomy[]
 	 */
@@ -92,7 +89,9 @@ class Renderer extends \Advanced_Posts_Blocks\Renderer {
 
 
 	/**
-	 * @param array $attributes
+	 * Render callback
+	 *
+	 * @param array $attributes block attributes.
 	 *
 	 * @return false|string
 	 */

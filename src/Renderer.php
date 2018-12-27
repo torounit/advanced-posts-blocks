@@ -1,4 +1,9 @@
 <?php
+/**
+ * Renderer Interface.
+ *
+ * @package Advanced_Posts_Blocks
+ */
 
 namespace Advanced_Posts_Blocks;
 
@@ -12,12 +17,16 @@ namespace Advanced_Posts_Blocks;
 abstract class Renderer {
 
 	/**
-	 * @var string $name Name for block.
+	 * Name for block.
+	 *
+	 * @var string
 	 */
 	protected $name = '';
 
 	/**
-	 * @var array $attributes Attributes schema for blocks.
+	 * Attributes schema for blocks.
+	 *
+	 * @var array
 	 */
 	protected $attributes = [
 		'className' => [
@@ -28,7 +37,7 @@ abstract class Renderer {
 	/**
 	 * Constructor
 	 *
-	 * @param string $name
+	 * @param string $name name for block.
 	 */
 	public function __construct( $name = '' ) {
 		if ( $name ) {
@@ -53,6 +62,8 @@ abstract class Renderer {
 	}
 
 	/**
+	 * Getter for attirbutes.
+	 *
 	 * @return array
 	 */
 	public function get_attributes(): array {
@@ -62,7 +73,7 @@ abstract class Renderer {
 	/**
 	 * Get content from template.
 	 *
-	 * @param $attributes
+	 * @param array $attributes Block attributes.
 	 *
 	 * @return false|string
 	 */
@@ -83,7 +94,7 @@ abstract class Renderer {
 	/**
 	 * Get component style name.
 	 *
-	 * @param string $class_name
+	 * @param string $class_name class strings.
 	 *
 	 * @return string
 	 */
@@ -106,7 +117,9 @@ abstract class Renderer {
 	}
 
 	/**
-	 * @param array $attributes
+	 * Render callback
+	 *
+	 * @param array $attributes Block attributes.
 	 *
 	 * @return string
 	 */

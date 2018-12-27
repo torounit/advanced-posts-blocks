@@ -1,4 +1,9 @@
 <?php
+/**
+ * Initialize.
+ *
+ * @package Advanced_Posts_Blocks
+ */
 
 namespace Advanced_Posts_Blocks;
 
