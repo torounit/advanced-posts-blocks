@@ -3,7 +3,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './posts/getEditComponent';
 import { select } from '@wordpress/data';
 
-const { getEntityRecords, getPostTypes, getTaxonomies } = select( 'core' );
+const { getEntityRecords, getPostTypes } = select( 'core' );
 
 const { subscribe } = wp.data;
 
@@ -18,7 +18,7 @@ const unsubscribe = subscribe( () => {
 			registerBlockType(
 				name,
 				{
-					title: postType.labels.postss,
+					title: postType.labels.archives,
 					icon: 'admin-post',
 					category: 'common',
 					supports: {
