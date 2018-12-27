@@ -10,21 +10,12 @@ require_once dirname( __FILE__ ) . '/Renderer.php';
 require_once dirname( __FILE__ ) . '/posts/Renderer.php';
 
 
-add_action( 'wp_loaded', function () {
-//	$post_types = get_post_types( [ 'public' => true ] );
-//	foreach ( $post_types as $post_type ) {
-//		$wp_post_type = get_post_type_object( $post_type );
-//		$base         = $wp_post_type->rest_base;
-//		if ( ! is_string( $base ) ) {
-//			$base = $post_type;
-//		}
-//		new Posts\Renderer( 'advanced-posts-blocks/' . $base, $post_type );
-//
-//	}
-
-	new Posts\Renderer( 'advanced-posts-blocks/posts' );
-
-} );
+add_action(
+	'wp_loaded',
+	function () {
+		new Posts\Renderer( 'advanced-posts-blocks/posts' );
+	}
+);
 
 add_action(
 	'enqueue_block_editor_assets',
