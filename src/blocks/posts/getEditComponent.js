@@ -16,7 +16,7 @@ import {
 	InspectorControls,
 	ServerSideRender,
 } from '@wordpress/editor';
-import TermsControls from './TermsControls';
+import TermSelect from './TermSelect';
 
 /**
  * Module Constants
@@ -87,12 +87,13 @@ const getEditComponent = ( blockName ) => {
 				/>
 			);
 			const TermControls = taxonomies.map( ( taxonomy ) => (
-				<TermsControls
-					key={ taxonomy.rest_base }
-					taxonomy={ taxonomy }
+				<TermSelect
+					noOptionLabel={ __( 'All' ) }
+					multiple={ true }
 					termList={ this.state[ taxonomy.rest_base ] || [] }
+					label={ taxonomy.labels.name }
 					selectedTermId={ attributes[ taxonomy.rest_base ] }
-					onTermChange={ ( value ) => {
+					onChange={ ( value ) => {
 						if ( ! Array.isArray( value ) ) {
 							value = [ value ];
 						}
@@ -100,7 +101,9 @@ const getEditComponent = ( blockName ) => {
 					} }
 				/>
 			) );
+
 			const title = sprintf( __( '%s Block Seetting', 'advanced-posts-blocks' ), labels.name );
+
 			const inspectorControls = (
 				<InspectorControls>
 					<PanelBody title={ title }>
