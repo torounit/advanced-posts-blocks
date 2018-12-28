@@ -52,6 +52,20 @@ class Renderer {
 	];
 
 	/**
+	 * Tax Query Term operator
+	 *
+	 * @var string
+	 */
+	private $term_operator = 'AND';
+
+	/**
+	 * Query var
+	 *
+	 * @var string
+	 */
+	private $query_var = 'advanced_posts_blocks';
+
+	/**
 	 * Constructor
 	 *
 	 * @param string $name block name.
@@ -66,10 +80,49 @@ class Renderer {
 			$base                      = $this->get_rest_base( $taxonomy );
 			$this->attributes[ $base ] = [
 				'type'    => 'array',
-				'default' => [],
+				'default' => '',
 			];
 		}
 		$this->register();
+
+		add_filter( 'query_vars', [ $this, 'add_query_var' ] );
+		add_action( 'pre_get_posts', [ $this, 'pre_get_posts' ] );
+	}
+
+	/**
+	 * Add Query var.
+	 *
+	 * @param array $query_vars
+	 *
+	 * @return array
+	 */
+	public function add_query_var( $query_vars ) {
+		$query_vars[] = $this->query_var;
+
+		return $query_vars;
+	}
+
+	/**
+	 * Pre get posts. add
+	 *
+	 * @param \WP_Query $query
+	 */
+	public function pre_get_posts( \WP_Query $query ) {
+		$tax_query             = $query->get( 'tax_query' );
+		$advanced_posts_blocks = filter_input( INPUT_GET, 'advanced_posts_blocks' );
+
+		if ( $advanced_posts_blocks && $tax_query ) {
+
+			$tax_query = array_map( function ( $term_query ) {
+				if ( ! is_array( $term_query ) ) {
+					return $term_query;
+				}
+				$term_query['operator'] = $this->term_operator;
+
+				return $term_query;
+			}, $tax_query );
+		}
+		$query->set( 'tax_query', $tax_query );
 	}
 
 	/**
@@ -121,7 +174,7 @@ class Renderer {
 					'taxonomy' => $taxonomy->name,
 					'field'    => 'term_id',
 					'terms'    => $attributes[ $base ],
-					'operator' => 'AND',
+					'operator' => $this->term_operator,
 				];
 			}
 		}
@@ -132,12 +185,14 @@ class Renderer {
 		if ( $output ) {
 			return $output;
 		}
+
 		ob_start();
 		load_template( dirname( __FILE__ ) . '/template.php' );
 		$output = ob_get_contents();
 		ob_end_clean();
 
 		return $output;
+
 	}
 
 	/**
@@ -205,6 +260,7 @@ class Renderer {
 		get_template_part( $slug, $name );
 		$output = ob_get_contents();
 		ob_end_clean();
+
 		return $output;
 	}
 
@@ -234,7 +290,7 @@ class Renderer {
 		$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name ) );
 
 		if ( ! $output ) {
-			$path = [
+			$path   = [
 				$this->get_template_part_dir(),
 				$this->name,
 			];
