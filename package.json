@@ -6,17 +6,18 @@
     "build": "npm run build:production",
     "build:production": "cross-env NODE_ENV=production webpack",
     "dev": "webpack --watch",
-    "test-unit": "wp-scripts test-unit-js --config tests/js/jest.config.json"
+    "test": "wp-scripts test-unit-js --config tests/js/jest.config.json"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-react-jsx": "^7.2.0",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.2.3",
+    "@wordpress/babel-plugin-import-jsx-pragma": "^1.1.2",
+    "@wordpress/babel-preset-default": "^3.0.1",
     "@wordpress/browserslist-config": "^2.2.2",
-    "@wordpress/element": "^2.1.8",
     "@wordpress/jest-preset-default": "^3.0.3",
     "@wordpress/scripts": "^2.4.4",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "browser-sync": "^2.26.3",
@@ -46,8 +47,8 @@
     "@wordpress/components": "^7.0.4",
     "@wordpress/data": "^4.1.0",
     "@wordpress/editor": "^9.0.6",
+    "@wordpress/element": "^2.1.8",
     "@wordpress/i18n": "^3.1.0",
-    "@wordpress/url": "^2.3.2",
-    "babel-core": "^7.0.0-bridge.0"
+    "@wordpress/url": "^2.3.2"
   }
 }
