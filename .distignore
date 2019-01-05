@@ -8,6 +8,7 @@
 .gitignore
 .gitlab-ci.yml
 .npmrc
+.git
 .travis.yml
 .DS_Store
 Thumbs.db
@@ -18,6 +19,7 @@ bin
 composer.json
 composer.lock
 Gruntfile.js
+webpack.config.js
 package.json
 package-lock.json
 phpunit.xml
