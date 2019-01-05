@@ -26,7 +26,7 @@ const registerPostBlockType = () => {
 				html: false,
 			},
 
-			edit: withSelect( ( ownSelect, props ) => {
+			edit: withSelect( ( _, props ) => {
 				const { attributes } = props;
 				const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
 				const { getEntityRecords, getTaxonomies, getPostType } = select( 'core' );
