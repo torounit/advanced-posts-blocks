@@ -7,30 +7,6 @@
 
 namespace Advanced_Posts_Blocks;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
-/**
- * Get plugin version.
- *
- * @return string
- */
-function get_plugin_version() {
-	static $data = null;
-	if ( empty( $data ) ) {
-		$data = \get_file_data(
-			PLUGIN_FILE,
-			[
-				'Version' => 'Version',
-			]
-		);
-	}
-
-	return $data['Version'];
-}
-
-
 require_once dirname( __FILE__ ) . '/blocks/posts/class-renderer.php';
 
 
@@ -58,7 +34,7 @@ add_action(
 				'wp-edit-post',
 				'wp-i18n',
 			],
-			get_plugin_version(),
+			get_plugin_data()['Version'],
 			true
 		);
 	}
