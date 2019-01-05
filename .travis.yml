@@ -15,6 +15,8 @@ branches:
 cache:
   directories:
     - $HOME/.composer/cache
+    - node_modules
+    - vendor
 
 matrix:
   include:
@@ -23,9 +25,9 @@ matrix:
     - php: 7.1
       env: WP_VERSION=latest
     - php: 7.0
-      env: WP_VERSION=5.0
+      env: WP_VERSION=latest WP_PULUGIN_DEPLOY=1
     - php: 7.0
-      env: WP_VERSION=latest
+      env: WP_VERSION=5.0
     - php: 7.0
       env: WP_VERSION=trunk
     - php: 7.0
@@ -34,6 +36,9 @@ matrix:
       env: WP_VERSION=latest
 
 before_script:
+  - composer install
+  - nvm install --lts
+  - npm install
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
@@ -47,10 +52,6 @@ before_script:
       composer global require "phpunit/phpunit=4.8.*|5.7.*"
     fi
   - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      composer global require wp-coding-standards/wpcs
-      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
-    fi
 
 script:
   - |
@@ -60,5 +61,8 @@ script:
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      phpcs
+      composer phpcs
     fi
+after_success:
+  - curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
+

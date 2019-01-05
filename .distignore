@@ -30,6 +30,7 @@ phpcs.xml
 phpcs.xml.dist
 README.md
 wp-cli.local.yml
+docker
 docker-compose.yml
 yarn.lock
 tests
