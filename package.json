@@ -1,6 +1,6 @@
 {
   "name": "advanced-posts-blocks",
-  "version": "0.1.0",
+  "version": "nightly",
   "author": "HIroshi Urabe <mail@torounit.com> (https://torounit.com/)",
   "scripts": {
     "build": "npm run build:production",
