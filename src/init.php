@@ -11,6 +11,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Get plugin version.
+ *
+ * @return string
+ */
+function get_plugin_version() {
+	static $data = null;
+	if ( empty( $data ) ) {
+		$data = \get_file_data( PLUGIN_FILE, [
+			'Version' => 'Version',
+		] );
+	}
+
+	return $data['Version'];
+}
+
+
 require_once dirname( __FILE__ ) . '/blocks/posts/class-renderer.php';
 
 
@@ -36,7 +53,7 @@ add_action(
 			'wp-i18n',
 			'wp-plugins',
 		];
-		wp_enqueue_script( 'blocks-script', plugins_url( 'dist/main.js', PLUGIN_FILE ), $deps, 1, true );
+		wp_enqueue_script( 'blocks-script', plugins_url( 'dist/main.js', PLUGIN_FILE ), $deps, get_plugin_version(), true );
 	}
 );
 
