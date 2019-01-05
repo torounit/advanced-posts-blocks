@@ -1,7 +1,7 @@
 {
   "name": "advanced-posts-blocks",
   "version": "0.1.0",
-  "author": "YOUR NAME HERE",
+  "author": "HIroshi Urabe <mail@torounit.com> (https://torounit.com/)",
   "scripts": {
     "build": "npm run build:production",
     "build:production": "cross-env NODE_ENV=production webpack",

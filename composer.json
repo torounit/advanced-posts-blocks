@@ -18,8 +18,8 @@
     "phpcompatibility/phpcompatibility-wp": "^2.0"
   },
   "scripts": {
-    "phpcs-config": [
-      "phpcs --config-set installed_paths ./vendor/wp-coding-standards/wpcs/"
+    "post-install-cmd": [
+      "phpcs -i"
     ],
     "phpcs": [
       "phpcs -p -s -v -n --standard=./.phpcs.xml.dist --extensions=php"
