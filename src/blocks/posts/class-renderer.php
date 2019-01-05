@@ -84,22 +84,22 @@ class Renderer {
 			];
 		}
 		$this->register();
-
-		add_filter( 'query_vars', [ $this, 'add_query_var' ] );
+		foreach ( get_post_types( [ 'show_in_rest' => true ], 'objects' ) as $post_type ) {
+			add_filter( 'rest_' . $post_type->name . '_query', [ $this, 'rest_api_add_query_param' ], 10, 2 );
+		}
 		add_action( 'pre_get_posts', [ $this, 'pre_get_posts' ] );
 	}
 
 	/**
-	 * Add Query var.
+	 * Add query parameter to rest api.
 	 *
-	 * @param array $query_vars $public_query_vars.
-	 *
-	 * @return array
-	 */
-	public function add_query_var( $query_vars ) {
-		$query_vars[] = $this->query_var;
-
-		return $query_vars;
+	 * @param  array            $args    The query arguments.
+	 * @param  \WP_REST_Request $request Full details about the request.
+	 * @return array $args.
+	 **/
+	public function rest_api_add_query_param( $args, $request ) {
+		$args[ $this->query_var ] = ! empty( $request[ $this->query_var ] );
+		return $args;
 	}
 
 	/**
@@ -109,17 +109,16 @@ class Renderer {
 	 */
 	public function pre_get_posts( \WP_Query $query ) {
 		$tax_query             = $query->get( 'tax_query' );
-		$advanced_posts_blocks = filter_input( INPUT_GET, 'advanced_posts_blocks' );
-
+		$advanced_posts_blocks = $query->get( $this->query_var );
 		if ( $advanced_posts_blocks && $tax_query ) {
 			$tax_query = array_map(
 				function ( $term_query ) {
 					if ( ! is_array( $term_query ) ) {
-						  return $term_query;
-					}
-						$term_query['operator'] = $this->term_operator;
-
 						return $term_query;
+					}
+					$term_query['operator'] = $this->term_operator;
+
+					return $term_query;
 				},
 				$tax_query
 			);
