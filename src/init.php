@@ -19,9 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 function get_plugin_version() {
 	static $data = null;
 	if ( empty( $data ) ) {
-		$data = \get_file_data( PLUGIN_FILE, [
-			'Version' => 'Version',
-		] );
+		$data = \get_file_data(
+			PLUGIN_FILE,
+			[
+				'Version' => 'Version',
+			]
+		);
 	}
 
 	return $data['Version'];
@@ -42,18 +45,22 @@ add_action(
 add_action(
 	'enqueue_block_editor_assets',
 	function () {
-		$deps = [
-			'wp-api-fetch',
-			'wp-blocks',
-			'wp-components',
-			'wp-data',
-			'wp-element',
-			'wp-editor',
-			'wp-edit-post',
-			'wp-i18n',
-			'wp-plugins',
-		];
-		wp_enqueue_script( 'blocks-script', plugins_url( 'dist/main.js', PLUGIN_FILE ), $deps, get_plugin_version(), true );
+		wp_enqueue_script(
+			'advanced-posts-blocks',
+			plugins_url( 'dist/main.js', PLUGIN_FILE ),
+			[
+				'wp-api-fetch',
+				'wp-blocks',
+				'wp-components',
+				'wp-data',
+				'wp-element',
+				'wp-editor',
+				'wp-edit-post',
+				'wp-i18n',
+			],
+			get_plugin_version(),
+			true
+		);
 	}
 );
 

@@ -92,7 +92,7 @@ class Renderer {
 	/**
 	 * Add Query var.
 	 *
-	 * @param array $query_vars
+	 * @param array $query_vars $public_query_vars.
 	 *
 	 * @return array
 	 */
@@ -103,24 +103,26 @@ class Renderer {
 	}
 
 	/**
-	 * Pre get posts. add
+	 * Change tax_query `operator` in the_wp_query
 	 *
-	 * @param \WP_Query $query
+	 * @param \WP_Query $query The WP_Query instance (passed by reference).
 	 */
 	public function pre_get_posts( \WP_Query $query ) {
 		$tax_query             = $query->get( 'tax_query' );
 		$advanced_posts_blocks = filter_input( INPUT_GET, 'advanced_posts_blocks' );
 
 		if ( $advanced_posts_blocks && $tax_query ) {
+			$tax_query = array_map(
+				function ( $term_query ) {
+					if ( ! is_array( $term_query ) ) {
+						  return $term_query;
+					}
+						$term_query['operator'] = $this->term_operator;
 
-			$tax_query = array_map( function ( $term_query ) {
-				if ( ! is_array( $term_query ) ) {
-					return $term_query;
-				}
-				$term_query['operator'] = $this->term_operator;
-
-				return $term_query;
-			}, $tax_query );
+						return $term_query;
+				},
+				$tax_query
+			);
 		}
 		$query->set( 'tax_query', $tax_query );
 	}
@@ -192,7 +194,6 @@ class Renderer {
 		ob_end_clean();
 
 		return $output;
-
 	}
 
 	/**
