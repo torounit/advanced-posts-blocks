@@ -60,7 +60,7 @@ registerBlockType(
 				orderby: orderBy,
 				per_page: postsToShow,
 				advanced_posts_blocks: true,
-			}, ( value ) => !isUndefined( value ) );
+			}, ( value ) => ! isUndefined( value ) );
 			return {
 				latestPosts: getEntityRecords( 'postType', selectedPostType.slug, latestPostsQuery ) || [],
 				taxonomies,

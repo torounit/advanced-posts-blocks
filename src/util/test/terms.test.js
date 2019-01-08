@@ -9,7 +9,7 @@ describe( 'buildTermsTree()', () => {
 		const output = [
 			{ id: 2232, parent: 0, children: [] },
 			{ id: 2245, parent: 0, children: [] },
-		]
+		];
 		const termsTreem = buildTermsTree( input );
 		expect( termsTreem ).toEqual( output );
 	} );

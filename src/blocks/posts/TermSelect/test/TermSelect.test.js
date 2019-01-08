@@ -17,6 +17,6 @@ test( 'TermSelect Multiple', () => {
 			selectedTermId={ [ 2232 ] }
 		/>,
 	);
-	let tree = component.toJSON();
+	const tree = component.toJSON();
 	expect( tree ).toMatchSnapshot();
 } );

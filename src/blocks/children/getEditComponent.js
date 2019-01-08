@@ -47,7 +47,7 @@ const getEditComponent = ( blockName ) => {
 		async componentDidUpdate() {
 			const { taxonomies } = this.props;
 			const { isTaxonomiesLoaded } = this.state;
-			if ( !isTaxonomiesLoaded && taxonomies && taxonomies.length > 0 ) {
+			if ( ! isTaxonomiesLoaded && taxonomies && taxonomies.length > 0 ) {
 				this.setState( { isTaxonomiesLoaded: true } );
 				for ( const taxonomy of taxonomies ) {
 					const restBase = taxonomy.rest_base;
@@ -73,7 +73,7 @@ const getEditComponent = ( blockName ) => {
 			const { displayPostDate } = this.props.attributes;
 			const { setAttributes } = this.props;
 
-			setAttributes( { displayPostDate: !displayPostDate } );
+			setAttributes( { displayPostDate: ! displayPostDate } );
 		}
 
 		render() {
@@ -139,7 +139,7 @@ const getEditComponent = ( blockName ) => {
 				</InspectorControls>
 			);
 			const hasPosts = Array.isArray( children ) && children.length;
-			if ( !hasPosts ) {
+			if ( ! hasPosts ) {
 				return (
 					<Fragment>
 						{ inspectorControls }
@@ -147,7 +147,7 @@ const getEditComponent = ( blockName ) => {
 							icon="admin-post"
 							label={ labels.name }
 						>
-							{ !Array.isArray( children ) ?
+							{ ! Array.isArray( children ) ?
 								<Spinner /> : labels.not_found
 							}
 						</Placeholder>
