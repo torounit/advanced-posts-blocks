@@ -3,19 +3,29 @@
  */
 import { isUndefined, pickBy, identity } from 'lodash';
 
+/**
+ * WordPress dependencies
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
-import { select, subscribe, withSelect } from '@wordpress/data';
+import { select, withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 
 const name = 'advanced-posts-blocks/posts';
 const edit = getEditComponent( name );
+
 registerBlockType(
 	name,
 	{
 		title: 'Posts (Advanced Posts Blocks)',
 
-		icon: <SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><Path fill="none" d="M0 0h24v24H0V0z" /><Path d="M4 6H2v16h16v-2H4V6zm18-4H6v16h16V2zm-3 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z" /></SVG>,
+		icon: (
+			//https://material.io/tools/icons/?icon=library_books&style=outline
+			<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+				<Path fill="none" d="M0 0h24v24H0V0z" />
+				<Path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM10 9h8v2h-8zm0 3h4v2h-4zm0-6h8v2h-8z" />
+			</SVG>
+		),
 
 		category: 'widgets',
 
@@ -50,9 +60,9 @@ registerBlockType(
 				orderby: orderBy,
 				per_page: postsToShow,
 				advanced_posts_blocks: true,
-			}, ( value ) => ! isUndefined( value ) );
+			}, ( value ) => !isUndefined( value ) );
 			return {
-				latestPosts: getEntityRecords( 'postType', selectedPostType.slug, latestPostsQuery ),
+				latestPosts: getEntityRecords( 'postType', selectedPostType.slug, latestPostsQuery ) || [],
 				taxonomies,
 				selectedPostType,
 				postTypes: postTypes

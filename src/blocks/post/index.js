@@ -3,6 +3,9 @@
  */
 import { isUndefined, pickBy } from 'lodash';
 
+/**
+ * WordPress dependencies
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
 import { select, withSelect } from '@wordpress/data';
@@ -10,12 +13,19 @@ import { Path, SVG } from '@wordpress/components';
 
 const name = 'advanced-posts-blocks/post';
 const edit = getEditComponent( name );
+
 registerBlockType(
 	name,
 	{
 		title: 'Post (Advanced Posts Blocks)',
 
-		icon: <SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><Path fill="none" d="M0 0h24v24H0V0z" /><Path d="M4 6H2v16h16v-2H4V6zm18-4H6v16h16V2zm-3 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z" /></SVG>,
+		icon: (
+			//https://material.io/tools/icons/?icon=description&style=outline
+			<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+				<Path fill="none" d="M0 0h24v24H0V0z" />
+				<Path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+			</SVG>
+		),
 
 		category: 'widgets',
 
