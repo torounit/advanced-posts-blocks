@@ -10,8 +10,6 @@ import {
 const DEFAULT_MIN_ITEMS = 1;
 const DEFAULT_MAX_ITEMS = 100;
 
-
-
 export default function QueryControls( {
 	numberOfItems,
 	order,

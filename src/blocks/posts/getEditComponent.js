@@ -23,7 +23,7 @@ import TermSelect from './TermSelect';
  * Module Constants
  */
 const TERM_LIST_QUERY = {
-	per_page: - 1,
+	per_page: -1,
 };
 
 const getEditComponent = ( blockName ) => {
