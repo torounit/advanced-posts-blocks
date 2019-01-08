@@ -27,8 +27,8 @@ registerBlockType(
 			const { attributes } = props;
 			const { postType: postTypeName } = attributes;
 			const { getEntityRecords, getPostType, getPostTypes } = select( 'core' );
-			const postTypes = getPostTypes();
-			const selectedPostType = getPostType( postTypeName );
+			const postTypes = getPostTypes() || [];
+			const selectedPostType = getPostType( postTypeName ) || {};
 
 			const PostsQuery = pickBy( {
 				per_page: -1,

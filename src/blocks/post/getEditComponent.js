@@ -38,7 +38,7 @@ const getEditComponent = ( blockName ) => {
 		render() {
 			const { className, attributes, setAttributes, posts, selectedPostType, postTypes } = this.props;
 			const { postId } = attributes;
-			const { labels } = selectedPostType;
+			const labels = selectedPostType.labels || {};
 
 			const PostTypeControls = (
 				<SelectControl

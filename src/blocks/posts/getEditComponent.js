@@ -23,7 +23,7 @@ import TermSelect from './TermSelect';
  * Module Constants
  */
 const TERM_LIST_QUERY = {
-	per_page: -1,
+	per_page: - 1,
 };
 
 const getEditComponent = ( blockName ) => {
@@ -75,7 +75,7 @@ const getEditComponent = ( blockName ) => {
 		render() {
 			const { className, attributes, setAttributes, latestPosts, taxonomies, selectedPostType, postTypes } = this.props;
 			const { order, orderBy, postsToShow } = attributes;
-			const { labels } = selectedPostType;
+			const labels = selectedPostType.labels || {};
 
 			const PostTypeControls = (
 				<SelectControl
