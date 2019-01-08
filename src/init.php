@@ -15,6 +15,7 @@ add_action(
 	function () {
 		new Blocks\Post\Renderer( 'advanced-posts-blocks/post' );
 		new Blocks\Posts\Renderer( 'advanced-posts-blocks/posts' );
+		new Blocks\Children\Renderer( 'advanced-posts-blocks/children' );
 	},
 	9999
 );
