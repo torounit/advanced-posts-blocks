@@ -39,10 +39,10 @@ Override template by your theme. if `template-parts/blocks/advanced-posts-blocks
 
 Support template hierarchy. The templates are searched in the following order.
 
-1. template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}-{style}.php
-2. template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}.php
-3. template-parts/blocks/advanced-posts-blocks/{Block_Type}-{style}.php
-4. template-parts/blocks/advanced-posts-blocks/{Block_Type}.php
+1. `template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}-{style}.php`
+2. `template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}.php`
+3. `template-parts/blocks/advanced-posts-blocks/{Block_Type}-{style}.php`
+4. `template-parts/blocks/advanced-posts-blocks/{Block_Type}.php`
 
 Block_Type is posts, post or children.
 
