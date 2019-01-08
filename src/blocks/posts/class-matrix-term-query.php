@@ -10,16 +10,11 @@ namespace Advanced_Posts_Blocks\Blocks\Posts;
 /**
  * Class Query
  *
+ * Fix Matrix Term Query.
+ *
  * @package Advanced_Posts_Blocks\Blocks\Posts
  */
-class Query {
-
-	/**
-	 * Tax Query Term operator
-	 *
-	 * @var string
-	 */
-	private $term_operator = '';
+class Matrix_Term_Query {
 
 	/**
 	 * Query var
@@ -31,21 +26,17 @@ class Query {
 	/**
 	 * Query constructor.
 	 *
-	 * @param string $term_operator Term operator for tax_query. default: AND.
-	 * @param string $query_var Query var. default: advanced_posts_blocks.
+	 * @param string $query_var Query var.
 	 */
-	public function __construct( $term_operator = 'AND', $query_var = 'advanced_posts_blocks' ) {
+	public function __construct( $query_var = 'advanced_posts_blocks' ) {
 		if ( $query_var ) {
 			$this->query_var = $query_var;
-		}
-		if ( $term_operator ) {
-			$this->term_operator = $term_operator;
 		}
 
 		foreach ( get_post_types( [ 'show_in_rest' => true ], 'objects' ) as $post_type ) {
 			add_filter( 'rest_' . $post_type->name . '_query', [ $this, 'rest_api_add_query_param' ], 10, 2 );
 		}
-		add_action( 'pre_get_posts', [ $this, 'pre_get_posts' ] );
+		add_action( 'parse_tax_query', [ $this, 'parse_tax_query' ], 9999 );
 	}
 
 	/**
@@ -67,24 +58,32 @@ class Query {
 	 *
 	 * @param \WP_Query $query The WP_Query instance (passed by reference).
 	 */
-	public function pre_get_posts( \WP_Query $query ) {
+	public function parse_tax_query( \WP_Query $query ) {
 		$tax_query             = $query->get( 'tax_query' );
 		$advanced_posts_blocks = $query->get( $this->query_var );
 		if ( $advanced_posts_blocks && $tax_query ) {
-			$tax_query = array_map(
-				function ( $term_query ) {
-					if ( ! is_array( $term_query ) ) {
-						return $term_query;
-					}
-					if ( empty( $term_query['operator'] ) ) {
-						$term_query['operator'] = $this->term_operator;
-					}
+			$new_tax_query = [];
+			foreach ( $tax_query as $sub_query ) {
+				if ( ! is_array( $sub_query ) ) {
+					$new_tax_query[] = $sub_query;
+					continue;
+				}
 
-					return $term_query;
-				},
-				$tax_query
-			);
+				if ( ! empty( $sub_query['terms'] ) && is_array( $sub_query['terms'] ) ) {
+					foreach ( $sub_query['terms'] as $term ) {
+						$new_tax_query[] = array_merge(
+							$sub_query,
+							[
+								'terms' => [ $term ],
+								'include_children' => true,
+							]
+						);
+					}
+				}
+			}
+			$new_tax_query['relation'] = 'AND';
+			$query->set( 'tax_query', $new_tax_query );
+			$query->tax_query = new \WP_Tax_Query( $new_tax_query );
 		}
-		$query->set( 'tax_query', $tax_query );
 	}
 }

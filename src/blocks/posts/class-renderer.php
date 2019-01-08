@@ -52,30 +52,22 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	];
 
 	/**
-	 * Tax Query Term operator
-	 *
-	 * @var string
-	 */
-	private $term_operator = 'AND';
-
-	/**
 	 * Constructor
 	 *
 	 * @param string $name block name.
 	 */
 	public function __construct( string $name ) {
-		parent::__construct( $name );
-
 		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
 			$base                      = $this->get_rest_base( $taxonomy );
 			$this->attributes[ $base ] = [
 				'type'    => 'array',
-				'default' => '',
+				'default' => [],
 			];
 		}
+		new Matrix_Term_Query( 'advanced_posts_blocks' );
 
-		new Query( $this->term_operator );
+		parent::__construct( $name );
 	}
 
 	/**
@@ -109,25 +101,28 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 */
 	public function render( $attributes ) {
 		$args      = [
-			'posts_per_page' => $attributes['postsToShow'],
-			'post_status'    => 'publish',
-			'order'          => $attributes['order'],
-			'orderby'        => $attributes['orderBy'],
-			'post_type'      => $attributes['postType'],
+			'posts_per_page'        => $attributes['postsToShow'],
+			'post_status'           => 'publish',
+			'order'                 => $attributes['order'],
+			'orderby'               => $attributes['orderBy'],
+			'post_type'             => $attributes['postType'],
+			'advanced_posts_blocks' => true,
 		];
 		$post_type = $attributes['postType'];
 
 		$args['tax_query'] = [];
 		foreach ( $this->get_post_type_taxonomies( $post_type ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
-			$base = $this->get_rest_base( $taxonomy );
-			if ( ! empty( $attributes[ $base ] ) ) {
-				$args['tax_query'][] = [
-					'taxonomy' => $taxonomy->name,
-					'field'    => 'term_id',
-					'terms'    => $attributes[ $base ],
-					'operator' => $this->term_operator,
-				];
+			$base  = $this->get_rest_base( $taxonomy );
+			$terms = array_filter( $attributes[ $base ] );
+			if ( ! empty( $terms ) ) {
+				$args['tax_query'][] = array_merge(
+					[
+						'taxonomy' => $taxonomy->name,
+						'field'    => 'term_id',
+						'terms'    => $terms,
+					]
+				);
 			}
 		}
 

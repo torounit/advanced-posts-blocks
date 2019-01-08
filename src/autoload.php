@@ -24,7 +24,7 @@ function autoload_register( $name ) {
 
 	$dir = dirname( __FILE__ ) . '/' . str_replace( 'advanced_posts_blocks', '', strtolower( join( '/', $namespaces ) ) );
 
-	$class_file_name = 'class-' . strtolower( $class_name ) . '.php';
+	$class_file_name = 'class-' . strtolower( str_replace( '_', '-', $class_name ) ) . '.php';
 	$file_name       = $dir . '/' . $class_file_name;
 
 	if ( is_readable( $file_name ) ) {
