@@ -17,29 +17,40 @@ Add Custom Dynamic Blocks for Render Post and Posts.
 
 = Posts Block =
 
-Create Posts Block filtered post type. (ex. post, page) and filter posts by multiple categories, tags or custom taxonomy terms.
+Posts Block filtered post type. (ex. post, page) and filter posts by multiple categories, tags or custom taxonomy terms.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/posts.php` exists in your theme, replace default view.
 
 = Post Block =
 
-Create Single Post/Page Block.
+Single Post/Page Block.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/post.php` exists in your theme, replace default view.
+
+= Children Block =
+
+Children Posts Blocks.
+
+Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/children.php` exists in your theme, replace default view.
+
 
 
 = Override Template =
 
 Support template hierarchy. The templates are searched in the following order.
 
-1. template-parts/blocks/advanced-posts-blocks/posts/{postType}-{style}.php
-2. template-parts/blocks/advanced-posts-blocks/posts/{postType}.php
-3. template-parts/blocks/advanced-posts-blocks/posts-{style}.php
-4. template-parts/blocks/advanced-posts-blocks/posts.php
+1. template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}-{style}.php
+2. template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}.php
+3. template-parts/blocks/advanced-posts-blocks/{Block_Type}-{style}.php
+4. template-parts/blocks/advanced-posts-blocks/{Block_Type}.php
+
+Block_Type is posts, post or children.
 
 
 = Credits =
+
 * [Icons - Material Design](https://material.io/tools/icons/) (Apache License Version 2.0)
+* [feathericon](https://feathericon.com/)
 
 == Changelog ==
 
