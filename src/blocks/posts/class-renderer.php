@@ -64,7 +64,6 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * @param string $name block name.
 	 */
 	public function __construct( string $name ) {
-
 		parent::__construct( $name );
 
 		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {

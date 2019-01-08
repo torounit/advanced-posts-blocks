@@ -50,15 +50,16 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * @return false|string
 	 */
 	public function render( $attributes ) {
-
 		if ( empty( $attributes['postId'] ) ) {
 			return '';
 		}
 
-		$query = new \WP_Query( [
-			'p' => $attributes['postId'],
-			'post_type' => 'any',
-		] );
+		$query = new \WP_Query(
+			[
+				'p' => $attributes['postId'],
+				'post_type' => 'any',
+			]
+		);
 		set_query_var( 'query', $query );
 		$output = $this->get_content_from_template( $attributes );
 		if ( $output ) {

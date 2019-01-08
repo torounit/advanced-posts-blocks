@@ -43,7 +43,6 @@ abstract class Renderer {
 		}
 
 		$this->register();
-
 	}
 
 	/**
