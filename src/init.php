@@ -7,13 +7,13 @@
 
 namespace Advanced_Posts_Blocks;
 
-require_once dirname( __FILE__ ) . '/blocks/posts/class-renderer.php';
+require_once dirname( __FILE__ ) . '/autoload.php';
 
 
 add_action(
 	'init',
 	function () {
-		new Renderer( 'advanced-posts-blocks/posts' );
+		new Posts\Renderer( 'advanced-posts-blocks/posts' );
 	},
 	9999
 );
