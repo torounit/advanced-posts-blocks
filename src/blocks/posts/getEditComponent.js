@@ -88,6 +88,7 @@ const getEditComponent = ( blockName ) => {
 			);
 			const TermControls = taxonomies.map( ( taxonomy ) => (
 				<TermSelect
+					key={ taxonomy }
 					noOptionLabel={ __( 'All' ) }
 					multiple={ true }
 					termList={ this.state[ taxonomy.rest_base ] || [] }
