@@ -1,15 +1,28 @@
 <?php
+/**
+ * Autoloader.
+ *
+ * @package Advanced_Posts_Blocks
+ */
 
 namespace Advanced_Posts_Blocks;
 
-spl_autoload_register( 'Advanced_Posts_Blocks\autoload_register' );
+try {
+	spl_autoload_register( 'Advanced_Posts_Blocks\autoload_register' );
+} catch ( \Exception $e ) {
+	wp_die( esc_html( $e->getMessage() ) );
+}
 
+/**
+ * Autoloader callback.
+ *
+ * @param string $name class name.
+ */
 function autoload_register( $name ) {
-	$dir        = dirname( __FILE__ );
 	$namespaces = explode( '\\', $name );
 	$class_name = array_pop( $namespaces );
 
-	$dir = dirname( __FILE__ ) . '/blocks' . str_replace( 'advanced_posts_blocks', '', strtolower( join( '/', $namespaces ) ) );
+	$dir = dirname( __FILE__ ) . '/' . str_replace( 'advanced_posts_blocks', '', strtolower( join( '/', $namespaces ) ) );
 
 	$class_file_name = 'class-' . strtolower( $class_name ) . '.php';
 	$file_name       = $dir . '/' . $class_file_name;

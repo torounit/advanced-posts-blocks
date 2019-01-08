@@ -13,7 +13,7 @@ require_once dirname( __FILE__ ) . '/autoload.php';
 add_action(
 	'init',
 	function () {
-		new Posts\Renderer( 'advanced-posts-blocks/posts' );
+		new Blocks\Posts\Renderer( 'advanced-posts-blocks/posts' );
 	},
 	9999
 );

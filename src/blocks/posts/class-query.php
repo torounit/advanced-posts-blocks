@@ -1,8 +1,17 @@
 <?php
+/**
+ * WP_Query fixer.
+ *
+ * @package Advanced_Posts_Blocks
+ */
 
-namespace Advanced_Posts_Blocks\Posts;
+namespace Advanced_Posts_Blocks\Blocks\Posts;
 
-
+/**
+ * Class Query
+ *
+ * @package Advanced_Posts_Blocks\Blocks\Posts
+ */
 class Query {
 
 	/**
@@ -22,8 +31,8 @@ class Query {
 	/**
 	 * Query constructor.
 	 *
-	 * @param string $query_var
-	 * @param string $term_operator
+	 * @param string $term_operator Term operator for tax_query. default: AND.
+	 * @param string $query_var Query var. default: advanced_posts_blocks.
 	 */
 	public function __construct( $term_operator = 'AND', $query_var = 'advanced_posts_blocks' ) {
 		if ( $query_var ) {
@@ -42,7 +51,7 @@ class Query {
 	/**
 	 * Add query parameter to rest api.
 	 *
-	 * @param  array $args The query arguments.
+	 * @param  array            $args The query arguments.
 	 * @param  \WP_REST_Request $request Full details about the request.
 	 *
 	 * @return array $args.
@@ -67,7 +76,9 @@ class Query {
 					if ( ! is_array( $term_query ) ) {
 						return $term_query;
 					}
-					$term_query['operator'] = $this->term_operator;
+					if ( empty( $term_query['operator'] ) ) {
+						$term_query['operator'] = $this->term_operator;
+					}
 
 					return $term_query;
 				},

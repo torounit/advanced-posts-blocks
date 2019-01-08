@@ -5,7 +5,7 @@
  * @package Advanced_Posts_Blocks
  */
 
-namespace Advanced_Posts_Blocks\Posts;
+namespace Advanced_Posts_Blocks\Blocks\Posts;
 
 /**
  * Class Renderer
