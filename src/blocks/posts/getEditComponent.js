@@ -7,6 +7,7 @@ import {
 	Placeholder,
 	Spinner,
 	SelectControl,
+	Disabled,
 } from '@wordpress/components';
 import QueryControls from './QueryControls';
 import apiFetch from '@wordpress/api-fetch';
@@ -140,11 +141,13 @@ const getEditComponent = ( blockName ) => {
 			return (
 				<Fragment>
 					{ inspectorControls }
-					<ServerSideRender
-						className={ className }
-						block={ blockName }
-						attributes={ attributes }
-					/>
+					<Disabled>
+						<ServerSideRender
+							className={ className }
+							block={ blockName }
+							attributes={ attributes }
+						/>
+					</Disabled>
 				</Fragment>
 			);
 		}

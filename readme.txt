@@ -13,10 +13,22 @@ Create Blocks filtered by any post type and any categories, tags or custom taxon
 
 == Description ==
 
+Add Custom Dynamic Blocks for Render Post and Posts.
+
+= Posts Block =
 
 Create Posts Block filtered post type. (ex. post, page) and filter posts by multiple categories, tags or custom taxonomy terms.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/posts.php` exists in your theme, replace default view.
+
+= Post Block =
+
+Create Single Post/Page Block.
+
+Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/post.php` exists in your theme, replace default view.
+
+
+= Override Template =
 
 Support template hierarchy. The templates are searched in the following order.
 
