@@ -26,6 +26,9 @@ Support template hierarchy. The templates are searched in the following order.
 4. template-parts/blocks/advanced-posts-blocks/posts.php
 
 
+= Credits =
+* [Icons - Material Design](https://material.io/tools/icons/) (Apache License Version 2.0)
+
 == Changelog ==
 
 = 0.1.0 =
