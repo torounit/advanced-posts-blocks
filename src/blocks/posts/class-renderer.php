@@ -59,13 +59,6 @@ class Renderer {
 	private $term_operator = 'AND';
 
 	/**
-	 * Query var
-	 *
-	 * @var string
-	 */
-	private $query_var = 'advanced_posts_blocks';
-
-	/**
 	 * Constructor
 	 *
 	 * @param string $name block name.
@@ -84,46 +77,30 @@ class Renderer {
 			];
 		}
 		$this->register();
-		foreach ( get_post_types( [ 'show_in_rest' => true ], 'objects' ) as $post_type ) {
-			add_filter( 'rest_' . $post_type->name . '_query', [ $this, 'rest_api_add_query_param' ], 10, 2 );
-		}
-		add_action( 'pre_get_posts', [ $this, 'pre_get_posts' ] );
+
+		new Query( $this->term_operator );
 	}
 
 	/**
-	 * Add query parameter to rest api.
-	 *
-	 * @param  array            $args    The query arguments.
-	 * @param  \WP_REST_Request $request Full details about the request.
-	 * @return array $args.
-	 **/
-	public function rest_api_add_query_param( $args, $request ) {
-		$args[ $this->query_var ] = ! empty( $request[ $this->query_var ] );
-		return $args;
-	}
-
-	/**
-	 * Change tax_query `operator` in the_wp_query
-	 *
-	 * @param \WP_Query $query The WP_Query instance (passed by reference).
+	 * Regsiter Block Type.
 	 */
-	public function pre_get_posts( \WP_Query $query ) {
-		$tax_query             = $query->get( 'tax_query' );
-		$advanced_posts_blocks = $query->get( $this->query_var );
-		if ( $advanced_posts_blocks && $tax_query ) {
-			$tax_query = array_map(
-				function ( $term_query ) {
-					if ( ! is_array( $term_query ) ) {
-						return $term_query;
-					}
-					$term_query['operator'] = $this->term_operator;
+	protected function register() {
+		register_block_type(
+			$this->name,
+			[
+				'attributes'      => $this->get_attributes(),
+				'render_callback' => [ $this, 'render' ],
+			]
+		);
+	}
 
-					return $term_query;
-				},
-				$tax_query
-			);
-		}
-		$query->set( 'tax_query', $tax_query );
+	/**
+	 * Getter for attirbutes.
+	 *
+	 * @return array
+	 */
+	public function get_attributes(): array {
+		return $this->attributes;
 	}
 
 	/**
@@ -193,28 +170,6 @@ class Renderer {
 		ob_end_clean();
 
 		return $output;
-	}
-
-	/**
-	 * Regsiter Block Type.
-	 */
-	protected function register() {
-		register_block_type(
-			$this->name,
-			[
-				'attributes'      => $this->get_attributes(),
-				'render_callback' => [ $this, 'render' ],
-			]
-		);
-	}
-
-	/**
-	 * Getter for attirbutes.
-	 *
-	 * @return array
-	 */
-	public function get_attributes(): array {
-		return $this->attributes;
 	}
 
 	/**
