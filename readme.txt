@@ -1,7 +1,7 @@
 === Advanced Posts Blocks ===
 Contributors:      Toro_Unit
 Donate link:       https://www.paypal.me/torounit
-Tags:              posts, block
+Tags:              posts, blocks
 Requires at least: 5.0
 Tested up to:      5.0
 Requires PHP:      7.0

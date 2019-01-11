@@ -5,7 +5,6 @@ import { Component, Fragment } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
-	Spinner,
 	SelectControl, Disabled,
 } from '@wordpress/components';
 import { __, sprintf } from '@wordpress/i18n';
