@@ -2,6 +2,7 @@
   "name": "advanced-posts-blocks",
   "version": "0.1.3",
   "author": "HIroshi Urabe <mail@torounit.com> (https://torounit.com/)",
+  "license": "GPL-3.0+",
   "scripts": {
     "build": "npm run build:production",
     "build:production": "cross-env NODE_ENV=production webpack",
