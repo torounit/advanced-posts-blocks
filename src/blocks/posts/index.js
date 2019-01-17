@@ -8,7 +8,7 @@ import { isUndefined, pickBy, identity } from 'lodash';
  */
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
-import { select, withSelect } from '@wordpress/data';
+import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 
 const name = 'advanced-posts-blocks/posts';
@@ -34,7 +34,7 @@ registerBlockType(
 			html: false,
 		},
 
-		edit: withSelect( ( _, props ) => {
+		edit: withSelect( ( select, props ) => {
 			const { attributes } = props;
 			const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
 			const { getEntityRecords, getTaxonomies, getPostType, getPostTypes } = select( 'core' );
@@ -43,7 +43,8 @@ registerBlockType(
 			let taxonomies = getTaxonomies() || [];
 
 			taxonomies = taxonomies.filter( ( taxonomy ) => {
-				return selectedPostType.taxonomies.includes( taxonomy.slug );
+				const postTypeTaxonomies = selectedPostType.taxonomies || [];
+				return postTypeTaxonomies.includes( taxonomy.slug );
 			} );
 
 			const taxQuery = {};
