@@ -87,7 +87,7 @@ const getEditComponent = ( blockName ) => {
 						{ inspectorControls }
 						<Placeholder
 							icon="admin-post"
-							label={ labels.name }
+							label={ labels.singular_name }
 						>
 							{ __( 'Post Not Found', 'advanced-posts-blocks' ) }
 						</Placeholder>
