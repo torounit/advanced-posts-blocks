@@ -38,9 +38,8 @@ registerBlockType(
 			const { attributes } = props;
 			const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
 			const { getEntityRecords, getTaxonomies, getPostType, getPostTypes } = select( 'core' );
-			const postTypes = getPostTypes() || [];
+			const postTypes = getPostTypes( { per_page: -1 } ) || [];
 			const selectedPostType = getPostType( postTypeName ) || {};
-
 			let taxonomies = getTaxonomies() || [];
 
 			taxonomies = taxonomies.filter( ( taxonomy ) => {
