@@ -29,6 +29,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	protected $attributes = [
 		'postType'    => [
 			'type'    => 'string',
+			'default' => 'page'
 		],
 		'postId'    => [
 			'type'    => 'number',
@@ -46,7 +47,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		],
 		'orderBy'     => [
 			'type'    => 'string',
-			'default' => 'menu_order',
+			'default' => 'title',
 		],
 		'align'       => [
 			'type' => 'string',

@@ -8,7 +8,7 @@ import { isUndefined, pickBy } from 'lodash';
  */
 import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
-import { select, withSelect } from '@wordpress/data';
+import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 
 const name = 'advanced-posts-blocks/children';
@@ -33,13 +33,13 @@ registerBlockType(
 			html: false,
 		},
 
-		edit: withSelect( ( _, props ) => {
+		edit: withSelect( ( select, props ) => {
 			const { attributes } = props;
 			const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
 			const { postId } = attributes;
 			const { getEntityRecords, getPostType, getPostTypes } = select( 'core' );
 			const { getCurrentPostId, getCurrentPostType } = select( 'core/editor' );
-			const postTypes = getPostTypes() || [];
+			const postTypes = getPostTypes( { per_page: -1 } ) || [];
 			let selectedPostType;
 
 			if ( postTypeName ) {
