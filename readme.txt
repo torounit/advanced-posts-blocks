@@ -54,6 +54,9 @@ Block_Type is posts, post or children.
 
 == Changelog ==
 
+= 0.1.4 =
+* Bug fix.
+
 = 0.1.0 =
 * first release.
 
