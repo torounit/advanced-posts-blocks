@@ -31,8 +31,8 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'type'    => 'string',
 			'default' => 'page',
 		],
-		'postId'    => [
-			'type'    => 'number',
+		'postId'      => [
+			'type' => 'number',
 		],
 		'className'   => [
 			'type' => 'string',
@@ -71,7 +71,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * @return false|string
 	 */
 	public function render( $attributes ) {
-		$args      = [
+		$args = [
 			'posts_per_page' => $attributes['postsToShow'],
 			'post_status'    => 'publish',
 			'post_parent'    => $attributes['postId'] ? $attributes['postId'] : get_the_ID(),

@@ -1,13 +1,13 @@
 # Advanced Posts Blocks #
 **Contributors:** [Toro_Unit](https://profiles.wordpress.org/Toro_Unit)  
 **Donate link:**       https://www.paypal.me/torounit  
-**Tags:**              posts, block  
+**Tags:**              posts, blocks  
 **Requires at least:** 5.0  
 **Tested up to:**      5.0  
 **Requires PHP:**      7.0  
 **Stable tag:**        nightly  
 **License:**           GPLv3 or later  
-**License URI:**       https://www.gnu.org/licenses/gpl-2.0.html  
+**License URI:**       https://www.gnu.org/licenses/gpl-3.0.html  
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
@@ -53,6 +53,9 @@ Block_Type is posts, post or children.
 * [feathericon](https://feathericon.com/)
 
 ## Changelog ##
+
+### 0.1.4 ###
+* Bug fix.
 
 ### 0.1.0 ###
 * first release.
