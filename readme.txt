@@ -39,12 +39,12 @@ Override template by your theme. if `template-parts/blocks/advanced-posts-blocks
 
 Support template hierarchy. The templates are searched in the following order.
 
-1. `template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}-{style}.php`
-2. `template-parts/blocks/advanced-posts-blocks/{Block_Type}/{postType}.php`
-3. `template-parts/blocks/advanced-posts-blocks/{Block_Type}-{style}.php`
+1. `template-parts/blocks/advanced-posts-blocks/{Block_Type}/{Post_Type}-{Style}.php`
+2. `template-parts/blocks/advanced-posts-blocks/{Block_Type}/{Post_Type}.php`
+3. `template-parts/blocks/advanced-posts-blocks/{Block_Type}-{Style}.php`
 4. `template-parts/blocks/advanced-posts-blocks/{Block_Type}.php`
 
-Block_Type is posts, post or children.
+`{Block_Type}` is posts, post or children.
 
 
 = Credits =
@@ -53,6 +53,9 @@ Block_Type is posts, post or children.
 * [feathericon](https://feathericon.com/)
 
 == Changelog ==
+
+= 0.1.6 =
+* Default template bug fix.
 
 = 0.1.4 =
 * Bug fix.

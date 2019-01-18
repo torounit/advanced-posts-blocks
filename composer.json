@@ -25,7 +25,7 @@
     "phpcs": [
       "phpcs -p -s -v -n --standard=./.phpcs.xml.dist --extensions=php"
     ],
-    "autofix": [
+    "fix": [
       "phpcs -p -s -v -n --standard=./.phpcs.xml.dist --extensions=php --report-diff=changes.diff; patch -p0 -ui changes.diff; rm changes.diff"
     ],
     "test": [
