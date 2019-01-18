@@ -134,7 +134,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		}
 
 		ob_start();
-		load_template( dirname( __FILE__ ) . '/template.php' );
+		load_template( dirname( __FILE__ ) . '/template.php', false );
 		$output = ob_get_contents();
 		ob_end_clean();
 
