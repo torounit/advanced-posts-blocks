@@ -10,8 +10,6 @@ import {
 	Disabled, TreeSelect,
 } from '@wordpress/components';
 import QueryControls from './QueryControls';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
 import { __, sprintf } from '@wordpress/i18n';
 import {
 	InspectorControls,
@@ -23,59 +21,8 @@ import {
  */
 import { buildTermsTree } from '../../util/terms';
 
-/**
- * Module Constants
- */
-const TERM_LIST_QUERY = {
-	per_page: -1,
-};
-
 const getEditComponent = ( blockName ) => {
 	return class extends Component {
-		constructor() {
-			super( ...arguments );
-			this.state = {
-				isTaxonomiesLoaded: false,
-			};
-			this.toggleDisplayPostDate = this.toggleDisplayPostDate.bind( this );
-		}
-
-		async componentDidMount() {
-			this.isStillMounted = true;
-		}
-
-		async componentDidUpdate() {
-			const { taxonomies } = this.props;
-			const { isTaxonomiesLoaded } = this.state;
-			if ( ! isTaxonomiesLoaded && taxonomies && taxonomies.length > 0 ) {
-				this.setState( { isTaxonomiesLoaded: true } );
-				for ( const taxonomy of taxonomies ) {
-					const restBase = taxonomy.rest_base;
-					try {
-						const terms = await apiFetch( { path: addQueryArgs( `/wp/v2/${ restBase }`, TERM_LIST_QUERY ) } );
-						if ( this.isStillMounted ) {
-							this.setState( { [ restBase ]: terms } );
-						}
-					} catch ( e ) {
-						if ( this.isStillMounted ) {
-							this.setState( { [ restBase ]: [] } );
-						}
-					}
-				}
-			}
-		}
-
-		componentWillUnmount() {
-			this.isStillMounted = false;
-		}
-
-		toggleDisplayPostDate() {
-			const { displayPostDate } = this.props.attributes;
-			const { setAttributes } = this.props;
-
-			setAttributes( { displayPostDate: ! displayPostDate } );
-		}
-
 		render() {
 			const { className, attributes, setAttributes, posts, children, postId, selectedPostType, postTypes } = this.props;
 			const { order, orderBy, postsToShow } = attributes;
