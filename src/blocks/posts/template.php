@@ -13,9 +13,14 @@
 	<?php if ( $query->have_posts() ) : ?>
 		<?php while ( $query->have_posts() ) : ?>
 			<?php $query->the_post(); ?>
-			<article>
-				<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-			</article>
+
+			<a href="<?php the_permalink(); ?>">
+				<article>
+					<h4><?php the_title(); ?></h4>
+					<?php the_excerpt(); ?>
+				</article>
+			</a>
+
 		<?php endwhile; ?>
 		<?php wp_reset_postdata(); ?>
 	<?php endif; ?>

@@ -146,6 +146,12 @@ abstract class Renderer {
 			$attributes['postType'],
 		];
 
+		$priority = has_filter( 'the_content', 'wpautop' );
+		if ( false !== $priority && doing_filter( 'the_content' ) ) {
+			remove_filter( 'the_content', 'wpautop', $priority );
+			add_filter( 'the_content', '_restore_wpautop_hook', $priority + 1 );
+		}
+
 		$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name ) );
 
 		if ( ! $output ) {
