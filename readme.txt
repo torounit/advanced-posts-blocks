@@ -54,6 +54,9 @@ Support template hierarchy. The templates are searched in the following order.
 
 == Changelog ==
 
+= 0.2.0 =
+* Remove wpautop in template.
+
 = 0.1.6 =
 * Default template bug fix.
 
