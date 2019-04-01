@@ -17,7 +17,7 @@ const edit = getEditComponent( name );
 registerBlockType(
 	name,
 	{
-		title: 'Children (Advanced Posts Blocks)',
+		title: 'Children Posts (Advanced Posts Blocks)',
 
 		icon: (
 			//feathericon#site-map

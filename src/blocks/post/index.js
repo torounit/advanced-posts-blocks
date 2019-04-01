@@ -17,7 +17,7 @@ const edit = getEditComponent( name );
 registerBlockType(
 	name,
 	{
-		title: 'Post (Advanced Posts Blocks)',
+		title: ' Single Post (Advanced Posts Blocks)',
 
 		icon: (
 			//https://material.io/tools/icons/?icon=description&style=outline
