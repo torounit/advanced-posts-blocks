@@ -2,8 +2,8 @@
 Contributors:      Toro_Unit
 Donate link:       https://www.paypal.me/torounit
 Tags:              posts, blocks
-Requires at least: 5.1
-Tested up to:      5.0
+Requires at least: 5.0
+Tested up to:      5.2
 Requires PHP:      7.0
 Stable tag:        nightly
 License:           GPLv3 or later
@@ -15,21 +15,21 @@ Create Blocks filtered by any post type and any categories, tags or custom taxon
 
 Add Custom Dynamic Blocks for Render Post and Posts.
 
-= Posts Block =
+= Multiple Posts Block =
 
 Posts Block filtered post type. (ex. post, page) and filter posts by multiple categories, tags or custom taxonomy terms.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/posts.php` exists in your theme, replace default view.
 
-= Post Block =
+= Single Post Block =
 
 Single Post/Page Block.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/post.php` exists in your theme, replace default view.
 
-= Children Block =
+= Children Posts Block =
 
-Children Posts Blocks.
+Children Posts Block.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/children.php` exists in your theme, replace default view.
 
@@ -53,6 +53,9 @@ Support template hierarchy. The templates are searched in the following order.
 * [feathericon](https://feathericon.com/)
 
 == Changelog ==
+
+= 0.2.2 =
+* Fixed typo.
 
 = 0.2.0 =
 * Remove wpautop in template.
