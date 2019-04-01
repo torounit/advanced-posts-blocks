@@ -64,4 +64,3 @@ function get_plugin_data() {
  * Block Initializer.
  */
 require_once dirname( __FILE__ ) . '/src/init.php';
-

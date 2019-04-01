@@ -28,7 +28,7 @@ const getEditComponent = ( blockName ) => {
 			const { order, orderBy, postsToShow } = attributes;
 			const labels = selectedPostType.labels || {};
 
-			const title = sprintf( __( '%s Block Seetting', 'advanced-posts-blocks' ), labels.name );
+			const title = sprintf( __( '%s Block Setting', 'advanced-posts-blocks' ), labels.name );
 
 			const PostTypeControls = (
 				<SelectControl
