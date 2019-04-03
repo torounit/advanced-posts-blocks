@@ -60,7 +60,7 @@ const getEditComponent = ( blockName ) => {
 
 			const ParentControls = (
 				<TreeSelect
-					label={ 'Parent Post' }
+					label={ __( 'Parent Post', 'advanced-post-blocks' ) }
 					noOptionLabel={ `(${ __( 'Not Selected' ) })` }
 					tree={ fillWithChildren( pagesTree ) }
 					selectedId={ postId }

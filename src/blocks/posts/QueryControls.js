@@ -61,7 +61,7 @@ export default function QueryControls( {
 		onNumberOfItemsChange && (
 			<RangeControl
 				key="query-controls-range-control"
-				label={ __( 'Number of items' ) }
+				label={ __( 'Number of items', 'advanced-post-blocks' ) }
 				value={ numberOfItems }
 				onChange={ onNumberOfItemsChange }
 				min={ minItems }
