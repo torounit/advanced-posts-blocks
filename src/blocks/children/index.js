@@ -13,7 +13,7 @@ import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const name = 'advanced-posts-blocks/children';
-const title = 'Children Posts';
+const title = __( 'Child Posts', 'advanced-posts-blocks' );
 const edit = getEditComponent( name, title );
 
 registerBlockType(
@@ -21,7 +21,9 @@ registerBlockType(
 	{
 		title: `${ title } (Advanced Posts Blocks)`,
 
-		keywords: [ __( 'children posts' ) ],
+		description: __( 'Display children of selected post.', 'advanced-posts-blocks' ),
+
+		keywords: [ 'child posts', 'children', __( 'children posts', 'advanced-posts-blocks' ) ],
 
 		icon: (
 			//feathericon#site-map

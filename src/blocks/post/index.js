@@ -13,7 +13,7 @@ import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const name = 'advanced-posts-blocks/post';
-const title = __('Single Post');
+const title = __( 'Single Post', 'advanced-posts-blocks' );
 const edit = getEditComponent( name, title );
 
 registerBlockType(
@@ -21,7 +21,9 @@ registerBlockType(
 	{
 		title: `${ title } (Advanced Posts Blocks)`,
 
-		keywords: [ __( 'single post' ) ],
+		description: __( 'Display single post.', 'advanced-posts-blocks' ),
+
+		keywords: [ 'single post', __( 'single post', 'advanced-posts-blocks' ) ],
 
 		icon: (
 			//https://material.io/tools/icons/?icon=description&style=outline
