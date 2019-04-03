@@ -10,14 +10,18 @@ import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
 import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 const name = 'advanced-posts-blocks/post';
-const edit = getEditComponent( name );
+const title = __('Single Post');
+const edit = getEditComponent( name, title );
 
 registerBlockType(
 	name,
 	{
-		title: ' Single Post (Advanced Posts Blocks)',
+		title: `${ title } (Advanced Posts Blocks)`,
+
+		keywords: [ __( 'single post' ) ],
 
 		icon: (
 			//https://material.io/tools/icons/?icon=description&style=outline

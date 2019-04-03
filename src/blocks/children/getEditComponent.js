@@ -10,7 +10,7 @@ import {
 	Disabled, TreeSelect,
 } from '@wordpress/components';
 import QueryControls from './QueryControls';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import {
 	InspectorControls,
 	ServerSideRender,
@@ -21,18 +21,18 @@ import {
  */
 import { buildTermsTree } from '../../util/terms';
 
-const getEditComponent = ( blockName ) => {
+const getEditComponent = ( blockName, blockTitle ) => {
 	return class extends Component {
 		render() {
 			const { className, attributes, setAttributes, posts, children, postId, selectedPostType, postTypes } = this.props;
 			const { order, orderBy, postsToShow } = attributes;
 			const labels = selectedPostType.labels || {};
 
-			const title = sprintf( __( '%s Block Setting', 'advanced-posts-blocks' ), labels.name );
+			const title = __( 'Query setting', 'advanced-posts-blocks' );
 
 			const PostTypeControls = (
 				<SelectControl
-					label="PostType"
+					label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 					value={ selectedPostType.slug }
 					options={ postTypes.map( type => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
@@ -43,7 +43,7 @@ const getEditComponent = ( blockName ) => {
 			const pagesTree = buildTermsTree( posts.map( ( item ) => ( {
 				id: item.id,
 				parent: item.parent,
-				name: item.title.raw ? item.title.raw : `#${ item.id } (${ __( 'no title' ) })`,
+				name: item.title.raw ? item.title.raw : `#${ item.id } ${ __( '(no title)' ) }`,
 			} ) ) );//.filter( ( item ) => ( item.children.length ) );
 
 			const fillWithChildren = ( terms ) => {
@@ -61,7 +61,7 @@ const getEditComponent = ( blockName ) => {
 			const ParentControls = (
 				<TreeSelect
 					label={ __( 'Parent Post', 'advanced-post-blocks' ) }
-					noOptionLabel={ `(${ __( 'Not Selected' ) })` }
+					noOptionLabel={ `${ __( '(not selected)', 'advanced-posts-blocks' ) }` }
 					tree={ fillWithChildren( pagesTree ) }
 					selectedId={ postId }
 					onChange={ ( value ) => {
@@ -92,7 +92,7 @@ const getEditComponent = ( blockName ) => {
 						{ inspectorControls }
 						<Placeholder
 							icon="admin-post"
-							label={ labels.name }
+							label={ blockTitle }
 						>
 							{ ! Array.isArray( children ) ?
 								<Spinner /> : labels.not_found

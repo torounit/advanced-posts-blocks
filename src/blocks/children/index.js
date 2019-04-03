@@ -10,14 +10,18 @@ import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
 import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 const name = 'advanced-posts-blocks/children';
-const edit = getEditComponent( name );
+const title = 'Children Posts';
+const edit = getEditComponent( name, title );
 
 registerBlockType(
 	name,
 	{
-		title: 'Children Posts (Advanced Posts Blocks)',
+		title: `${ title } (Advanced Posts Blocks)`,
+
+		keywords: [ __( 'children posts' ) ],
 
 		icon: (
 			//feathericon#site-map

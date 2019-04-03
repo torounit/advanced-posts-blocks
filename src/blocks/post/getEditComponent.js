@@ -7,13 +7,13 @@ import {
 	Placeholder,
 	SelectControl, Disabled,
 } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import {
 	InspectorControls,
 	ServerSideRender,
 } from '@wordpress/editor';
 
-const getEditComponent = ( blockName ) => {
+const getEditComponent = ( blockName, blockTitle ) => {
 	return class extends Component {
 		constructor() {
 			super( ...arguments );
@@ -41,7 +41,7 @@ const getEditComponent = ( blockName ) => {
 
 			const PostTypeControls = (
 				<SelectControl
-					label="PostType"
+					label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 					value={ selectedPostType.slug }
 					options={ postTypes.map( type => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
@@ -52,7 +52,7 @@ const getEditComponent = ( blockName ) => {
 			);
 			const PostControls = (
 				<SelectControl
-					label="Post"
+					label={ __( 'Post' ) }
 					value={ postId }
 					options={ [
 						{
@@ -70,7 +70,7 @@ const getEditComponent = ( blockName ) => {
 				/>
 			);
 
-			const title = sprintf( __( '%s Block Setting', 'advanced-posts-blocks' ), labels.name );
+			const title = __( 'Query setting', 'advanced-posts-blocks' );
 
 			const inspectorControls = (
 				<InspectorControls>
@@ -87,9 +87,9 @@ const getEditComponent = ( blockName ) => {
 						{ inspectorControls }
 						<Placeholder
 							icon="admin-post"
-							label={ labels.singular_name }
+							label={ blockTitle }
 						>
-							{ __( 'Post Not Found', 'advanced-posts-blocks' ) }
+							{ __( 'Post Not Found.', 'advanced-posts-blocks' ) }
 						</Placeholder>
 					</Fragment>
 				);

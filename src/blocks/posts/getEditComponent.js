@@ -10,14 +10,14 @@ import {
 	Disabled,
 } from '@wordpress/components';
 import QueryControls from './QueryControls';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import {
 	InspectorControls,
 	ServerSideRender,
 } from '@wordpress/editor';
 import TermSelect from './TermSelect';
 
-const getEditComponent = ( blockName ) => {
+const getEditComponent = ( blockName, blockTitle ) => {
 	return class extends Component {
 		render() {
 			const {
@@ -36,7 +36,7 @@ const getEditComponent = ( blockName ) => {
 
 			const PostTypeControls = (
 				<SelectControl
-					label="PostType"
+					label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 					value={ selectedPostType.slug }
 					options={ postTypes.map( type => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
@@ -61,7 +61,7 @@ const getEditComponent = ( blockName ) => {
 				/>
 			) );
 
-			const title = sprintf( __( '%s Block Setting', 'advanced-posts-blocks' ), labels.name );
+			const title = __( 'Query setting', 'advanced-posts-blocks' );
 
 			const inspectorControls = (
 				<InspectorControls>
@@ -85,7 +85,7 @@ const getEditComponent = ( blockName ) => {
 						{ inspectorControls }
 						<Placeholder
 							icon="admin-post"
-							label={ labels.name }
+							label={ blockTitle }
 						>
 							{ ! Array.isArray( latestPosts ) ?
 								<Spinner /> : labels.not_found

@@ -70,7 +70,7 @@ export default function QueryControls( {
 		onNumberOfItemsChange && (
 			<CheckboxControl
 				key="query-controls-check-control"
-				label={ __( 'All Items', 'advanced-post-blocks' ) }
+				label={ __( 'All items' ) }
 				checked={ numberOfItems === -1 }
 				onChange={ ( value ) => onNumberOfItemsChange( value ? -1 : 10 )
 				}
