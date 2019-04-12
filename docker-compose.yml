@@ -6,7 +6,7 @@ services:
     depends_on:
       - wordpress
     ports:
-      - 18888:80
+      - ${WP_PORT}:80
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - wordpress:/var/www/html
@@ -53,7 +53,7 @@ services:
       - .:/var/www/html/wp-content/plugins/advanced-posts-blocks
       - .:/home/www-data/app
     command: >
-      bash /home/www-data/app/docker/sh/wait-for.sh mysql:3306 -t 120 -- bash /home/www-data/app/docker/sh/install.sh 18888
+      bash /home/www-data/app/docker/sh/wait-for.sh mysql:3306 -t 120 -- bash /home/www-data/app/docker/sh/install.sh ${WP_PORT}
 
   cli:
     shm_size: 256mb

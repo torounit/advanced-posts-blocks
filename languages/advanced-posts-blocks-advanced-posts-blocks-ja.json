@@ -1,0 +1,74 @@
+{
+  "translation-revision-date": "2019-04-02 09:16:31+0000",
+  "generator": "GlotPress\/2.4.0-alpha",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "plural-forms": "nplurals=1; plural=0;",
+        "lang": "ja"
+      },
+      "Not Selected": [
+        "\u9078\u629e\u3055\u308c\u3066\u3044\u307e\u305b\u3093"
+      ],
+      "no title": [
+        "\u30bf\u30a4\u30c8\u30eb\u306a\u3057"
+      ],
+      "All Items": [
+        "\u5168\u3066\u306e\u30a2\u30a4\u30c6\u30e0"
+      ],
+      "Menu Order Descending": [
+        "\u30da\u30fc\u30b8\u9806\u5e8f\uff08\u964d\u9806\uff09"
+      ],
+      "Menu Order Ascending": [
+        "\u30da\u30fc\u30b8\u9806\u5e8f\uff08\u6607\u9806\uff09"
+      ],
+      "All": [
+        "\u3059\u3079\u3066"
+      ],
+      "Number of items": [
+        "\u30a2\u30a4\u30c6\u30e0\u6570"
+      ],
+      "Z \u2192 A": [
+        "Z \t A"
+      ],
+      "A \u2192 Z": [
+        "A \t Z"
+      ],
+      "Oldest to Newest": [
+        "\u6295\u7a3f\u65e5\u6642 (\u53e4\u3044\u8a18\u4e8b\u3092\u512a\u5148)"
+      ],
+      "Newest to Oldest": [
+        "\u6295\u7a3f\u65e5\u6642 (\u65b0\u3057\u3044\u8a18\u4e8b\u3092\u512a\u5148)"
+      ],
+      "Order by": [
+        "\u4e26\u3073\u9806"
+      ],
+      "Post Not Found": [
+        "\u6295\u7a3f\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093"
+      ],
+      "%s Block Setting": [
+        "%s\u30d6\u30ed\u30c3\u30af\u8a2d\u5b9a"
+      ],
+      "Select Post": [
+        "\u6295\u7a3f\u3092\u9078\u629e"
+      ],
+      "https:\/\/torounit.com": [
+        "https:\/\/torounit.com"
+      ],
+      "Toro_Unit": [
+        "Toro_Unit"
+      ],
+      "Powerfull posts blocks.": [
+        "\u30d1\u30ef\u30d5\u30eb\u306a\u6295\u7a3f\u4e00\u89a7\u30d6\u30ed\u30c3\u30af\u3067\u3059\u3002"
+      ],
+      "https:\/\/github.com\/torounit\/advanced-posts-blocks": [
+        "https:\/\/github.com\/torounit\/advanced-posts-blocks"
+      ],
+      "Advanced Posts Blocks": [
+        "Advanced Posts Blocks"
+      ]
+    }
+  }
+}
