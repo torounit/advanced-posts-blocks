@@ -45,7 +45,7 @@ add_action(
 			get_plugin_data()['Version'],
 			true
 		);
-		wp_set_script_translations( 'advanced-posts-blocks', 'advanced-posts-blocks',basename( PLUGIN_FILE ) . '/languages' );
+		wp_set_script_translations( 'advanced-posts-blocks', 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
 	}
 );
 
