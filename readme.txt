@@ -52,6 +52,14 @@ Support template hierarchy. The templates are searched in the following order.
 * [Icons - Material Design](https://material.io/tools/icons/) (Apache License Version 2.0)
 * [feathericon](https://feathericon.com/)
 
+== Screenshots ==
+
+1. Blocks
+2. Multiple Posts Block
+3. Child Page Block
+4. Single Post Block
+
+
 == Changelog ==
 
 = 0.2.2 =
