@@ -29,19 +29,11 @@ add_action(
 add_action(
 	'enqueue_block_editor_assets',
 	function () {
+		$deps = json_decode( file_get_contents( dirname( PLUGIN_FILE ) . '/build/index.deps.json' ) );
 		wp_enqueue_script(
 			'advanced-posts-blocks',
 			plugins_url( 'build/index.js', PLUGIN_FILE ),
-			[
-				'wp-api-fetch',
-				'wp-blocks',
-				'wp-components',
-				'wp-data',
-				'wp-element',
-				'wp-editor',
-				'wp-edit-post',
-				'wp-i18n',
-			],
+			$deps,
 			get_plugin_data()['Version'],
 			true
 		);
