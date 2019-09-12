@@ -31,7 +31,7 @@ add_action(
 	function () {
 		wp_enqueue_script(
 			'advanced-posts-blocks',
-			plugins_url( 'dist/main.js', PLUGIN_FILE ),
+			plugins_url( 'build/index.js', PLUGIN_FILE ),
 			[
 				'wp-api-fetch',
 				'wp-blocks',

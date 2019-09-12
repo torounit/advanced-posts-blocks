@@ -8,7 +8,7 @@ node_modules/
 *.sql
 *.tar.gz
 *.zip
-dist
+build
 
 /vendor/
 
