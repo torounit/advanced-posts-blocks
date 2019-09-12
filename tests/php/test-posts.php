@@ -31,7 +31,6 @@ class Posts_Test extends WP_UnitTestCase {
 		) );
 		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) );
 		$this->assertXmlStringEqualsXmlString( "<div>$expect</div>", "<div>$actual</div>" );
-
 	}
 
 	public function tearDown() {
