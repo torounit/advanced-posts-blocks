@@ -31,7 +31,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				terms,
 			} = this.props;
 
-			const { order, orderBy, postsToShow } = attributes;
+			const { order, orderBy, postsToShow, offset } = attributes;
 			const labels = selectedPostType.labels || {};
 
 			const PostTypeControls = (
@@ -67,8 +67,9 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				<InspectorControls>
 					<PanelBody title={ title }>
 						<QueryControls
-							{ ...{ order, orderBy } }
+							{ ...{ order, orderBy, offset } }
 							numberOfItems={ postsToShow }
+							onOffsetChange={ ( value ) => setAttributes( { offset: value } ) }
 							onOrderChange={ ( value ) => setAttributes( { order: value } ) }
 							onOrderByChange={ ( value ) => setAttributes( { orderBy: value } ) }
 							onNumberOfItemsChange={ ( value ) => setAttributes( { postsToShow: value } ) }

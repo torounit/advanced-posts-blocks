@@ -43,7 +43,7 @@ registerBlockType(
 
 		edit: withSelect( ( select, props ) => {
 			const { attributes } = props;
-			const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
+			const { postsToShow, order, orderBy, postType: postTypeName, offset } = attributes;
 			const { getEntityRecords, getTaxonomies, getPostType, getPostTypes } = select( 'core' );
 			const postTypes = getPostTypes( { per_page: -1 } ) || [];
 			const selectedPostType = getPostType( postTypeName ) || {};
@@ -69,6 +69,7 @@ registerBlockType(
 			const latestPostsQuery = pickBy( {
 				...taxQuery,
 				order,
+				offset,
 				orderby: orderBy,
 				per_page: postsToShow,
 				advanced_posts_blocks: true,

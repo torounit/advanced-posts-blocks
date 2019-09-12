@@ -38,6 +38,10 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'type'    => 'number',
 			'default' => 5,
 		],
+		'offset' => [
+			'type'    => 'number',
+			'default' => 0,
+		],
 		'order'       => [
 			'type'    => 'string',
 			'default' => 'desc',
@@ -106,6 +110,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'order'                 => $attributes['order'],
 			'orderby'               => $attributes['orderBy'],
 			'post_type'             => $attributes['postType'],
+			'offset'                => $attributes['offset'],
 			'advanced_posts_blocks' => true,
 		];
 		$post_type = $attributes['postType'];

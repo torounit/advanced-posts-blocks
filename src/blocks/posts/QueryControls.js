@@ -14,11 +14,13 @@ export default function QueryControls( {
 	numberOfItems,
 	order,
 	orderBy,
+	offset,
 	maxItems = DEFAULT_MAX_ITEMS,
 	minItems = DEFAULT_MIN_ITEMS,
 	onNumberOfItemsChange,
 	onOrderChange,
 	onOrderByChange,
+	onOffsetChange,
 } ) {
 	return [
 		( onOrderChange && onOrderByChange ) && (
@@ -65,6 +67,17 @@ export default function QueryControls( {
 				value={ numberOfItems }
 				onChange={ onNumberOfItemsChange }
 				min={ minItems }
+				max={ maxItems }
+			/>
+		),
+
+		onOffsetChange && (
+			<RangeControl
+				key="query-controls-offset-control"
+				label={ __( 'Offset' ) }
+				value={ offset }
+				onChange={ onOffsetChange }
+				min={ 0 }
 				max={ maxItems }
 			/>
 		),
