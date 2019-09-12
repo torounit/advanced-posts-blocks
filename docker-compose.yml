@@ -42,19 +42,6 @@ services:
       - mysql:/var/lib/mysql
       - ./docker/mysql:/docker-entrypoint-initdb.d
 
-  installer:
-    shm_size: 256mb
-    image: wordpress:cli
-    depends_on:
-      - mysql
-      - wordpress
-    volumes:
-      - wordpress:/var/www/html
-      - .:/var/www/html/wp-content/plugins/advanced-posts-blocks
-      - .:/home/www-data/app
-    command: >
-      bash /home/www-data/app/docker/sh/wait-for.sh mysql:3306 -t 120 -- bash /home/www-data/app/docker/sh/install.sh ${WP_PORT}
-
   cli:
     shm_size: 256mb
     image: wordpress:cli
