@@ -60,5 +60,5 @@ script:
       composer phpcs
     fi
 after_success:
-  - curl -L https://raw.githubusercontent.com/miya0001/travis2wpplugin/master/deploy.sh | bash
+  - bash bin/deploy.sh
 
