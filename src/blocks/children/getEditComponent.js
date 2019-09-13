@@ -9,6 +9,9 @@ import {
 	SelectControl,
 	Disabled, TreeSelect,
 } from '@wordpress/components';
+/**
+ * Internal dependencies
+ */
 import QueryControls from './QueryControls';
 import { __ } from '@wordpress/i18n';
 import {
@@ -34,7 +37,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				<SelectControl
 					label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 					value={ selectedPostType.slug }
-					options={ postTypes.map( type => ( { label: type.name, value: type.slug } ) ) }
+					options={ postTypes.map( ( type ) => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
 						setAttributes( { postType } );
 					} }
@@ -55,7 +58,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 						};
 					}
 					return null;
-				} ).filter( term => term );
+				} ).filter( ( term ) => term );
 			};
 
 			const ParentControls = (

@@ -7,6 +7,9 @@ import { isUndefined, pickBy, identity } from 'lodash';
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
+/**
+ * Internal dependencies
+ */
 import getEditComponent from './getEditComponent';
 import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
@@ -81,8 +84,8 @@ registerBlockType(
 				terms,
 				selectedPostType,
 				postTypes: postTypes
-					.filter( postType => postType.viewable )
-					.filter( postType => postType.rest_base !== 'media' ),
+					.filter( ( postType ) => postType.viewable )
+					.filter( ( postType ) => postType.rest_base !== 'media' ),
 			};
 		} )( edit ),
 

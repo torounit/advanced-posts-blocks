@@ -2,6 +2,9 @@
  * Internal dependencies
  */
 import { buildTermsTree } from '../../../util/terms';
+/**
+ * WordPress dependencies
+ */
 import { TreeSelect } from '@wordpress/components';
 
 export default function TermSelect( { label, noOptionLabel, termList, selectedTermId, onChange, multiple } ) {

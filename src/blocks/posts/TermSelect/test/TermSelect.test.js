@@ -1,4 +1,10 @@
+/**
+ * External dependencies
+ */
 import renderer from 'react-test-renderer';
+/**
+ * Internal dependencies
+ */
 import TermSelect from '../index';
 
 test( 'TermSelect Multiple', () => {

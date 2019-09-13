@@ -43,7 +43,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				<SelectControl
 					label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 					value={ selectedPostType.slug }
-					options={ postTypes.map( type => ( { label: type.name, value: type.slug } ) ) }
+					options={ postTypes.map( ( type ) => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
 						setAttributes( { postId: undefined } );
 						setAttributes( { postType } );
@@ -59,7 +59,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 							value: '',
 							label: __( 'Select Post', 'advanced-posts-blocks' ),
 						},
-						...posts.map( post => ( {
+						...posts.map( ( post ) => ( {
 							label: post.title.rendered,
 							value: post.id,
 						} ) ),

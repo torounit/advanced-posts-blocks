@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 import { compose } from '@wordpress/compose';
 
 const inc = ( a ) => {
