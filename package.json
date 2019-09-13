@@ -18,16 +18,16 @@
   "dependencies": {
     "@wordpress/api-fetch": "^3.5.0",
     "@wordpress/blocks": "^6.6.0",
-    "@wordpress/components": "^7.4.0",
+    "@wordpress/components": "^8.2.0",
     "@wordpress/data": "^4.8.0",
     "@wordpress/editor": "^9.6.0",
     "@wordpress/element": "^2.7.0",
     "@wordpress/i18n": "^3.6.0",
     "@wordpress/url": "^2.7.0",
-    "lodash": "^4.17.13"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^3.4.0",
+    "@wordpress/scripts": "^4.1.0",
     "grunt": "^1.0.4",
     "grunt-wp-i18n": "~1.0.3",
     "grunt-wp-readme-to-markdown": "~2.0.1"
