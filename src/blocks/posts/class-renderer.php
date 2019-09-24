@@ -66,6 +66,9 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			$base                      = $this->get_rest_base( $taxonomy );
 			$this->attributes[ $base ] = [
 				'type'    => 'array',
+				'items'   => [
+					'type' => 'number',
+				],
 				'default' => [],
 			];
 		}
