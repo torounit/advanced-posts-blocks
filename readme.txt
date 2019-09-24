@@ -62,8 +62,12 @@ Support template hierarchy. The templates are searched in the following order.
 
 == Changelog ==
 
+
+= 0.3.2 =
+* attribute bug fix.
+
 = 0.3.0 =
-* [Multiple Posts Block] Support offset attritube.
+* [Multiple Posts Block] Support offset attribute.
 
 = 0.2.2 =
 * Fixed typo.

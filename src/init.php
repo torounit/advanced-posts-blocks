@@ -29,12 +29,12 @@ add_action(
 add_action(
 	'enqueue_block_editor_assets',
 	function () {
-		$deps = json_decode( file_get_contents( dirname( PLUGIN_FILE ) . '/build/index.deps.json' ) );
+		$script_asset = require( dirname( PLUGIN_FILE ) . '/build/index.asset.php' );
 		wp_enqueue_script(
 			'advanced-posts-blocks',
 			plugins_url( 'build/index.js', PLUGIN_FILE ),
-			$deps,
-			get_plugin_data()['Version'],
+			$script_asset['dependencies'],
+			$script_asset['version'],
 			true
 		);
 		wp_set_script_translations( 'advanced-posts-blocks', 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
