@@ -15,6 +15,11 @@
     "type": "git",
     "url": "https://github.com/torounit/advanced-posts-blocks.git"
   },
+  "wp-env": {
+    "plugin-dir": "advanced-posts-blocks",
+    "plugin-name": "advanced-posts-blocks",
+    "welcome-build-command": "npm run start"
+  },
   "dependencies": {
     "@wordpress/api-fetch": "^3.6.1",
     "@wordpress/blocks": "^6.7.1",
