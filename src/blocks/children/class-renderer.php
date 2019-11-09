@@ -33,6 +33,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		],
 		'postId'      => [
 			'type' => 'number',
+			'default' => 0,
 		],
 		'className'   => [
 			'type' => 'string',

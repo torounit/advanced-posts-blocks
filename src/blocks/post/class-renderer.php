@@ -29,6 +29,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	protected $attributes = [
 		'postId'    => [
 			'type' => 'number',
+			'default' => 0,
 		],
 		'postType'  => [
 			'type'    => 'string',
