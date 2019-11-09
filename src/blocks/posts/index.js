@@ -11,13 +11,50 @@ import { registerBlockType } from '@wordpress/blocks';
  * Internal dependencies
  */
 import getEditComponent from './getEditComponent';
-import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { usePostTypes, usePostType, usePostTypeTaxonomies, useTermsGroupbyTaxnomy, usePosts } from '../../util/hooks';
 
 const name = 'advanced-posts-blocks/posts';
 const title = __( 'Multiple Posts', 'advanced-posts-blocks' );
-const edit = getEditComponent( name, title );
+const EditComponent = getEditComponent( name, title );
+
+const Edit = ( props ) => {
+	const { attributes } = props;
+	const { postsToShow, order, orderBy, postType: postTypeName, offset } = attributes;
+	const postTypes = usePostTypes();
+	const selectedPostType = usePostType( postTypeName );
+	const taxonomies = usePostTypeTaxonomies( selectedPostType );
+	const terms = useTermsGroupbyTaxnomy( taxonomies );
+
+	const taxQuery = {};
+	for ( const taxonomy of taxonomies ) {
+		const taxonomyTerms = attributes[ taxonomy.rest_base ];
+		if ( Array.isArray( taxonomyTerms ) && taxonomyTerms.length > 0 ) {
+			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.filter( identity );
+		}
+	}
+	const latestPostsQuery = pickBy( {
+		...taxQuery,
+		order,
+		offset,
+		orderby: orderBy,
+		per_page: postsToShow,
+		advanced_posts_blocks: true,
+	}, ( value ) => ! isUndefined( value ) );
+
+	const newProps = {
+		...props,
+		latestPosts: usePosts( selectedPostType, latestPostsQuery ),
+		taxonomies,
+		terms,
+		selectedPostType,
+		postTypes: postTypes
+			.filter( ( postType ) => postType.viewable )
+			.filter( ( postType ) => postType.rest_base !== 'media' ),
+	};
+	return <EditComponent { ...newProps } />;
+};
 
 registerBlockType(
 	name,
@@ -44,50 +81,7 @@ registerBlockType(
 			html: false,
 		},
 
-		edit: withSelect( ( select, props ) => {
-			const { attributes } = props;
-			const { postsToShow, order, orderBy, postType: postTypeName, offset } = attributes;
-			const { getEntityRecords, getTaxonomies, getPostType, getPostTypes } = select( 'core' );
-			const postTypes = getPostTypes( { per_page: -1 } ) || [];
-			const selectedPostType = getPostType( postTypeName ) || {};
-			let taxonomies = getTaxonomies() || [];
-
-			taxonomies = taxonomies.filter( ( taxonomy ) => {
-				const postTypeTaxonomies = selectedPostType.taxonomies || [];
-				return postTypeTaxonomies.includes( taxonomy.slug );
-			} );
-
-			const taxQuery = {};
-			for ( const taxonomy of taxonomies ) {
-				const terms = attributes[ taxonomy.rest_base ];
-				if ( Array.isArray( terms ) && terms.length > 0 ) {
-					taxQuery[ taxonomy.rest_base ] = terms.filter( identity );
-				}
-			}
-
-			const terms = {};
-			for ( const taxonomy of taxonomies ) {
-				terms[ taxonomy.rest_base ] = getEntityRecords( 'taxonomy', taxonomy.slug, { per_page: -1 } ) || [];
-			}
-			const latestPostsQuery = pickBy( {
-				...taxQuery,
-				order,
-				offset,
-				orderby: orderBy,
-				per_page: postsToShow,
-				advanced_posts_blocks: true,
-			}, ( value ) => ! isUndefined( value ) );
-
-			return {
-				latestPosts: getEntityRecords( 'postType', selectedPostType.slug, latestPostsQuery ) || [],
-				taxonomies,
-				terms,
-				selectedPostType,
-				postTypes: postTypes
-					.filter( ( postType ) => postType.viewable )
-					.filter( ( postType ) => postType.rest_base !== 'media' ),
-			};
-		} )( edit ),
+		edit: Edit,
 
 		save() {
 			return null;

@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { isUndefined, pickBy } from 'lodash';
-
 /**
  * WordPress dependencies
  */
@@ -11,13 +10,47 @@ import { registerBlockType } from '@wordpress/blocks';
  * Internal dependencies
  */
 import getEditComponent from './getEditComponent';
-import { withSelect } from '@wordpress/data';
 import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { useCurrentPostId, useCurrentPostType, usePosts, usePostType, usePostTypes } from '../../util/hooks';
 
 const name = 'advanced-posts-blocks/children';
 const title = __( 'Child Posts', 'advanced-posts-blocks' );
-const edit = getEditComponent( name, title );
+const EditComponent = getEditComponent( name, title );
+
+const Edit = ( props ) => {
+	const { attributes } = props;
+	const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
+	const { postId } = attributes;
+	const postTypes = usePostTypes();
+	const currentPostType = useCurrentPostType();
+	const currentPostId = useCurrentPostId();
+	const selectedPostType = usePostType( postTypeName ? postTypeName : currentPostType );
+	const PostsQuery = pickBy( {
+		orderby: orderBy,
+		per_page: -1,
+	}, ( value ) => ! isUndefined( value ) );
+
+	const childrenPostsQuery = pickBy( {
+		order,
+		parent: postId ? postId : currentPostId,
+		orderby: orderBy,
+		per_page: postsToShow,
+	}, ( value ) => ! isUndefined( value ) );
+
+	const newProps = {
+		...props,
+		postId,
+		posts: usePosts( selectedPostType, PostsQuery ),
+		children: usePosts( selectedPostType, childrenPostsQuery ),
+		selectedPostType,
+		postTypes: postTypes
+			.filter( ( postType ) => postType.hierarchical )
+			.filter( ( postType ) => postType.viewable )
+			.filter( ( postType ) => postType.rest_base !== 'media' ),
+	};
+	return <EditComponent { ...newProps } />;
+};
 
 registerBlockType(
 	name,
@@ -41,46 +74,7 @@ registerBlockType(
 			align: [ 'wide', 'full' ],
 			html: false,
 		},
-
-		edit: withSelect( ( select, props ) => {
-			const { attributes } = props;
-			const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
-			const { postId } = attributes;
-			const { getEntityRecords, getPostType, getPostTypes } = select( 'core' );
-			const { getCurrentPostId, getCurrentPostType } = select( 'core/editor' );
-			const postTypes = getPostTypes( { per_page: -1 } ) || [];
-			let selectedPostType;
-
-			if ( postTypeName ) {
-				selectedPostType = getPostType( postTypeName ) || {};
-			} else {
-				selectedPostType = getPostType( getCurrentPostType() ) || {};
-			}
-
-			const PostsQuery = pickBy( {
-				orderby: orderBy,
-				per_page: -1,
-			}, ( value ) => ! isUndefined( value ) );
-
-			const childrenPostsQuery = pickBy( {
-				order,
-				parent: postId ? postId : getCurrentPostId(),
-				orderby: orderBy,
-				per_page: postsToShow,
-			}, ( value ) => ! isUndefined( value ) );
-
-			return {
-				postId,
-				posts: getEntityRecords( 'postType', selectedPostType.slug, PostsQuery ) || [],
-				children: getEntityRecords( 'postType', selectedPostType.slug, childrenPostsQuery ) || [],
-				selectedPostType,
-				postTypes: postTypes
-					.filter( ( postType ) => postType.hierarchical )
-					.filter( ( postType ) => postType.viewable )
-					.filter( ( postType ) => postType.rest_base !== 'media' ),
-			};
-		} )( edit ),
-
+		edit: Edit,
 		save() {
 			return null;
 		},
