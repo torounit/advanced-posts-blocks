@@ -2,6 +2,7 @@
 **/*.build.js
 **/node_modules/**
 **/vendor/**
+**/wordpress/**
 build
 coverage
 cypress

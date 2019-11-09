@@ -15,9 +15,11 @@ import {
 import QueryControls from './QueryControls';
 import { __ } from '@wordpress/i18n';
 import {
-	InspectorControls,
 	ServerSideRender,
 } from '@wordpress/editor';
+import {
+	InspectorControls,
+} from '@wordpress/block-editor';
 
 /**
  * Internal dependencies

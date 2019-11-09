@@ -9,9 +9,11 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {
-	InspectorControls,
 	ServerSideRender,
 } from '@wordpress/editor';
+import {
+	InspectorControls,
+} from '@wordpress/block-editor';
 
 const getEditComponent = ( blockName, blockTitle ) => {
 	return class extends Component {

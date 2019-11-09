@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const PLUGIN_FILE = __FILE__;
+const SCRIPT_HANDLE = 'advanced-posts-blocks';
 
 /**
  * Get plugin information.

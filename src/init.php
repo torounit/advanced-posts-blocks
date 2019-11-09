@@ -27,17 +27,17 @@ add_action(
 );
 
 add_action(
-	'enqueue_block_editor_assets',
+	'init',
 	function () {
 		$script_asset = require( dirname( PLUGIN_FILE ) . '/build/index.asset.php' );
-		wp_enqueue_script(
-			'advanced-posts-blocks',
+		wp_register_script(
+			SCRIPT_HANDLE,
 			plugins_url( 'build/index.js', PLUGIN_FILE ),
 			$script_asset['dependencies'],
 			$script_asset['version'],
 			true
 		);
-		wp_set_script_translations( 'advanced-posts-blocks', 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
+		wp_set_script_translations( SCRIPT_HANDLE, 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
 	}
 );
 

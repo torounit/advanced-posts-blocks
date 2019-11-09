@@ -7,6 +7,8 @@
 
 namespace Advanced_Posts_Blocks\Blocks;
 
+use const Advanced_Posts_Blocks\SCRIPT_HANDLE;
+
 /**
  * Class Renderer
  *
@@ -52,6 +54,7 @@ abstract class Renderer {
 		register_block_type(
 			$this->name,
 			[
+				'editor_script'   => SCRIPT_HANDLE,
 				'attributes'      => $this->get_attributes(),
 				'render_callback' => [ $this, 'render' ],
 			]
