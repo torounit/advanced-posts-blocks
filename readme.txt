@@ -62,6 +62,9 @@ Support template hierarchy. The templates are searched in the following order.
 
 == Changelog ==
 
+= 0.4.0 =
+* use react hooks.
+
 = 0.3.3 =
 * Term attribute bug fix.
 * Term control key fix.
