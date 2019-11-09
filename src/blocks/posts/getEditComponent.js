@@ -43,7 +43,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					value={ selectedPostType.slug }
 					options={ postTypes.map( ( type ) => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
-						console.log(postType)
 						setAttributes( { postType } );
 					} }
 				/>
@@ -59,7 +58,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 						selectedTermId={ attributes[ taxonomy.rest_base ] }
 						onChange={ ( value ) => {
 
-							if ( !Array.isArray( value ) ) {
+							if ( ! Array.isArray( value ) ) {
 								value = [ value ];
 							}
 							value = value.filter( ( e ) => e );
