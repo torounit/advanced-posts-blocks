@@ -43,26 +43,31 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					value={ selectedPostType.slug }
 					options={ postTypes.map( ( type ) => ( { label: type.name, value: type.slug } ) ) }
 					onChange={ ( postType ) => {
+						console.log(postType)
 						setAttributes( { postType } );
 					} }
 				/>
 			);
-			const TermControls = taxonomies.map( ( taxonomy ) => (
-				<TermSelect
-					key={ taxonomy }
-					noOptionLabel={ __( 'All' ) }
-					multiple={ true }
-					termList={ terms[ taxonomy.rest_base ] || [] }
-					label={ taxonomy.labels.name }
-					selectedTermId={ attributes[ taxonomy.rest_base ] }
-					onChange={ ( value ) => {
-						if ( ! Array.isArray( value ) ) {
-							value = [ value ];
-						}
-						setAttributes( { [ taxonomy.rest_base ]: '' !== value ? value : undefined } );
-					} }
-				/>
-			) );
+			const TermControls = taxonomies.map( ( taxonomy ) => {
+				return (
+					<TermSelect
+						key={ taxonomy.rest_base }
+						noOptionLabel={ __( 'All' ) }
+						multiple={ true }
+						termList={ terms[ taxonomy.rest_base ] || [] }
+						label={ taxonomy.labels.name }
+						selectedTermId={ attributes[ taxonomy.rest_base ] }
+						onChange={ ( value ) => {
+
+							if ( !Array.isArray( value ) ) {
+								value = [ value ];
+							}
+							value = value.filter( ( e ) => e );
+							setAttributes( { [ taxonomy.rest_base ]: value } );
+						} }
+					/>
+				);
+			} );
 
 			const title = __( 'Query setting', 'advanced-posts-blocks' );
 
