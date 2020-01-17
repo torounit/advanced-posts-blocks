@@ -76,7 +76,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	/**
 	 * Set term attributes.
 	 */
-	private function setup_term_attributes () {
+	private function setup_term_attributes() {
 		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
 			$base                      = $this->get_rest_base( $taxonomy );
