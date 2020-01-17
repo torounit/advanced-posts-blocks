@@ -22,7 +22,6 @@ add_action(
 		new Blocks\Post\Renderer();
 		new Blocks\Posts\Renderer();
 		new Blocks\Children\Renderer();
-	},
-	9999
+	}
 );
 

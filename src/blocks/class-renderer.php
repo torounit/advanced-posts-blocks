@@ -64,7 +64,7 @@ abstract class Renderer {
 			$script_asset['version'],
 			true
 		);
-		wp_set_script_translations( SCRIPT_HANDLE, 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
+		wp_set_script_translations( $this->name, 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
 	}
 
 	protected function register_block_type_arguments() {
