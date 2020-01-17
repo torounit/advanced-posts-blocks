@@ -19,7 +19,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @var string
 	 */
-	protected $name = '';
+	protected $name = 'advanced-posts-blocks/children';
 
 	/**
 	 * Attributes schema for blocks.
@@ -55,13 +55,12 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		],
 	];
 
-	/**
-	 * Constructor
-	 *
-	 * @param string $name block name.
-	 */
-	public function __construct( string $name ) {
-		parent::__construct( $name );
+
+	protected function register() {
+		register_block_type(
+			'advanced-posts-blocks/children',
+			$this->register_block_type_arguments()
+		);
 	}
 
 	/**

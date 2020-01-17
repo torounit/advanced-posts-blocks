@@ -19,7 +19,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @var string
 	 */
-	protected $name = '';
+	protected $name = 'advanced-posts-blocks/posts';
 
 	/**
 	 * Attributes schema for blocks.
@@ -58,9 +58,25 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	/**
 	 * Constructor
 	 *
-	 * @param string $name block name.
 	 */
-	public function __construct( string $name ) {
+	public function __construct() {
+		$this->setup_term_attributes();
+		new Matrix_Term_Query( 'advanced_posts_blocks' );
+		parent::__construct();
+	}
+
+
+	protected function register() {
+		register_block_type(
+			'advanced-posts-blocks/posts',
+			$this->register_block_type_arguments()
+		);
+	}
+
+	/**
+	 * Set term attributes.
+	 */
+	private function setup_term_attributes () {
 		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
 			$base                      = $this->get_rest_base( $taxonomy );
@@ -72,9 +88,6 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 				'default' => [],
 			];
 		}
-		new Matrix_Term_Query( 'advanced_posts_blocks' );
-
-		parent::__construct( $name );
 	}
 
 	/**

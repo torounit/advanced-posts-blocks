@@ -38,12 +38,8 @@ abstract class Renderer {
 	/**
 	 * Constructor
 	 *
-	 * @param string $name block name.
 	 */
-	public function __construct( string $name ) {
-		if ( $name ) {
-			$this->name = $name;
-		}
+	public function __construct() {
 		$this->register_assets();
 		$this->register();
 	}
@@ -62,7 +58,7 @@ abstract class Renderer {
 		$script_dir   = '/build/' . str_replace( 'advanced-posts-blocks', 'blocks', $this->name );
 		$script_asset = require( dirname( PLUGIN_FILE ) . $script_dir . '/index.asset.php' );
 		wp_register_script(
-			SCRIPT_HANDLE,
+			$this->name,
 			plugins_url( $script_dir . '/index.js', PLUGIN_FILE ),
 			$script_asset['dependencies'],
 			$script_asset['version'],
@@ -71,9 +67,9 @@ abstract class Renderer {
 		wp_set_script_translations( SCRIPT_HANDLE, 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
 	}
 
-	private function register_block_type_arguments() {
+	protected function register_block_type_arguments() {
 		return [
-			'editor_script'   => SCRIPT_HANDLE,
+			'editor_script'   => $this->name,
 			'attributes'      => $this->get_attributes(),
 			'render_callback' => [ $this, 'render' ],
 		];
