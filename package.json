@@ -28,8 +28,14 @@
     "grunt-wp-readme-to-markdown": "~2.0.1"
   },
   "release-it": {
+    "hooks": {
+      "after:bump": "bash ./bin/create-release.sh ${version}"
+    },
     "github": {
-      "release": true
+      "release": true,
+      "assets": [
+        "advanced-posts-blocks.zip"
+      ]
     },
     "npm": {
       "publish": false

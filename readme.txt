@@ -62,6 +62,10 @@ Support template hierarchy. The templates are searched in the following order.
 
 == Changelog ==
 
+= 0.5.0 =
+* Separate block script.
+* Refactoring.
+
 = 0.4.0 =
 * use react hooks.
 
