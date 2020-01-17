@@ -7,6 +7,7 @@
 
 namespace Advanced_Posts_Blocks\Blocks;
 
+use const Advanced_Posts_Blocks\PLUGIN_FILE;
 use const Advanced_Posts_Blocks\SCRIPT_HANDLE;
 
 /**
@@ -29,7 +30,7 @@ abstract class Renderer {
 	 * @var array
 	 */
 	protected $attributes = [
-		'className'   => [
+		'className' => [
 			'type' => 'string',
 		],
 	];
@@ -43,7 +44,7 @@ abstract class Renderer {
 		if ( $name ) {
 			$this->name = $name;
 		}
-
+		$this->register_assets();
 		$this->register();
 	}
 
@@ -53,12 +54,29 @@ abstract class Renderer {
 	protected function register() {
 		register_block_type(
 			$this->name,
-			[
-				'editor_script'   => SCRIPT_HANDLE,
-				'attributes'      => $this->get_attributes(),
-				'render_callback' => [ $this, 'render' ],
-			]
+			$this->register_block_type_arguments()
 		);
+	}
+
+	private function register_assets() {
+		$script_dir   = '/build/' . str_replace( 'advanced-posts-blocks', 'blocks', $this->name );
+		$script_asset = require( dirname( PLUGIN_FILE ) . $script_dir . '/index.asset.php' );
+		wp_register_script(
+			SCRIPT_HANDLE,
+			plugins_url( $script_dir . '/index.js', PLUGIN_FILE ),
+			$script_asset['dependencies'],
+			$script_asset['version'],
+			true
+		);
+		wp_set_script_translations( SCRIPT_HANDLE, 'advanced-posts-blocks', basename( PLUGIN_FILE ) . '/languages' );
+	}
+
+	private function register_block_type_arguments() {
+		return [
+			'editor_script'   => SCRIPT_HANDLE,
+			'attributes'      => $this->get_attributes(),
+			'render_callback' => [ $this, 'render' ],
+		];
 	}
 
 	/**
