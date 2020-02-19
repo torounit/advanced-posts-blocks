@@ -135,15 +135,17 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		foreach ( $this->get_post_type_taxonomies( $post_type ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
 			$base  = $this->get_rest_base( $taxonomy );
-			$terms = array_filter( $attributes[ $base ] );
-			if ( ! empty( $terms ) ) {
-				$args['tax_query'][] = array_merge(
-					[
-						'taxonomy' => $taxonomy->name,
-						'field'    => 'term_id',
-						'terms'    => $terms,
-					]
-				);
+			if ( $base && isset( $attributes[ $base ] ) && is_array( $attributes[ $base ] ) ) {
+				$terms = array_filter( $attributes[ $base ] );
+				if ( ! empty( $terms ) ) {
+					$args['tax_query'][] = array_merge(
+						[
+							'taxonomy' => $taxonomy->name,
+							'field'    => 'term_id',
+							'terms'    => $terms,
+						]
+					);
+				}
 			}
 		}
 
