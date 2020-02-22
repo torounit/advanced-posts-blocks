@@ -3,7 +3,6 @@ module.exports = function( grunt ) {
 
 	// Project configuration
 	grunt.initConfig( {
-
 		pkg: grunt.file.readJSON( 'package.json' ),
 
 		addtextdomain: {
@@ -14,7 +13,14 @@ module.exports = function( grunt ) {
 				options: {
 					updateDomains: true,
 				},
-				src: [ '*.php', '**/*.php', '!\.git/**/*', '!bin/**/*', '!node_modules/**/*', '!tests/**/*' ],
+				src: [
+					'*.php',
+					'**/*.php',
+					'!.git/**/*',
+					'!bin/**/*',
+					'!node_modules/**/*',
+					'!tests/**/*',
+				],
 			},
 		},
 
@@ -30,7 +36,7 @@ module.exports = function( grunt ) {
 			target: {
 				options: {
 					domainPath: '/languages',
-					exclude: [ '\.git/*', 'bin/*', 'node_modules/*', 'tests/*' ],
+					exclude: [ '.git/*', 'bin/*', 'node_modules/*', 'tests/*' ],
 					mainFile: 'advanced-posts-blocks.php',
 					potFilename: 'advanced-posts-blocks.pot',
 					potHeaders: {

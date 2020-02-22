@@ -22,7 +22,7 @@ export default function QueryControls( {
 	onOrderByChange,
 } ) {
 	return [
-		( onOrderChange && onOrderByChange ) && (
+		onOrderChange && onOrderByChange && (
 			<SelectControl
 				key="query-controls-order-select"
 				label={ __( 'Order by' ) }
@@ -72,12 +72,13 @@ export default function QueryControls( {
 				key="query-controls-check-control"
 				label={ __( 'All items' ) }
 				checked={ numberOfItems === -1 }
-				onChange={ ( value ) => onNumberOfItemsChange( value ? -1 : 10 )
+				onChange={ ( value ) =>
+					onNumberOfItemsChange( value ? -1 : 10 )
 				}
 			/>
 		),
 
-		( numberOfItems !== -1 && onNumberOfItemsChange ) && (
+		numberOfItems !== -1 && onNumberOfItemsChange && (
 			<RangeControl
 				key="query-controls-range-control"
 				label={ __( 'Number of items' ) }

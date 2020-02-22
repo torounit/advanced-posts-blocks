@@ -14,12 +14,8 @@ import {
  */
 import QueryControls from './QueryControls';
 import { __ } from '@wordpress/i18n';
-import {
-	ServerSideRender,
-} from '@wordpress/editor';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { ServerSideRender } from '@wordpress/editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import TermSelect from './TermSelect';
 
 const getEditComponent = ( blockName, blockTitle ) => {
@@ -40,7 +36,10 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			<SelectControl
 				label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 				value={ selectedPostType.slug }
-				options={ postTypes.map( ( type ) => ( { label: type.name, value: type.slug } ) ) }
+				options={ postTypes.map( ( type ) => ( {
+					label: type.name,
+					value: type.slug,
+				} ) ) }
 				onChange={ ( postType ) => {
 					setAttributes( { postType } );
 				} }
@@ -74,10 +73,18 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					<QueryControls
 						{ ...{ order, orderBy, offset } }
 						numberOfItems={ postsToShow }
-						onOffsetChange={ ( value ) => setAttributes( { offset: value } ) }
-						onOrderChange={ ( value ) => setAttributes( { order: value } ) }
-						onOrderByChange={ ( value ) => setAttributes( { orderBy: value } ) }
-						onNumberOfItemsChange={ ( value ) => setAttributes( { postsToShow: value } ) }
+						onOffsetChange={ ( value ) =>
+							setAttributes( { offset: value } )
+						}
+						onOrderChange={ ( value ) =>
+							setAttributes( { order: value } )
+						}
+						onOrderByChange={ ( value ) =>
+							setAttributes( { orderBy: value } )
+						}
+						onNumberOfItemsChange={ ( value ) =>
+							setAttributes( { postsToShow: value } )
+						}
 					/>
 					{ PostTypeControls }
 					{ TermControls }
@@ -89,13 +96,12 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			return (
 				<Fragment>
 					{ inspectorControls }
-					<Placeholder
-						icon="admin-post"
-						label={ blockTitle }
-					>
-						{ ! Array.isArray( latestPosts ) ?
-							<Spinner /> : labels.not_found
-						}
+					<Placeholder icon="admin-post" label={ blockTitle }>
+						{ ! Array.isArray( latestPosts ) ? (
+							<Spinner />
+						) : (
+							labels.not_found
+						) }
 					</Placeholder>
 				</Fragment>
 			);

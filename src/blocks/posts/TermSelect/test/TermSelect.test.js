@@ -21,7 +21,7 @@ test( 'TermSelect Multiple', () => {
 			termList={ termList }
 			label={ 'Terms' }
 			selectedTermId={ [ 2232 ] }
-		/>,
+		/>
 	);
 	const tree = component.toJSON();
 	expect( tree ).toMatchSnapshot();

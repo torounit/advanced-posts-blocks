@@ -5,25 +5,32 @@ import { Fragment } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
-	SelectControl, Disabled,
+	SelectControl,
+	Disabled,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import {
-	ServerSideRender,
-} from '@wordpress/editor';
-import {
-	InspectorControls,
-} from '@wordpress/block-editor';
+import { ServerSideRender } from '@wordpress/editor';
+import { InspectorControls } from '@wordpress/block-editor';
 
 const getEditComponent = ( blockName, blockTitle ) => {
-	return ( { className, attributes, setAttributes, posts, selectedPostType, postTypes } ) => {
+	return ( {
+		className,
+		attributes,
+		setAttributes,
+		posts,
+		selectedPostType,
+		postTypes,
+	} ) => {
 		const { postId } = attributes;
 
 		const PostTypeControls = (
 			<SelectControl
 				label={ __( 'Post Type', 'advanced-posts-blocks' ) }
 				value={ selectedPostType.slug }
-				options={ postTypes.map( ( type ) => ( { label: type.name, value: type.slug } ) ) }
+				options={ postTypes.map( ( type ) => ( {
+					label: type.name,
+					value: type.slug,
+				} ) ) }
 				onChange={ ( postType ) => {
 					setAttributes( { postId: undefined } );
 					setAttributes( { postType } );
@@ -45,7 +52,9 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					} ) ),
 				] }
 				onChange={ ( value ) => {
-					setAttributes( { postId: value ? parseInt( value ) : undefined } );
+					setAttributes( {
+						postId: value ? parseInt( value ) : undefined,
+					} );
 				} }
 			/>
 		);
@@ -65,10 +74,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			return (
 				<Fragment>
 					{ inspectorControls }
-					<Placeholder
-						icon="admin-post"
-						label={ blockTitle }
-					>
+					<Placeholder icon="admin-post" label={ blockTitle }>
 						{ __( 'Post Not Found.', 'advanced-posts-blocks' ) }
 					</Placeholder>
 				</Fragment>

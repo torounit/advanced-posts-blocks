@@ -2,10 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import {
-	RangeControl,
-	SelectControl,
-} from '@wordpress/components';
+import { RangeControl, SelectControl } from '@wordpress/components';
 
 const DEFAULT_MIN_ITEMS = 1;
 const DEFAULT_MAX_ITEMS = 100;
@@ -23,7 +20,7 @@ export default function QueryControls( {
 	onOffsetChange,
 } ) {
 	return [
-		( onOrderChange && onOrderByChange ) && (
+		onOrderChange && onOrderByChange && (
 			<SelectControl
 				key="query-controls-order-select"
 				label={ __( 'Order by' ) }

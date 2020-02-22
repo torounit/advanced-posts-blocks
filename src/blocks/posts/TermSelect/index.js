@@ -7,7 +7,14 @@ import { buildTermsTree } from '../../../util/terms';
  */
 import { TreeSelect } from '@wordpress/components';
 
-export default function TermSelect( { label, noOptionLabel, termList, selectedTermId, onChange, multiple } ) {
+export default function TermSelect( {
+	label,
+	noOptionLabel,
+	termList,
+	selectedTermId,
+	onChange,
+	multiple,
+} ) {
 	const termsTree = buildTermsTree( termList );
 	return (
 		<TreeSelect

@@ -8,7 +8,9 @@ const getEntries = () => {
 	glob.sync( '*/index.js', {
 		cwd: srcDir,
 	} ).forEach( ( key ) => {
-		entries[ 'blocks/' + key.replace( '/index.js', '/index' ) ] = path.resolve( srcDir, key );
+		entries[
+			'blocks/' + key.replace( '/index.js', '/index' )
+		] = path.resolve( srcDir, key );
 	} );
 	return entries;
 };

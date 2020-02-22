@@ -20,12 +20,15 @@
     "plugin-name": "advanced-posts-blocks",
     "welcome-build-command": "npm run start"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@wordpress/blocks": "^6.12.0",
+    "@wordpress/components": "^9.2.1",
+    "@wordpress/i18n": "^3.9.0",
+    "lodash": "^4.17.15",
+    "@wordpress/data": "latest"
+  },
   "devDependencies": {
-    "@wordpress/scripts": "^6.2.0",
-    "grunt": "^1.0.4",
-    "grunt-wp-i18n": "~1.0.3",
-    "grunt-wp-readme-to-markdown": "~2.0.1"
+    "@wordpress/scripts": "^7.1.1"
   },
   "release-it": {
     "hooks": {
