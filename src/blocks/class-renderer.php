@@ -186,6 +186,18 @@ abstract class Renderer {
 	}
 
 	/**
+	 * Create \WP_Query and set $query.
+	 *
+	 * @param array $args URL query string or array of vars.
+	 * @param string $query_var query var.
+	 */
+	protected function setup_query( $args, $query_var = 'query' ) {
+		$args = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
+		$query = new \WP_Query( $args );
+		set_query_var( $query_var, $query );
+	}
+
+	/**
 	 * Get component style name.
 	 *
 	 * @param string $class_name class strings.

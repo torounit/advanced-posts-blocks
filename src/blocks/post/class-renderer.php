@@ -66,9 +66,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'post_type' => 'any',
 		];
 
-		$args = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
-		$query = new \WP_Query( $args );
-		set_query_var( 'query', $query );
+		$this->setup_query( $args );
 		$output = $this->get_content_from_template( $attributes );
 		if ( $output ) {
 			return $output;
