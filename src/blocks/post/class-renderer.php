@@ -61,14 +61,13 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		if ( empty( $attributes['postId'] ) ) {
 			return '';
 		}
+		$args = [
+			'p' => $attributes['postId'],
+			'post_type' => 'any',
+		];
 
-		$query = new \WP_Query(
-			[
-				'p' => $attributes['postId'],
-				'post_type' => 'any',
-			]
-		);
-
+		$args = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
+		$query = new \WP_Query( $args );
 		set_query_var( 'query', $query );
 		$output = $this->get_content_from_template( $attributes );
 		if ( $output ) {

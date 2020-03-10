@@ -80,6 +80,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'post_type'      => $attributes['postType'] ? $attributes['postType'] : get_post_type(),
 		];
 
+		$args = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
 		$query = new \WP_Query( $args );
 		set_query_var( 'query', $query );
 		$output = $this->get_content_from_template( $attributes );
