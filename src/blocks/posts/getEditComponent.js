@@ -29,7 +29,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		postTypes,
 		terms,
 	} ) => {
-		const { order, orderBy, postsToShow, offset } = attributes;
+		const { order, orderBy, postsToShow, offset, ignoreStickyPosts } = attributes;
 		const labels = selectedPostType.labels || {};
 
 		const PostTypeControls = (
@@ -71,7 +71,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			<InspectorControls>
 				<PanelBody title={ title }>
 					<QueryControls
-						{ ...{ order, orderBy, offset } }
+						{ ...{ order, orderBy, offset, ignoreStickyPosts } }
 						numberOfItems={ postsToShow }
 						onOffsetChange={ ( value ) =>
 							setAttributes( { offset: value } )
@@ -84,6 +84,9 @@ const getEditComponent = ( blockName, blockTitle ) => {
 						}
 						onNumberOfItemsChange={ ( value ) =>
 							setAttributes( { postsToShow: value } )
+						}
+						onIgnoreStickyPostsChange={ ( value ) =>
+							setAttributes( { ignoreStickyPosts: value } )
 						}
 					/>
 					{ PostTypeControls }

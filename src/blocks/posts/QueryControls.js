@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RangeControl, SelectControl } from '@wordpress/components';
+import { RangeControl, SelectControl, ToggleControl } from '@wordpress/components';
 
 const DEFAULT_MIN_ITEMS = 1;
 const DEFAULT_MAX_ITEMS = 100;
@@ -12,12 +12,14 @@ export default function QueryControls( {
 	order,
 	orderBy,
 	offset,
+	ignoreStickyPosts,
 	maxItems = DEFAULT_MAX_ITEMS,
 	minItems = DEFAULT_MIN_ITEMS,
 	onNumberOfItemsChange,
 	onOrderChange,
 	onOrderByChange,
 	onOffsetChange,
+	onIgnoreStickyPostsChange,
 } ) {
 	return [
 		onOrderChange && onOrderByChange && (
@@ -78,5 +80,14 @@ export default function QueryControls( {
 				max={ maxItems }
 			/>
 		),
+		onIgnoreStickyPostsChange && (
+			<ToggleControl
+				key="query-controls-ignore-sticky-posts-control"
+				label={ __( 'Ignore sticky posts' ) }
+				checked={ ignoreStickyPosts }
+				onChange={ onIgnoreStickyPostsChange }
+			/>
+		)
+
 	];
 }

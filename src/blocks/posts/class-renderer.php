@@ -53,6 +53,10 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		'align'       => [
 			'type' => 'string',
 		],
+		'ignoreStickyPosts' => [
+			'type'    => 'boolean',
+			'default' => false,
+		]
 	];
 
 	/**
@@ -123,6 +127,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		$args      = [
 			'posts_per_page'        => $attributes['postsToShow'],
 			'post_status'           => 'publish',
+			'ignore_sticky_posts'   => $attributes['ignoreStickyPosts'],
 			'order'                 => $attributes['order'],
 			'orderby'               => $attributes['orderBy'],
 			'post_type'             => $attributes['postType'],
