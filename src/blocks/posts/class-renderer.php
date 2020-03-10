@@ -55,7 +55,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		],
 		'ignoreStickyPosts' => [
 			'type'    => 'boolean',
-			'default' => false,
+			'default' => true,
 		]
 	];
 
