@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { RangeControl, SelectControl, ToggleControl } from '@wordpress/components';
+import { RangeControl, SelectControl, CheckboxControl } from '@wordpress/components';
 
 const DEFAULT_MIN_ITEMS = 1;
 const DEFAULT_MAX_ITEMS = 100;
@@ -81,7 +81,7 @@ export default function QueryControls( {
 			/>
 		),
 		onIgnoreStickyPostsChange && (
-			<ToggleControl
+			<CheckboxControl
 				key="query-controls-ignore-sticky-posts-control"
 				label={ __( 'Ignore sticky posts' ) }
 				checked={ ignoreStickyPosts }
