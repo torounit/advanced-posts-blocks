@@ -9,7 +9,8 @@
     "test": "wp-scripts test-unit-js --config tests/js/jest.config.json",
     "start": "wp-scripts start",
     "build": "wp-scripts build",
-    "lint-js": "wp-scripts lint-js"
+    "lint-js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update"
   },
   "repository": {
     "type": "git",
@@ -23,16 +24,16 @@
   "dependencies": {
     "@wordpress/blocks": "^6.15.0",
     "@wordpress/components": "^9.5.0",
+    "@wordpress/data": "^4.17.0",
     "@wordpress/i18n": "^3.12.0",
-    "lodash": "^4.17.15",
-    "@wordpress/data": "latest"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@wordpress/scripts": "^9.0.0"
   },
   "release-it": {
     "hooks": {
-      "after:bump": "bash ./bin/create-release.sh ${version}"
+      "after:bump": "bash ./bin/create-release.sh advanced-posts-blocks ${version}"
     },
     "github": {
       "release": true,
