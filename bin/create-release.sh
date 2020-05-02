@@ -2,18 +2,19 @@
 
 set -e
 
-if [ $# -lt 1 ]; then
-	echo "usage: $0 <version>"
+if [ $# -lt 2 ]; then
+	echo "usage: $0 <plugin-name> <version>"
 	exit 1
 fi
 
-version=$1
+pluginname=$1
+version=$2
 
-sed -i '' -e "s/^ \* Version: .*/ * Version: ${version}/g" advanced-posts-blocks.php;
-sed -i '' -e "s/^ \* @version .*/ * @version ${version}/g" advanced-posts-blocks.php;
+sed -i'' -e "s/^ \* Version: .*/ * Version: ${version}/g" ${pluginname}.php;
+sed -i'' -e "s/^ \* @version .*/ * @version ${version}/g" ${pluginname}.php;
 
 rsync -a --exclude-from=.distignore ./ ./distribution/
 cd distribution
-zip -r ../advanced-posts-blocks.zip ./
+zip -r ../${pluginname}.zip ./
 cd ../
 rm -rf distribution

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Advanced Posts Blocks
  * Plugin URI:      https://github.com/torounit/advanced-posts-blocks
- * Description:     Powerfull posts blocks.
+ * Description:     Customizable posts blocks.
  * Author:          Toro_Unit
  * Author URI:      https://torounit.com
  * Text Domain:     advanced-posts-blocks
