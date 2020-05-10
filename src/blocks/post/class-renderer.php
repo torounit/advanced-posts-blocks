@@ -63,7 +63,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		}
 		$args = [
 			'p' => $attributes['postId'],
-			'post_type' => 'any',
+			'post_type' => $attributes['postType'],
 		];
 
 		$this->setup_query( $args );
