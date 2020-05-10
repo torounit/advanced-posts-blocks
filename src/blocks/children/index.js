@@ -60,8 +60,7 @@ const Edit = ( props ) => {
 		selectedPostType,
 		postTypes: postTypes
 			.filter( ( postType ) => postType.hierarchical )
-			.filter( ( postType ) => postType.viewable )
-			.filter( ( postType ) => postType.rest_base !== 'media' ),
+			.filter( ( postType ) => ![ 'attachment', 'wp_block' ].includes( postType.slug ) ),
 	};
 	return <EditComponent { ...newProps } />;
 };
