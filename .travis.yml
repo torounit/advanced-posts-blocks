@@ -49,11 +49,11 @@ before_script:
   - nvm install --lts
   - npm install
 script:
+  - npm run build
   - |
     if [[ ! -z "$WP_VERSION" ]] ; then
       phpunit
       WP_MULTISITE=1 phpunit
-    npm run build
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
