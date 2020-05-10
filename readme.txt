@@ -62,6 +62,9 @@ Support template hierarchy. The templates are searched in the following order.
 
 == Changelog ==
 
+= 0.7.2 =
+* bug fix for single post block.
+
 = 0.7.0 =
 * Allow select hidden post type.
 
