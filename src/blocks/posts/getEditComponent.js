@@ -29,7 +29,13 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		postTypes,
 		terms,
 	} ) => {
-		const { order, orderBy, postsToShow, offset, ignoreStickyPosts } = attributes;
+		const {
+			order,
+			orderBy,
+			postsToShow,
+			offset,
+			ignoreStickyPosts,
+		} = attributes;
 		const labels = selectedPostType.labels || {};
 
 		const PostTypeControls = (

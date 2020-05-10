@@ -23,22 +23,23 @@ const Edit = ( props ) => {
 	const { attributes } = props;
 	const { postType: postTypeName } = attributes;
 	const postTypes = usePostTypes();
-	console.log( postTypes );
 	const selectedPostType = usePostType( postTypeName );
 	const PostsQuery = pickBy(
 		{
-			per_page: - 1,
+			per_page: -1,
 			advanced_posts_blocks: true,
 		},
-		( value ) => !isUndefined( value )
+		( value ) => ! isUndefined( value )
 	);
 
 	const newProps = {
 		...props,
 		posts: usePosts( selectedPostType, PostsQuery ),
 		selectedPostType,
-		postTypes: postTypes
-			.filter( ( postType ) => ![ 'attachment', 'wp_block' ].includes( postType.slug ) )
+		postTypes: postTypes.filter(
+			( postType ) =>
+				! [ 'attachment', 'wp_block' ].includes( postType.slug )
+		),
 	};
 	return <EditComponent { ...newProps } />;
 };
@@ -59,8 +60,7 @@ registerBlockType( name, {
 			viewBox="0 0 24 24"
 		>
 			<Path fill="none" d="M0 0h24v24H0V0z" />
-			<Path
-				d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
+			<Path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
 		</SVG>
 	),
 

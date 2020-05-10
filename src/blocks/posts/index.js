@@ -64,8 +64,10 @@ const Edit = ( props ) => {
 		taxonomies,
 		terms,
 		selectedPostType,
-		postTypes: postTypes
-			.filter( ( postType ) => ![ 'attachment', 'wp_block' ].includes( postType.slug ) ),
+		postTypes: postTypes.filter(
+			( postType ) =>
+				! [ 'attachment', 'wp_block' ].includes( postType.slug )
+		),
 	};
 	return <EditComponent { ...newProps } />;
 };
