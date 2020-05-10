@@ -1,13 +1,13 @@
 # Advanced Posts Blocks #
-**Contributors:** [Toro_Unit](https://profiles.wordpress.org/Toro_Unit)  
-**Donate link:**       https://www.paypal.me/torounit  
-**Tags:**              posts, blocks  
-**Requires at least:** 5.0  
-**Tested up to:**      5.2  
-**Requires PHP:**      7.0  
-**Stable tag:**        nightly  
-**License:**           GPLv3 or later  
-**License URI:**       https://www.gnu.org/licenses/gpl-3.0.html  
+**Contributors:** [Toro_Unit](https://profiles.wordpress.org/Toro_Unit)
+**Donate link:**       https://www.paypal.me/torounit
+**Tags:**              posts, blocks
+**Requires at least:** 5.0
+**Tested up to:**      5.2
+**Requires PHP:**      7.0
+**Stable tag:**        nightly
+**License:**           GPLv3 or later
+**License URI:**       https://www.gnu.org/licenses/gpl-3.0.html
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
@@ -62,19 +62,40 @@ Support template hierarchy. The templates are searched in the following order.
 
 ## Changelog ##
 
-### 0.3.0 ###
+### 0.7.0
+* Allow select hidden post type.
+
+### 0.6.0
+* [Multiple Posts Block] Support ignore sticky posts.
+
+### 0.5.0
+* Separate block script.
+* Refactoring.
+
+### 0.4.0
+* use react hooks.
+
+### 0.3.3
+* Term attribute bug fix.
+* Term control key fix.
+
+### 0.3.2
+* attribute bug fix.
+
+
+### 0.3.0
 * [Multiple Posts Block] Support offset attritube.
 
-### 0.2.2 ###
+### 0.2.2
 * Fixed typo.
 
-### 0.2.0 ###
+### 0.2.0
 * Remove wpautop in template.
 
-### 0.1.6 ###
+### 0.1.6
 * Default template bug fix.
 
-### 0.1.4 ###
+### 0.1.4
 * Bug fix.
 
 ### 0.1.0 ###

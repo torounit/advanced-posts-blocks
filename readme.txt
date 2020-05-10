@@ -62,6 +62,12 @@ Support template hierarchy. The templates are searched in the following order.
 
 == Changelog ==
 
+= 0.7.0 =
+* Allow select hidden post type.
+
+= 0.6.0 =
+* [Multiple Posts Block] Support ignore sticky posts.
+
 = 0.5.0 =
 * Separate block script.
 * Refactoring.
