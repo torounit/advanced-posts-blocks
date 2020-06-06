@@ -8,6 +8,7 @@ import {
 	Spinner,
 	SelectControl,
 	Disabled,
+	FormTokenField,
 } from '@wordpress/components';
 /**
  * Internal dependencies
@@ -17,6 +18,7 @@ import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls } from '@wordpress/block-editor';
 import TermSelect from './TermSelect';
+import { useSelect } from '@wordpress/data';
 
 const getEditComponent = ( blockName, blockTitle ) => {
 	return ( {
@@ -51,24 +53,59 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				} }
 			/>
 		);
+
 		const TermControls = taxonomies.map( ( taxonomy ) => {
-			return (
-				<TermSelect
+			const termIds = attributes[ taxonomy.rest_base ];
+			const { categories, categoriesMapById, categoriesMapByName } = useSelect(
+				( select ) => {
+					const _categories = select( 'core' ).getEntityRecords(
+						'taxonomy',
+						taxonomy.slug,
+						{ per_page: - 1 }
+					);
+					return {
+						categories: _categories,
+						..._categories?.reduce(
+							( acc, category ) => ( {
+								categoriesMapById: {
+									...acc.categoriesMapById,
+									[ category.id ]: category,
+								},
+								categoriesMapByName: {
+									...acc.categoriesMapByName,
+									[ category.name ]: category,
+								},
+							} ),
+							{ categoriesMapById: {}, categoriesMapByName: {} }
+						),
+					};
+				},
+				[ taxonomy ]
+			);
+			return categories && categories.length > 0 ? (
+				<FormTokenField
 					key={ taxonomy.rest_base }
-					noOptionLabel={ __( 'All' ) }
-					multiple={ true }
-					termList={ terms[ taxonomy.rest_base ] || [] }
 					label={ taxonomy.labels.name }
-					selectedTermId={ attributes[ taxonomy.rest_base ] }
-					onChange={ ( value ) => {
-						if ( ! Array.isArray( value ) ) {
-							value = [ value ];
+					value={ termIds.map(
+						( categoryId ) => {
+							return categoriesMapById[ categoryId ].name;
 						}
-						value = value.filter( ( e ) => e );
-						setAttributes( { [ taxonomy.rest_base ]: value } );
+					) }
+					suggestions={ categories.map(
+						( category ) => category.name
+					) }
+					onChange={ ( newCategoryNames ) => {
+						const categoryIds = newCategoryNames.map(
+							( categoryName ) =>
+								categoriesMapByName[ categoryName ]
+									?.id
+						);
+						if ( categoryIds.includes( undefined ) )
+							return;
+						setAttributes( { [ taxonomy.rest_base ]: categoryIds } );
 					} }
 				/>
-			);
+			) : null;
 		} );
 
 		const title = __( 'Query setting', 'advanced-posts-blocks' );
