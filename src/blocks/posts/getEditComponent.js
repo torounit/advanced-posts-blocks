@@ -17,7 +17,6 @@ import QueryControls from './QueryControls';
 import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls } from '@wordpress/block-editor';
-import TermSelect from './TermSelect';
 import { useSelect } from '@wordpress/data';
 
 const getEditComponent = ( blockName, blockTitle ) => {
@@ -29,7 +28,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		taxonomies,
 		selectedPostType,
 		postTypes,
-		terms,
 	} ) => {
 		const {
 			order,

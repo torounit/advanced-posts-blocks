@@ -21,23 +21,6 @@ export const usePostTypeTaxonomies = ( postType ) =>
 		[ postType ]
 	);
 
-export const useTermsGroupByTaxonomy = ( taxonomies ) =>
-	useSelect(
-		( select ) => {
-			const obj = {};
-			for ( const taxonomy of taxonomies ) {
-				obj[ taxonomy.rest_base ] =
-					select( 'core' ).getEntityRecords(
-						'taxonomy',
-						taxonomy.slug,
-						{ per_page: -1 }
-					) || [];
-			}
-			return obj;
-		},
-		[ taxonomies ]
-	);
-
 export const usePosts = ( postType, query ) =>
 	useSelect(
 		( select ) =>

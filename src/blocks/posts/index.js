@@ -17,7 +17,6 @@ import {
 	usePostTypes,
 	usePostType,
 	usePostTypeTaxonomies,
-	useTermsGroupByTaxonomy,
 	usePosts,
 } from '../../util/hooks';
 
@@ -37,7 +36,6 @@ const Edit = ( props ) => {
 	const postTypes = usePostTypes();
 	const selectedPostType = usePostType( postTypeName );
 	const taxonomies = usePostTypeTaxonomies( selectedPostType );
-	const terms = useTermsGroupByTaxonomy( taxonomies );
 
 	const taxQuery = {};
 	for ( const taxonomy of taxonomies ) {
@@ -62,7 +60,6 @@ const Edit = ( props ) => {
 		...props,
 		latestPosts: usePosts( selectedPostType, latestPostsQuery ),
 		taxonomies,
-		terms,
 		selectedPostType,
 		postTypes: postTypes.filter(
 			( postType ) =>
