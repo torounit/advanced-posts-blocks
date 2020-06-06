@@ -54,12 +54,18 @@ const getEditComponent = ( blockName, blockTitle ) => {
 
 		const TermControls = taxonomies.map( ( taxonomy ) => {
 			const termIds = attributes[ taxonomy.rest_base ];
-			const { categories, categoriesMapById, categoriesMapByName } = useSelect(
+			const {
+				categories,
+				categoriesMapById,
+				categoriesMapByName,
+			} = useSelect(
 				( select ) => {
 					const _categories = select( 'core' ).getEntityRecords(
 						'taxonomy',
 						taxonomy.slug,
-						{ per_page: - 1 }
+						{
+							per_page: -1,
+						}
 					);
 					return {
 						categories: _categories,
@@ -84,23 +90,21 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				<FormTokenField
 					key={ taxonomy.rest_base }
 					label={ taxonomy.labels.name }
-					value={ termIds.map(
-						( categoryId ) => {
-							return categoriesMapById[ categoryId ].name;
-						}
-					) }
+					value={ termIds.map( ( categoryId ) => {
+						return categoriesMapById[ categoryId ].name;
+					} ) }
 					suggestions={ categories.map(
 						( category ) => category.name
 					) }
 					onChange={ ( newCategoryNames ) => {
 						const categoryIds = newCategoryNames.map(
 							( categoryName ) =>
-								categoriesMapByName[ categoryName ]
-									?.id
+								categoriesMapByName[ categoryName ]?.id
 						);
-						if ( categoryIds.includes( undefined ) )
-							return;
-						setAttributes( { [ taxonomy.rest_base ]: categoryIds } );
+						if ( categoryIds.includes( undefined ) ) return;
+						setAttributes( {
+							[ taxonomy.rest_base ]: categoryIds,
+						} );
 					} }
 				/>
 			) : null;
