@@ -160,10 +160,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			return $output;
 		}
 
-		ob_start();
-		load_template( dirname( __FILE__ ) . '/template.php', false );
-		$output = ob_get_contents();
-		ob_end_clean();
+		$output = $this->get_content_from_default_template( dirname( __FILE__ ) . '/template.php' );
 
 		return $output;
 	}

@@ -6,6 +6,10 @@
  *
  * @var string $class_name
  * @var WP_Query $query
+ * @var array $args {
+ *     @type string $class_name
+ *     @type WP_Query $query
+ * }
  */
 
 ?>

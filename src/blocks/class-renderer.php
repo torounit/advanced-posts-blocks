@@ -36,6 +36,12 @@ abstract class Renderer {
 	];
 
 	/**
+	 * The argument to be passed to the template.
+	 * @var array
+	 */
+	protected $args = [];
+
+	/**
 	 * Constructor
 	 *
 	 */
@@ -113,6 +119,17 @@ abstract class Renderer {
 	}
 
 	/**
+	 * Set template arguments.
+	 *
+	 * @param string $key
+	 * @param $value
+	 */
+	public function set_template_args( $key, $value ) {
+		$this->args[ $key ] = $value;
+		set_query_var( $key, $value );
+	}
+
+	/**
 	 * Get template part directory.
 	 *
 	 * @return string
@@ -133,7 +150,7 @@ abstract class Renderer {
 	 */
 	public function get_template_part( $slug, $name = null ) {
 		ob_start();
-		get_template_part( $slug, $name );
+		get_template_part( $slug, $name, $this->args );
 		$output = ob_get_contents();
 		ob_end_clean();
 
@@ -156,7 +173,7 @@ abstract class Renderer {
 	 */
 	protected function get_content_from_template( $attributes ) {
 		$class_name = join( ' ', $this->get_class_names( $attributes ) );
-		set_query_var( 'class_name', $class_name );
+		$this->set_template_args( 'class_name', $class_name );
 		$path = [
 			$this->get_template_part_dir(),
 			$this->name,
@@ -186,15 +203,29 @@ abstract class Renderer {
 	}
 
 	/**
+	 * Get content form default template.
+	 * @param $template
+	 *
+	 * @return false|string
+	 */
+	protected function get_content_from_default_template( $template ) {
+		ob_start();
+		load_template( $template, false, $this->args );
+		$output = ob_get_contents();
+		ob_end_clean();
+		return $output;
+	}
+
+	/**
 	 * Create \WP_Query and set $query.
 	 *
 	 * @param array $args URL query string or array of vars.
 	 * @param string $query_var query var.
 	 */
 	protected function setup_query( $args, $query_var = 'query' ) {
-		$args = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
+		$args  = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
 		$query = new \WP_Query( $args );
-		set_query_var( $query_var, $query );
+		$this->set_template_args( $query_var, $query );
 	}
 
 	/**
