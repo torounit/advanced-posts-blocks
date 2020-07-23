@@ -42,6 +42,12 @@ abstract class Renderer {
 	protected $args = [];
 
 	/**
+	 * The WP_Query as passed to the template.
+	 * @var \WP_Query
+	 */
+	protected $query;
+
+	/**
 	 * Constructor
 	 *
 	 */
@@ -203,16 +209,43 @@ abstract class Renderer {
 	}
 
 	/**
+	 * Get fallback template path.
+	 *
+	 * @param string $name block name.
+	 *
+	 * @return string template path.
+	 */
+	private function get_default_template_path( $name ) {
+		$block_path    = explode( '/', $name );
+		$block_dir     = end( $block_path );
+		$template_path = __DIR__ . '/'. $block_dir . '/template.php';
+
+		/**
+		 * Filters the fallback template file path.
+		 *
+		 * @param string $template_path The submenu file.
+		 * @param string $name block name.
+		 *
+		 * @since 1.0.0
+		 *
+		 */
+		return apply_filters( 'advanced_posts_blocks_default_template_path', $template_path, $this->name, $this->query, $this->args );
+	}
+
+	/**
 	 * Get content form default template.
-	 * @param $template
+	 *
+	 * @param string $name Block name.
 	 *
 	 * @return false|string
 	 */
-	protected function get_content_from_default_template( $template ) {
+	protected function get_content_from_default_template( $name ) {
+		$template = $this->get_default_template_path( $name );
 		ob_start();
 		load_template( $template, false, $this->args );
 		$output = ob_get_contents();
 		ob_end_clean();
+
 		return $output;
 	}
 
@@ -223,9 +256,9 @@ abstract class Renderer {
 	 * @param string $query_var query var.
 	 */
 	protected function setup_query( $args, $query_var = 'query' ) {
-		$args  = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
-		$query = new \WP_Query( $args );
-		$this->set_template_args( $query_var, $query );
+		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
+		$this->query = new \WP_Query( $args );
+		$this->set_template_args( $query_var, $this->query );
 	}
 
 	/**

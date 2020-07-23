@@ -87,7 +87,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			return $output;
 		}
 
-		$output = $this->get_content_from_default_template( dirname( __FILE__ ) . '/template.php' );
+		$output = $this->get_content_from_default_template( $this->name );
 
 		return $output;
 	}
