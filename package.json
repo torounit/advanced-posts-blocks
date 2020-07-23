@@ -33,7 +33,9 @@
   },
   "release-it": {
     "hooks": {
-      "after:bump": "bash ./bin/create-release.sh advanced-posts-blocks ${version}"
+      "before:bump": "bash ./bin/create-release.sh advanced-posts-blocks ${version}",
+      "after:bump": "bash ./bin/create-zip.sh advanced-posts-blocks",
+      "after:release": "bash ./bin/cleanup.sh advanced-posts-blocks"
     },
     "github": {
       "release": true,

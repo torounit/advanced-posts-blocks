@@ -20,7 +20,4 @@ sed -i.bak -e "s/^ \* @version .*/ * @version ${version}/g" ${pluginname}.php;
 rm ${pluginname}.php.bak
 
 rsync -a --exclude-from=.distignore ./ ./distribution/
-cd distribution
-zip -r ../${pluginname}.zip ./
-cd ../
-rm -rf distribution
+
