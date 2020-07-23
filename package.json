@@ -33,7 +33,6 @@
   },
   "release-it": {
     "hooks": {
-      "before:git": "bash ./bin/update-readme.sh ${version}",
       "after:bump": "bash ./bin/create-release.sh advanced-posts-blocks ${version}"
     },
     "github": {
