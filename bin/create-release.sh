@@ -21,3 +21,4 @@ rm ${pluginname}.php.bak
 
 rsync -a --exclude-from=.distignore ./ ./distribution/
 
+rm -rf build
