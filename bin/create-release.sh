@@ -10,9 +10,6 @@ fi
 pluginname=$1
 version=$2
 
-sed -i.bak -e "s/^Stable tag: .*/Stable tag: ${version}/g" README.md;
-rm README.md.bak
-
 sed -i.bak -e "s/^ \* Version: .*/ * Version: ${version}/g" ${pluginname}.php;
 sed -i.bak -e "s/^ \* @version .*/ * @version ${version}/g" ${pluginname}.php;
 rm ${pluginname}.php.bak
