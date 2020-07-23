@@ -226,7 +226,7 @@ abstract class Renderer {
 		 * @param string $template_path The submenu file.
 		 * @param string $name block name.
 		 *
-		 * @since 1.0.0
+		 * @since 0.8.0
 		 *
 		 */
 		return apply_filters( 'advanced_posts_blocks_default_template_path', $template_path, $this->name, $this->query, $this->args );
