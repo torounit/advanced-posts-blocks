@@ -1,33 +1,33 @@
-# Advanced Posts Blocks #
-**Contributors:** [Toro_Unit](https://profiles.wordpress.org/Toro_Unit)
-**Donate link:**       https://www.paypal.me/torounit
-**Tags:**              posts, blocks
-**Requires at least:** 5.0
-**Tested up to:**      5.2
-**Requires PHP:**      7.0
-**Stable tag:**        nightly
-**License:**           GPLv3 or later
-**License URI:**       https://www.gnu.org/licenses/gpl-3.0.html
+# Advanced Posts Blocks
+Contributors:      Toro_Unit
+Donate link:       https://www.paypal.me/torounit
+Tags:              posts, blocks
+Requires at least: 5.3
+Tested up to:      5.5
+Requires PHP:      7.2
+Stable tag:        nightly
+License:           GPLv3 or later
+License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
-## Description ##
+## Description
 
 Add Custom Dynamic Blocks for Render Post and Posts.
 
-### Multiple Posts Block ###
+### Multiple Posts Block
 
 Posts Block filtered post type. (ex. post, page) and filter posts by multiple categories, tags or custom taxonomy terms.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/posts.php` exists in your theme, replace default view.
 
-### Single Post Block ###
+### Single Post Block
 
 Single Post/Page Block.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/post.php` exists in your theme, replace default view.
 
-### Children Posts Block ###
+### Children Posts Block
 
 Children Posts Block.
 
@@ -35,7 +35,7 @@ Override template by your theme. if `template-parts/blocks/advanced-posts-blocks
 
 
 
-### Override Template ###
+### Override Template
 
 Support template hierarchy. The templates are searched in the following order.
 
@@ -46,13 +46,37 @@ Support template hierarchy. The templates are searched in the following order.
 
 `{Block_Type}` is posts, post or children.
 
+### Template variables
 
-### Credits ###
+* `$class_name` (string) Block style class names.
+* `$query` (WP_Query) Query for block.
+
+
+
+### Example
+
+`wp-content/themes/your-theme/template-parts/blocks/advanced-posts-blocks/posts.php`
+
+```php
+<div class="wp-block-advanced-posts-block-posts <?php echo esc_attr( $class_name ); ?>">
+    <?php if ( $query->have_posts() ) : ?>
+        <ul>
+            <?php while ( $query->have_posts() ) : ?>
+                <?php $query->the_post(); ?>
+                <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+            <?php endwhile; ?>
+        </ul>
+        <?php wp_reset_postdata(); ?>
+    <?php endif; ?>
+</div>
+```
+
+### Credits
 
 * [Icons - Material Design](https://material.io/tools/icons/) (Apache License Version 2.0)
 * [feathericon](https://feathericon.com/)
 
-## Screenshots ##
+## Screenshots
 
 1. Blocks
 2. Multiple Posts Block
@@ -60,7 +84,12 @@ Support template hierarchy. The templates are searched in the following order.
 4. Single Post Block
 
 
-## Changelog ##
+## Changelog
+
+### 0.8.0
+* Add filter `advanced_posts_blocks_default_template_path` .
+* support `$args` in template.
+* Tested WordPress 5.5.
 
 ### 0.7.2
 * bug fix for single post block.
@@ -87,7 +116,7 @@ Support template hierarchy. The templates are searched in the following order.
 
 
 ### 0.3.0
-* [Multiple Posts Block] Support offset attritube.
+* [Multiple Posts Block] Support offset attribute.
 
 ### 0.2.2
 * Fixed typo.
@@ -101,6 +130,6 @@ Support template hierarchy. The templates are searched in the following order.
 ### 0.1.4
 * Bug fix.
 
-### 0.1.0 ###
+### 0.1.0
 * first release.
 
