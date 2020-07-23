@@ -52,25 +52,6 @@ Support template hierarchy. The templates are searched in the following order.
 * `$query` (WP_Query) Query for block.
 
 
-
-### Example
-
-`wp-content/themes/your-theme/template-parts/blocks/advanced-posts-blocks/posts.php`
-
-```php
-<div class="wp-block-advanced-posts-block-posts <?php echo esc_attr( $class_name ); ?>">
-    <?php if ( $query->have_posts() ) : ?>
-        <ul>
-            <?php while ( $query->have_posts() ) : ?>
-                <?php $query->the_post(); ?>
-                <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-            <?php endwhile; ?>
-        </ul>
-        <?php wp_reset_postdata(); ?>
-    <?php endif; ?>
-</div>
-```
-
 ### Credits
 
 * [Icons - Material Design](https://material.io/tools/icons/) (Apache License Version 2.0)
