@@ -67,6 +67,13 @@ Support template hierarchy. The templates are searched in the following order.
 
 ## Changelog
 
+### 0.8.3
+* Posts block: block bug fix.
+* add `block.json`.
+
+### 0.8.2
+* Update build task.
+
 ### 0.8.0
 * Add filter `advanced_posts_blocks_default_template_path` .
 * support `$args` in template.
@@ -79,7 +86,7 @@ Support template hierarchy. The templates are searched in the following order.
 * Allow select hidden post type.
 
 ### 0.6.0
-* [Multiple Posts Block] Support ignore sticky posts.
+* Posts block: Support ignore sticky posts.
 
 ### 0.5.0
 * Separate block script.
