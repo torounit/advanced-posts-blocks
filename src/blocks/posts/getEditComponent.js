@@ -19,6 +19,7 @@ import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
+
 const TermControl = ( { taxonomy, termIds, handleChange } ) => {
 	const categories =
 		useSelect(
@@ -60,7 +61,7 @@ const TermControl = ( { taxonomy, termIds, handleChange } ) => {
 					( categoryName ) => categoriesMapByName[ categoryName ]?.id
 				);
 				if ( ! categoryIds.includes( undefined ) ) {
-					handleChange( taxonomy.rest_base, categoryIds );
+					handleChange( categoryIds );
 				}
 			} }
 		/>
@@ -107,9 +108,9 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					key={ i }
 					taxonomy={ taxonomy }
 					termIds={ termIds }
-					handleChange={ ( key, value ) => {
+					handleChange={ ( value ) => {
 						setAttributes( {
-							[ key ]: value,
+							[ taxonomy.rest_base ]: value,
 						} );
 					} }
 				/>
