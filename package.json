@@ -1,6 +1,6 @@
 {
   "name": "advanced-posts-blocks",
-  "version": "0.8.3",
+  "version": "0.9.0-beta.1",
   "author": "HIroshi Urabe <mail@torounit.com> (https://torounit.com)",
   "license": "GPL-3.0+",
   "main": "build/index.js",
