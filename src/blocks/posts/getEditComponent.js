@@ -19,6 +19,54 @@ import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
+const TermControl = ( { taxonomy, termIds, handleChange } ) => {
+	const categories =
+		useSelect(
+			( select ) => {
+				return select( 'core' ).getEntityRecords(
+					'taxonomy',
+					taxonomy.slug,
+					{
+						per_page: -1,
+					}
+				);
+			},
+			[ taxonomy ]
+		) ?? [];
+
+	const categoriesMapById = categories.reduce( ( acc, category ) => {
+		return {
+			...acc,
+			[ category.id ]: category,
+		};
+	}, {} );
+	const categoriesMapByName = categories.reduce( ( acc, category ) => {
+		return {
+			...acc,
+			[ category.name ]: category,
+		};
+	}, {} );
+
+	return categories && categories.length > 0 ? (
+		<FormTokenField
+			key={ taxonomy.rest_base }
+			label={ taxonomy.labels.name }
+			value={ termIds.map( ( categoryId ) => {
+				return categoriesMapById[ categoryId ].name;
+			} ) }
+			suggestions={ categories.map( ( category ) => category.name ) }
+			onChange={ ( newCategoryNames ) => {
+				const categoryIds = newCategoryNames.map(
+					( categoryName ) => categoriesMapByName[ categoryName ]?.id
+				);
+				if ( ! categoryIds.includes( undefined ) ) {
+					handleChange( taxonomy.rest_base, categoryIds );
+				}
+			} }
+		/>
+	) : null;
+};
+
 const getEditComponent = ( blockName, blockTitle ) => {
 	return ( {
 		className,
@@ -52,62 +100,20 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			/>
 		);
 
-		const TermControls = taxonomies.map( ( taxonomy ) => {
+		const TermControls = taxonomies.map( ( taxonomy, i ) => {
 			const termIds = attributes[ taxonomy.rest_base ] ?? [];
-			const {
-				categories,
-				categoriesMapById,
-				categoriesMapByName,
-			} = useSelect(
-				( select ) => {
-					const _categories = select( 'core' ).getEntityRecords(
-						'taxonomy',
-						taxonomy.slug,
-						{
-							per_page: -1,
-						}
-					);
-					return {
-						categories: _categories,
-						..._categories?.reduce(
-							( acc, category ) => ( {
-								categoriesMapById: {
-									...acc.categoriesMapById,
-									[ category.id ]: category,
-								},
-								categoriesMapByName: {
-									...acc.categoriesMapByName,
-									[ category.name ]: category,
-								},
-							} ),
-							{ categoriesMapById: {}, categoriesMapByName: {} }
-						),
-					};
-				},
-				[ taxonomy ]
-			);
-			return categories && categories.length > 0 ? (
-				<FormTokenField
-					key={ taxonomy.rest_base }
-					label={ taxonomy.labels.name }
-					value={ termIds.map( ( categoryId ) => {
-						return categoriesMapById[ categoryId ].name;
-					} ) }
-					suggestions={ categories.map(
-						( category ) => category.name
-					) }
-					onChange={ ( newCategoryNames ) => {
-						const categoryIds = newCategoryNames.map(
-							( categoryName ) =>
-								categoriesMapByName[ categoryName ]?.id
-						);
-						if ( categoryIds.includes( undefined ) ) return;
+			return (
+				<TermControl
+					key={ i }
+					taxonomy={ taxonomy }
+					termIds={ termIds }
+					handleChange={ ( key, value ) => {
 						setAttributes( {
-							[ taxonomy.rest_base ]: categoryIds,
+							[ key ]: value,
 						} );
 					} }
 				/>
-			) : null;
+			);
 		} );
 
 		const title = __( 'Query setting', 'advanced-posts-blocks' );
