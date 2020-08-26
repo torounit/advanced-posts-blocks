@@ -69,8 +69,11 @@ Support template hierarchy. The templates are searched in the following order.
 
 ## Changelog
 
+### 0.9.0
+* Posts Block: fix react hooks violation.
+
 ### 0.8.3
-* Posts block: block bug fix.
+* Posts Block: block bug fix.
 * add `block.json`.
 
 ### 0.8.2
@@ -88,7 +91,7 @@ Support template hierarchy. The templates are searched in the following order.
 * Allow select hidden post type.
 
 ### 0.6.0
-* Posts block: Support ignore sticky posts.
+* Posts Block: Support ignore sticky posts.
 
 ### 0.5.0
 * Separate block script.
