@@ -1,0 +1,23 @@
+{
+  "name": "advanced-posts-blocks/post",
+  "title": "Single Posts",
+  "description": "Display single post.",
+  "icon": "admin-users",
+  "textdomain": "advanced-posts-blocks",
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "postId": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "supports": {
+    "align": [ "wide", "full" ],
+    "html": false
+  },
+  "category": "widgets",
+  "editorScript": "file:../../build/index.js"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "advanced-posts-blocks/posts",
+  "title": "Multiple Posts",
+  "description": "Display multiple posts.",
+  "icon": "admin-users",
+  "textdomain": "advanced-posts-blocks",
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "postsToShow": {
+      "type": "number",
+      "default": 5
+    },
+    "offset": {
+      "type": "number",
+      "default": 0
+    },
+    "order": {
+      "type": "string",
+      "default": "desc"
+    },
+    "orderBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "ignoreStickyPosts": {
+      "type": "boolean",
+      "default": true
+    }
+
+  },
+  "supports": {
+    "align": [ "wide", "full" ],
+    "html": false
+  },
+  "category": "widgets",
+  "editorScript": "file:../../build/index.js"
+}
