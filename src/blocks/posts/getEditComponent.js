@@ -53,7 +53,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		);
 
 		const TermControls = taxonomies.map( ( taxonomy ) => {
-			const termIds = attributes[ taxonomy.rest_base ];
+			const termIds = attributes[ taxonomy.rest_base ] ?? [];
 			const {
 				categories,
 				categoriesMapById,
