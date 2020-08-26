@@ -17,19 +17,21 @@ Add Custom Dynamic Blocks for Render Post and Posts.
 
 ### Multiple Posts Block
 
+Displays a list of posts.
+
 Posts Block filtered post type. (ex. post, page) and filter posts by multiple categories, tags or custom taxonomy terms.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/posts.php` exists in your theme, replace default view.
 
 ### Single Post Block
 
-Single Post/Page Block.
+Displays the selected page or single post.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/post.php` exists in your theme, replace default view.
 
-### Children Posts Block
+### Child Posts Block
 
-Children Posts Block.
+Displays the child posts on the selected page or post.
 
 Override template by your theme. if `template-parts/blocks/advanced-posts-blocks/children.php` exists in your theme, replace default view.
 
@@ -61,7 +63,7 @@ Support template hierarchy. The templates are searched in the following order.
 
 1. Blocks
 2. Multiple Posts Block
-3. Child Page Block
+3. Child Posts Block
 4. Single Post Block
 
 
