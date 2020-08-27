@@ -46,11 +46,8 @@ const Edit = ( props ) => {
 
 registerBlockType( name, {
 	title: `${ title } (Advanced Posts Blocks)`,
-
 	description: __( 'Display single post.', 'advanced-posts-blocks' ),
-
 	keywords: [ 'single post', __( 'single post', 'advanced-posts-blocks' ) ],
-
 	icon: (
 		//https://material.io/tools/icons/?icon=description&style=outline
 		<SVG
@@ -63,13 +60,10 @@ registerBlockType( name, {
 			<Path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
 		</SVG>
 	),
-
 	category: 'widgets',
-
 	supports: {
 		html: false,
 	},
-
 	edit: Edit,
 	save() {
 		return null;

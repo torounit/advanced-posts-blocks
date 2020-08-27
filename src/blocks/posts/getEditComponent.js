@@ -10,15 +10,15 @@ import {
 	Disabled,
 	FormTokenField,
 } from '@wordpress/components';
-/**
- * Internal dependencies
- */
-import QueryControls from './QueryControls';
 import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
+/**
+ * Internal dependencies
+ */
+import QueryControls from './QueryControls';
 
 const TermControl = ( { taxonomy, termIds, handleChange } ) => {
 	const categories =

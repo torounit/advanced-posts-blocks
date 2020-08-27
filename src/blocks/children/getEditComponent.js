@@ -10,10 +10,7 @@ import {
 	Disabled,
 	TreeSelect,
 } from '@wordpress/components';
-/**
- * Internal dependencies
- */
-import QueryControls from './QueryControls';
+
 import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls } from '@wordpress/block-editor';
@@ -21,6 +18,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
+import QueryControls from './QueryControls';
 import { buildTermsTree } from '../../util/terms';
 
 const getEditComponent = ( blockName, blockTitle ) => {
