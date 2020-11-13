@@ -2,7 +2,7 @@
   "name": "advanced-posts-blocks/children",
   "title": "Child Posts",
   "description": "Display children of selected post.",
-  "icon": "admin-users",
+  "icon": "admin-page",
   "textdomain": "advanced-posts-blocks",
   "attributes": {
     "postType": {

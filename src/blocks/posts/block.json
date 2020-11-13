@@ -2,7 +2,7 @@
   "name": "advanced-posts-blocks/posts",
   "title": "Multiple Posts",
   "description": "Display multiple posts.",
-  "icon": "admin-users",
+  "icon": "admin-post",
   "textdomain": "advanced-posts-blocks",
   "attributes": {
     "postType": {
@@ -28,6 +28,10 @@
     "ignoreStickyPosts": {
       "type": "boolean",
       "default": true
+    },
+    "showAllPosts": {
+      "type": "boolean",
+      "default": false
     }
 
   },

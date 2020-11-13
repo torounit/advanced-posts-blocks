@@ -2,7 +2,7 @@
   "name": "advanced-posts-blocks/post",
   "title": "Single Posts",
   "description": "Display single post.",
-  "icon": "admin-users",
+  "icon": "admin-post",
   "textdomain": "advanced-posts-blocks",
   "attributes": {
     "postType": {
