@@ -75,7 +75,7 @@ Register your block style.
 
 ```php
 register_block_style(
-    'advanced-posts-blocks/post',
+    'advanced-posts-blocks/post', // or 'advanced-posts-blocks/posts', 'advanced-posts-blocks/children'
     array(
         'name'  => 'your-style',
         'label' => 'Your Style',
