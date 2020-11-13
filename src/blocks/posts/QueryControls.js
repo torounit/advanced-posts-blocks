@@ -19,11 +19,13 @@ export default function QueryControls( {
 	ignoreStickyPosts,
 	maxItems = DEFAULT_MAX_ITEMS,
 	minItems = DEFAULT_MIN_ITEMS,
+	showAllPosts,
 	onNumberOfItemsChange,
 	onOrderChange,
 	onOrderByChange,
 	onOffsetChange,
 	onIgnoreStickyPostsChange,
+	onshowAllPostsChange,
 } ) {
 	return [
 		onOrderChange && onOrderByChange && (
@@ -63,7 +65,7 @@ export default function QueryControls( {
 			/>
 		),
 
-		onNumberOfItemsChange && (
+		! showAllPosts && onNumberOfItemsChange && (
 			<RangeControl
 				key="query-controls-range-control"
 				label={ __( 'Number of items' ) }
@@ -73,6 +75,16 @@ export default function QueryControls( {
 				max={ maxItems }
 			/>
 		),
+
+		onIgnoreStickyPostsChange && (
+			<CheckboxControl
+				key="query-controls-nopaging-control"
+				label={ __( 'Show all Posts' ) }
+				checked={ showAllPosts }
+				onChange={ onshowAllPostsChange }
+			/>
+		),
+
 
 		onOffsetChange && (
 			<RangeControl

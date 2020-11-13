@@ -101,6 +101,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'orderby'               => $attributes['orderBy'],
 			'post_type'             => $attributes['postType'],
 			'offset'                => $attributes['offset'],
+			'nopaging'                => $attributes['showAllPosts'],
 			'advanced_posts_blocks' => true,
 		];
 		$post_type = $attributes['postType'];
