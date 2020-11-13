@@ -62,6 +62,9 @@ abstract class Renderer {
 	 * Constructor
 	 */
 	public function __construct() {
+		if ( ! $this->dir || ! file_exists( $this->dir . '/block.json' ) ) {
+			wp_die( 'Set \Advanced_Posts_Blocks\Blocks\Renderer::dir to the directory path where the block.json exists.' );
+		}
 		$metadata         = json_decode( file_get_contents( $this->dir . '/block.json' ), true );
 		$this->attributes = array_merge( $this->attributes, $metadata['attributes'] );
 		$this->register_assets();
