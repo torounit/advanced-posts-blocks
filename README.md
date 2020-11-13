@@ -66,6 +66,35 @@ Support template hierarchy. The templates are searched in the following order.
 3. Child Posts Block
 4. Single Post Block
 
+## Frequently Asked Questions
+
+### How add another block style ?
+
+
+Register your block style.
+
+```php
+register_block_style(
+    'advanced-posts-blocks/post',
+    array(
+        'name'  => 'your-style',
+        'label' => 'Your Style',
+    )
+);
+```
+
+Create template `template-parts/blocks/advanced-posts-blocks/post-your-style.php`
+
+```php
+<?php if ( $query->have_posts() ) : ?>
+    <?php while ( $query->have_posts() ) : ?>
+        <?php $query->the_post(); ?>
+            <h4><?php the_title(); ?></h4>
+            <?php the_excerpt(); ?>
+    <?php endwhile; ?>
+    <?php wp_reset_postdata(); ?>
+<?php endif; ?>
+```
 
 ## Changelog
 
