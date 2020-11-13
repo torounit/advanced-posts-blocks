@@ -15,33 +15,18 @@ namespace Advanced_Posts_Blocks\Blocks\Post;
 class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 
 	/**
+	 * Path to the block.json dir.
+	 *
+	 * @var string
+	 */
+	protected $dir = __DIR__;
+
+	/**
 	 * Name of Block.
 	 *
 	 * @var string
 	 */
 	protected $name = 'advanced-posts-blocks/post';
-
-	/**
-	 * Attributes schema for blocks.
-	 *
-	 * @var array
-	 */
-	protected $attributes = [
-		'postId'    => [
-			'type' => 'number',
-			'default' => 0,
-		],
-		'postType'  => [
-			'type'    => 'string',
-			'default' => 'post',
-		],
-		'className' => [
-			'type' => 'string',
-		],
-		'align'     => [
-			'type' => 'string',
-		],
-	];
 
 	protected function register() {
 		register_block_type(

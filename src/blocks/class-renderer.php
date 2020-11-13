@@ -24,6 +24,15 @@ abstract class Renderer {
 	 */
 	protected $name = '';
 
+
+	/**
+	 * Path to the block.json dir.
+	 *
+	 * @var string
+	 */
+	protected $dir = '';
+
+
 	/**
 	 * Attributes schema for blocks.
 	 *
@@ -52,6 +61,8 @@ abstract class Renderer {
 	 *
 	 */
 	public function __construct() {
+		$metadata = json_decode( file_get_contents( $this->dir . '/block.json' ), true ); //phpcs: ignore
+		$this->attributes = array_merge( $this->attributes, $metadata['attributes'] );
 		$this->register_assets();
 		$this->register();
 	}
