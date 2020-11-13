@@ -30,7 +30,6 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 
 	/**
 	 * Constructor
-	 *
 	 */
 	public function __construct() {
 		$this->setup_term_attributes();
@@ -50,16 +49,16 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * Set term attributes.
 	 */
 	private function setup_term_attributes() {
-		foreach ( get_taxonomies( [ 'publicly_queryable' => true ], 'objects' ) as $taxonomy ) {
+		foreach ( get_taxonomies( array(), 'objects' ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
 			$base                      = $this->get_rest_base( $taxonomy );
-			$this->attributes[ $base ] = [
+			$this->attributes[ $base ] = array(
 				'type'    => 'array',
-				'items'   => [
+				'items'   => array(
 					'type' => 'number',
-				],
-				'default' => [],
-			];
+				),
+				'default' => array(),
+			);
 		}
 	}
 
@@ -93,7 +92,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * @return false|string
 	 */
 	public function render( $attributes ) {
-		$args      = [
+		$args      = array(
 			'posts_per_page'        => $attributes['postsToShow'],
 			'post_status'           => 'publish',
 			'ignore_sticky_posts'   => $attributes['ignoreStickyPosts'],
@@ -101,24 +100,24 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'orderby'               => $attributes['orderBy'],
 			'post_type'             => $attributes['postType'],
 			'offset'                => $attributes['offset'],
-			'nopaging'                => $attributes['showAllPosts'],
+			'nopaging'              => $attributes['showAllPosts'],
 			'advanced_posts_blocks' => true,
-		];
+		);
 		$post_type = $attributes['postType'];
 
-		$args['tax_query'] = [];
+		$args['tax_query'] = array();
 		foreach ( $this->get_post_type_taxonomies( $post_type ) as $taxonomy ) {
 			$this->get_rest_base( $taxonomy );
-			$base  = $this->get_rest_base( $taxonomy );
+			$base = $this->get_rest_base( $taxonomy );
 			if ( $base && isset( $attributes[ $base ] ) && is_array( $attributes[ $base ] ) ) {
 				$terms = array_filter( $attributes[ $base ] );
 				if ( ! empty( $terms ) ) {
 					$args['tax_query'][] = array_merge(
-						[
+						array(
 							'taxonomy' => $taxonomy->name,
 							'field'    => 'term_id',
 							'terms'    => $terms,
-						]
+						)
 					);
 				}
 			}

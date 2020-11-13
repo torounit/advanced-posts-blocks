@@ -46,10 +46,10 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		if ( empty( $attributes['postId'] ) ) {
 			return '';
 		}
-		$args = [
-			'p' => $attributes['postId'],
+		$args = array(
+			'p'         => $attributes['postId'],
 			'post_type' => $attributes['postType'],
-		];
+		);
 
 		$this->setup_query( $args );
 		$output = $this->get_content_from_template( $attributes );

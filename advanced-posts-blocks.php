@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const PLUGIN_FILE = __FILE__;
+const PLUGIN_FILE   = __FILE__;
 const SCRIPT_HANDLE = 'advanced-posts-blocks';
 
 /**
@@ -43,7 +43,7 @@ function get_plugin_data() {
 	if ( empty( $data ) ) {
 		$data = \get_file_data(
 			__FILE__,
-			[
+			array(
 				'Name'        => 'Plugin Name',
 				'PluginURI'   => 'Plugin URI',
 				'Version'     => 'Version',
@@ -53,7 +53,7 @@ function get_plugin_data() {
 				'TextDomain'  => 'Text Domain',
 				'DomainPath'  => 'Domain Path',
 				'Network'     => 'Network',
-			]
+			)
 		);
 	}
 

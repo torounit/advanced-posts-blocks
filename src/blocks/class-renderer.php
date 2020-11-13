@@ -38,30 +38,31 @@ abstract class Renderer {
 	 *
 	 * @var array
 	 */
-	protected $attributes = [
-		'className' => [
+	protected $attributes = array(
+		'className' => array(
 			'type' => 'string',
-		],
-	];
+		),
+	);
 
 	/**
 	 * The argument to be passed to the template.
+	 *
 	 * @var array
 	 */
-	protected $args = [];
+	protected $args = array();
 
 	/**
 	 * The WP_Query as passed to the template.
+	 *
 	 * @var \WP_Query
 	 */
 	protected $query;
 
 	/**
 	 * Constructor
-	 *
 	 */
 	public function __construct() {
-		$metadata = json_decode( file_get_contents( $this->dir . '/block.json' ), true ); //phpcs: ignore
+		$metadata         = json_decode( file_get_contents( $this->dir . '/block.json' ), true );
 		$this->attributes = array_merge( $this->attributes, $metadata['attributes'] );
 		$this->register_assets();
 		$this->register();
@@ -79,7 +80,7 @@ abstract class Renderer {
 
 	private function register_assets() {
 		$script_dir   = '/build/' . str_replace( 'advanced-posts-blocks', 'blocks', $this->name );
-		$script_asset = require( dirname( PLUGIN_FILE ) . $script_dir . '/index.asset.php' );
+		$script_asset = require dirname( PLUGIN_FILE ) . $script_dir . '/index.asset.php';
 		wp_register_script(
 			$this->name,
 			plugins_url( $script_dir . '/index.js', PLUGIN_FILE ),
@@ -91,11 +92,11 @@ abstract class Renderer {
 	}
 
 	protected function register_block_type_arguments() {
-		return [
+		return array(
 			'editor_script'   => $this->name,
 			'attributes'      => $this->get_attributes(),
-			'render_callback' => [ $this, 'render' ],
-		];
+			'render_callback' => array( $this, 'render' ),
+		);
 	}
 
 	/**
@@ -124,7 +125,7 @@ abstract class Renderer {
 	 * @return array
 	 */
 	public function get_class_names( $attributes ): array {
-		$class_names = [];
+		$class_names = array();
 		if ( ! empty( $attributes['className'] ) ) {
 			$class_names = explode( ' ', $attributes['className'] );
 		}
@@ -191,11 +192,11 @@ abstract class Renderer {
 	protected function get_content_from_template( $attributes ) {
 		$class_name = join( ' ', $this->get_class_names( $attributes ) );
 		$this->set_template_args( 'class_name', $class_name );
-		$path = [
+		$path = array(
 			$this->get_template_part_dir(),
 			$this->name,
 			$attributes['postType'],
-		];
+		);
 
 		$priority = has_filter( 'the_content', 'wpautop' );
 		if ( false !== $priority && doing_filter( 'the_content' ) ) {
@@ -205,10 +206,10 @@ abstract class Renderer {
 		$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name ) );
 
 		if ( ! $output ) {
-			$path   = [
+			$path   = array(
 				$this->get_template_part_dir(),
 				$this->name,
-			];
+			);
 			$output = $this->get_template_part( join( '/', $path ), $this->get_style_name( $class_name ) );
 		}
 
@@ -229,7 +230,7 @@ abstract class Renderer {
 	private function get_default_template_path( $name ) {
 		$block_path    = explode( '/', $name );
 		$block_dir     = end( $block_path );
-		$template_path = __DIR__ . '/'. $block_dir . '/template.php';
+		$template_path = __DIR__ . '/' . $block_dir . '/template.php';
 
 		/**
 		 * Filters the fallback template file path.
@@ -238,7 +239,6 @@ abstract class Renderer {
 		 * @param string $name block name.
 		 *
 		 * @since 0.8.0
-		 *
 		 */
 		return apply_filters( 'advanced_posts_blocks_default_template_path', $template_path, $this->name, $this->query, $this->args );
 	}

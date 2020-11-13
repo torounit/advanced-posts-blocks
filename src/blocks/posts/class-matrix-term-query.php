@@ -33,10 +33,10 @@ class Matrix_Term_Query {
 			$this->query_var = $query_var;
 		}
 
-		foreach ( get_post_types( [ 'show_in_rest' => true ], 'objects' ) as $post_type ) {
-			add_filter( 'rest_' . $post_type->name . '_query', [ $this, 'rest_api_add_query_param' ], 10, 2 );
+		foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
+			add_filter( 'rest_' . $post_type->name . '_query', array( $this, 'rest_api_add_query_param' ), 10, 2 );
 		}
-		add_action( 'parse_tax_query', [ $this, 'parse_tax_query' ], 9999 );
+		add_action( 'parse_tax_query', array( $this, 'parse_tax_query' ), 9999 );
 	}
 
 	/**
@@ -62,7 +62,7 @@ class Matrix_Term_Query {
 		$tax_query             = $query->get( 'tax_query' );
 		$advanced_posts_blocks = $query->get( $this->query_var );
 		if ( $advanced_posts_blocks && $tax_query ) {
-			$new_tax_query = [];
+			$new_tax_query = array();
 			foreach ( $tax_query as $sub_query ) {
 				if ( ! is_array( $sub_query ) ) {
 					$new_tax_query[] = $sub_query;
@@ -73,10 +73,10 @@ class Matrix_Term_Query {
 					foreach ( $sub_query['terms'] as $term ) {
 						$new_tax_query[] = array_merge(
 							$sub_query,
-							[
-								'terms' => [ $term ],
+							array(
+								'terms'            => array( $term ),
 								'include_children' => true,
-							]
+							)
 						);
 					}
 				}

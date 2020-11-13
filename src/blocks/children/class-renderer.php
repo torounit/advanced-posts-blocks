@@ -43,14 +43,14 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * @return false|string
 	 */
 	public function render( $attributes ) {
-		$args = [
+		$args = array(
 			'posts_per_page' => $attributes['postsToShow'],
 			'post_status'    => 'publish',
 			'post_parent'    => $attributes['postId'] ? $attributes['postId'] : get_the_ID(),
 			'order'          => $attributes['order'],
 			'orderby'        => $attributes['orderBy'],
 			'post_type'      => $attributes['postType'] ? $attributes['postType'] : get_post_type(),
-		];
+		);
 
 		$this->setup_query( $args );
 
