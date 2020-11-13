@@ -28,7 +28,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extension: mbstring, intl #optional, setup extensions
+          extensions: mbstring, intl #optional, setup extensions
           ini-values: post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
           coverage: xdebug #optional, setup coverage driver
 
@@ -80,9 +80,8 @@ jobs:
       - name: npm run lint-js
         run: npm run lint-js
 
-
   release:
-    name: release
+    name: Release
     runs-on: ubuntu-latest
     needs: [test,lint]
     steps:
