@@ -1,4 +1,4 @@
-name: Test
+name: Code format
 
 on: push
 
@@ -24,5 +24,11 @@ jobs:
       - name: Composer install
         run: composer install --optimize-autoloader --prefer-dist
 
-      - name: phpunit tests
+      - name: phpcs tests
         run: composer phpcs
+
+      - name: npm install
+        run: npm install
+
+      - name: npm run lint-js
+        run: npm run lint-js

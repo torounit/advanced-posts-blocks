@@ -47,4 +47,4 @@ jobs:
           bash ./bin/build.sh
 
       - name: phpunit tests
-        run: ./vendor/bin/phpunit
+        run: composer test

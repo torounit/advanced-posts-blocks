@@ -21,6 +21,7 @@
     "phpunit/phpunit":"4.8.*|5.7.*|6.*.*|7.*.*"
   },
   "scripts": {
+    "test": "phpunit",
     "format": "phpcbf --standard=./.phpcs.xml.dist --report-summary --report-source",
     "lint": "phpcs --standard=./.phpcs.xml.dist",
     "phpcs": "phpcs --standard=./.phpcs.xml.dist"
