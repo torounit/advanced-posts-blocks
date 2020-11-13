@@ -18,8 +18,8 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.2', '7.3' ]
-        wp-versions: [ '5.3', '5.5', 'latest' ]
+        php-versions: [ '7.3', '7.4' ]
+        wp-versions: [ '5.3', 'latest', 'trunk' ]
     name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
     steps:
       - name: Checkout
