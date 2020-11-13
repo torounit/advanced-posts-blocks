@@ -52,6 +52,5 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       composer phpcs
     fi
-after_success:
-  - bash bin/deploy.sh
+
 

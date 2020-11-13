@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
 
-  phpunit:
+  test:
     runs-on: ${{ matrix.operating-system }}
     services:
       mysql:
@@ -79,3 +79,22 @@ jobs:
 
       - name: npm run lint-js
         run: npm run lint-js
+
+
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    needs: [test,lint]
+    steps:
+      - uses: actions/checkout@master
+      - name: Build
+        if: contains(github.ref, 'tags/')
+        run: |
+          bash ./bin/build.sh
+      - name: WordPress Plugin Deploy
+        if: contains(github.ref, 'tags/')
+        uses: 10up/action-wordpress-plugin-deploy@master
+        env:
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SLUG: advanced-posts-blocks
