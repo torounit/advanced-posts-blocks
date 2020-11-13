@@ -124,7 +124,13 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			<InspectorControls>
 				<PanelBody title={ title }>
 					<QueryControls
-						{ ...{ order, orderBy, offset, ignoreStickyPosts, showAllPosts } }
+						{ ...{
+							order,
+							orderBy,
+							offset,
+							ignoreStickyPosts,
+							showAllPosts,
+						} }
 						numberOfItems={ postsToShow }
 						onOffsetChange={ ( value ) =>
 							setAttributes( { offset: value } )
@@ -142,7 +148,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 							setAttributes( { ignoreStickyPosts: value } )
 						}
 						onshowAllPostsChange={ ( value ) => {
-							setAttributes( { showAllPosts: value } )
+							setAttributes( { showAllPosts: value } );
 						} }
 					/>
 					{ PostTypeControls }

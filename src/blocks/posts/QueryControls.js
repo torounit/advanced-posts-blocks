@@ -79,12 +79,11 @@ export default function QueryControls( {
 		onIgnoreStickyPostsChange && (
 			<CheckboxControl
 				key="query-controls-nopaging-control"
-				label={ __( 'Show all Posts' ) }
+				label={ __( 'Show all posts' ) }
 				checked={ showAllPosts }
 				onChange={ onshowAllPostsChange }
 			/>
 		),
-
 
 		onOffsetChange && (
 			<RangeControl

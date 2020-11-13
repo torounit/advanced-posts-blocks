@@ -11,7 +11,9 @@
     "build": "wp-scripts build",
     "format-js": "wp-scripts format-js",
     "lint-js": "wp-scripts lint-js",
-    "packages-update": "wp-scripts packages-update"
+    "lint-js:fix": "wp-scripts lint-js --fix",
+    "packages-update": "wp-scripts packages-update",
+    "lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist"
   },
   "repository": {
     "type": "git",
@@ -30,7 +32,34 @@
     "lodash": "^4.17.19"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^12.1.0"
+    "@wordpress/browserslist-config": "^2.7.0",
+    "@wordpress/env": "^2.1.0",
+    "@wordpress/eslint-plugin": "^7.1.0",
+    "@wordpress/prettier-config": "^0.4.0",
+    "@wordpress/scripts": "^12.2.0",
+    "prettier": "npm:wp-prettier@^2.0.5",
+    "lint-staged": "^10.3.0",
+    "husky": "^4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "packages/*/package.json": [
+      "wp-scripts lint-pkg-json"
+    ],
+    "{*.css,*.scss}": [
+      "npm run lint-style"
+    ],
+    "*.js": [
+      "npm run format-js",
+      "npm run lint-js"
+    ],
+    "*.php": [
+      "npm run lint-php"
+    ]
   },
   "release-it": {
     "hooks": {
