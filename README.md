@@ -3,7 +3,7 @@ Contributors:      Toro_Unit
 Donate link:       https://www.paypal.me/torounit
 Tags:              posts, blocks
 Requires at least: 5.3
-Tested up to:      5.5
+Tested up to:      5.6
 Requires PHP:      7.2
 Stable tag:        0.9.0
 License:           GPLv3 or later
@@ -68,6 +68,10 @@ Support template hierarchy. The templates are searched in the following order.
 
 
 ## Changelog
+
+### 1.0.0
+* Support internal taxonomies. ( `publicly_queryable: false` )
+* WordPress 5.6-beta-4 tested.
 
 ### 0.9.0
 * Posts Block: fix react hooks violation.
