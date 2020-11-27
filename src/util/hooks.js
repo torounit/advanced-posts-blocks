@@ -14,10 +14,12 @@ export const usePostType = ( postType ) =>
 export const usePostTypeTaxonomies = ( postType ) =>
 	useSelect(
 		( select ) =>
-			( select( 'core' ).getTaxonomies() || [] ).filter( ( taxonomy ) => {
-				const postTypeTaxonomies = postType.taxonomies || [];
-				return postTypeTaxonomies.includes( taxonomy.slug );
-			} ),
+			( select( 'core' ).getTaxonomies( { per_page: -1 } ) || [] ).filter(
+				( taxonomy ) => {
+					const postTypeTaxonomies = postType.taxonomies || [];
+					return postTypeTaxonomies.includes( taxonomy.slug );
+				}
+			),
 		[ postType ]
 	);
 
