@@ -86,17 +86,19 @@ register_block_style(
 Create template `template-parts/blocks/advanced-posts-blocks/post-your-style.php`
 
 ```php
-<?php if ( $query->have_posts() ) : ?>
-    <?php while ( $query->have_posts() ) : ?>
-        <?php $query->the_post(); ?>
-            <h4><?php the_title(); ?></h4>
-            <?php the_excerpt(); ?>
-    <?php endwhile; ?>
-    <?php wp_reset_postdata(); ?>
-<?php endif; ?>
+if ( $query->have_posts() ) :
+    while ( $query->have_posts() ) :
+        $query->the_post();
+        // write template tag!
+    endwhile;
+    wp_reset_postdata();
+endif;
 ```
 
 ## Changelog
+
+### 1.0.3
+* Taxonomy panel bug fix.
 
 ### 1.0.0
 * Support internal taxonomies. ( `publicly_queryable: false` )
