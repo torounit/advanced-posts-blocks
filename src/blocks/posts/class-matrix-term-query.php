@@ -70,8 +70,9 @@ class Matrix_Term_Query {
 				}
 
 				if ( ! empty( $sub_query['terms'] ) && is_array( $sub_query['terms'] ) ) {
+					$new_tax_sub_query = array();
 					foreach ( $sub_query['terms'] as $term ) {
-						$new_tax_query[] = array_merge(
+						$new_tax_sub_query[] = array_merge(
 							$sub_query,
 							array(
 								'terms'            => array( $term ),
@@ -79,6 +80,9 @@ class Matrix_Term_Query {
 							)
 						);
 					}
+					$new_tax_sub_query['relation'] = 'AND';
+
+					$new_tax_query[] = $new_tax_sub_query;
 				}
 			}
 			$new_tax_query['relation'] = 'AND';
