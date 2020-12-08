@@ -103,7 +103,10 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		);
 
 		const TermControls = taxonomies.map( ( taxonomy, i ) => {
-			const termIds = attributes[ taxonomy.rest_base ] ?? [];
+			const termIds =
+				attributes[ taxonomy.rest_base ].terms ??
+				attributes[ taxonomy.rest_base ] ??
+				[];
 			return (
 				<TermControl
 					key={ i }
@@ -111,7 +114,9 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					termIds={ termIds }
 					handleChange={ ( value ) => {
 						setAttributes( {
-							[ taxonomy.rest_base ]: value,
+							[ taxonomy.rest_base ]: {
+								terms: value,
+							},
 						} );
 					} }
 				/>

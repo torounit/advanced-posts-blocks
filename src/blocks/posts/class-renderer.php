@@ -52,9 +52,32 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		foreach ( get_taxonomies( array(), 'objects' ) as $taxonomy ) {
 			$base                      = $this->get_rest_base( $taxonomy );
 			$this->attributes[ $base ] = array(
-				'type'    => 'array',
-				'items'   => array(
-					'type' => 'number',
+				'anyOf'   => array(
+					array(
+						'title' => 'Term ids (v1)',
+						'type'  => 'array',
+						'items' => array(
+							'type' => 'number',
+						),
+					),
+					array(
+						'title'      => 'Term object (v2)',
+						'type'       => 'object',
+						'properties' => array(
+							'terms'    => array(
+								'type'    => 'array',
+								'items'   => array(
+									'type' => 'number',
+								),
+								'default' => array(),
+							),
+							'relation' => array(
+								'type'     => 'string',
+								'required' => false,
+								'default'  => 'AND',
+							),
+						),
+					),
 				),
 				'default' => array(),
 			);
@@ -106,23 +129,37 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		$args['tax_query'] = array();
 		foreach ( $this->get_post_type_taxonomies( $post_type ) as $taxonomy ) {
 			$base = $this->get_rest_base( $taxonomy );
-			if ( $base && isset( $attributes[ $base ] ) && is_array( $attributes[ $base ] ) ) {
-				$terms = array_filter( $attributes[ $base ] );
-				if ( ! empty( $terms ) ) {
-					$query = array();
-					foreach ( $terms as $term ) {
-						$query[] = array(
-							array(
-								'taxonomy' => $taxonomy->name,
-								'field'    => 'term_id',
-								'terms'    => $term,
-							),
-						);
-					}
-					$query['relation'] = 'AND';
+			if ( ! $base ) {
+				continue;
+			}
 
-					$args['tax_query'][] = $query;
+			if ( ! isset( $attributes[ $base ] ) ) {
+				continue;
+			}
+
+			if ( ! isset( $attributes[ $base ]['terms'] ) && is_array( $attributes[ $base ] ) ) {
+				$attributes[ $base ] = array(
+					'terms'    => $attributes[ $base ],
+					'relation' => 'AND',
+				);
+			}
+
+			$terms = array_filter( $attributes[ $base ]['terms'] );
+
+			if ( ! empty( $terms ) ) {
+				$query = array();
+				foreach ( $terms as $term ) {
+					$query[] = array(
+						array(
+							'taxonomy' => $taxonomy->name,
+							'field'    => 'term_id',
+							'terms'    => $term,
+						),
+					);
 				}
+				$query['relation'] = 'AND';
+
+				$args['tax_query'][] = $query;
 			}
 		}
 
