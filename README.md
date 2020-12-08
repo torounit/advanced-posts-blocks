@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.me/torounit
 Tags:              posts, blocks
 Requires at least: 5.6
 Tested up to:      5.6
-Requires PHP:      7.2
+Requires PHP:      7.3
 Stable tag:        1.0.3
 License:           GPLv3 or later
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
@@ -97,8 +97,9 @@ endif;
 
 ## Changelog
 
-### 1.1.0
+### 2.0.0
 * Refactaring release.
+* Drop WordPress 5.5 and PHP 7.2
 
 ### 1.0.3
 * Taxonomy panel bug fix.
