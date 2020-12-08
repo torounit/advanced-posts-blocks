@@ -68,19 +68,23 @@ jobs:
     needs: [test]
     steps:
       - uses: actions/checkout@v2
+        if: contains(github.ref, 'tags/')
 
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+        if: contains(github.ref, 'tags/')
 
       - name: npm install
         run: npm ci
+        if: contains(github.ref, 'tags/')
 
       - name: Build
         if: contains(github.ref, 'tags/')
         run: |
           bash ./bin/build.sh
+
       - name: WordPress Plugin Deploy
         if: contains(github.ref, 'tags/')
         uses: 10up/action-wordpress-plugin-deploy@master
