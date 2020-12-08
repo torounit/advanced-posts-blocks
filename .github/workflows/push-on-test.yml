@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
 
   test:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ubuntu-latest
     services:
       mysql:
         image: mysql:5.7
@@ -18,17 +18,16 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
-        operating-system: [ ubuntu-latest ]
         php-versions: [ '7.3', '7.4' ]
         wp-versions: [ 'latest', 'trunk' ]
     name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 14.x
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 12.x
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -70,10 +69,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 14.x
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 12.x
 
       - name: npm install
         run: npm ci
