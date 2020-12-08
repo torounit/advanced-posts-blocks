@@ -11,6 +11,17 @@ License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
+<!-- only:github/ -->
+[![Latest Stable Version](https://img.shields.io/wordpress/plugin/v/advanced-posts-blocks?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
+[![License](https://img.shields.io/github/license/torounit/advanced-posts-blocks?style=for-the-badge)](https://github.com/torounit/advanced-posts-blocks/blob/master/LICENSE)
+[![Downloads](https://img.shields.io/wordpress/plugin/dt/advanced-posts-blocks.svg?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
+[![Tested up](https://img.shields.io/wordpress/v/advanced-posts-blocks.svg?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
+[![wp.org rating](https://img.shields.io/wordpress/plugin/r/advanced-posts-blocks.svg?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
+[![Build Status](https://img.shields.io/github/workflow/status/torounit/advanced-posts-blocks/Test?style=for-the-badge)](https://github.com/torounit/advanced-posts-blocks/actions)
+
+[![](https://ps.w.org/advanced-posts-blocks/assets/banner-1544x500.png?rev=1044335)](https://wordpress.org/plugins/advanced-posts-blocks/)
+<!-- /only:github -->
+
 ## Description
 
 Add Custom Dynamic Blocks for Render Post and Posts.
