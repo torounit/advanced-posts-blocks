@@ -104,7 +104,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 
 		const TermControls = taxonomies.map( ( taxonomy, i ) => {
 			const termIds =
-				attributes[ taxonomy.rest_base ].terms ??
+				attributes[ taxonomy.rest_base ]?.terms ??
 				attributes[ taxonomy.rest_base ] ??
 				[];
 			return (

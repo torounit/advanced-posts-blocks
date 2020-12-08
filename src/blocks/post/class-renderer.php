@@ -22,27 +22,13 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	protected $dir = __DIR__;
 
 	/**
-	 * Name of Block.
-	 *
-	 * @var string
-	 */
-	protected $name = 'advanced-posts-blocks/post';
-
-	protected function register() {
-		register_block_type(
-			'advanced-posts-blocks/post',
-			$this->register_block_type_arguments()
-		);
-	}
-
-	/**
 	 * Render callback
 	 *
 	 * @param array $attributes block attributes.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
-	public function render( $attributes ) {
+	public function render( array $attributes ): string {
 		if ( empty( $attributes['postId'] ) ) {
 			return '';
 		}

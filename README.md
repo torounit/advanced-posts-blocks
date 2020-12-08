@@ -2,7 +2,7 @@
 Contributors:      Toro_Unit
 Donate link:       https://www.paypal.me/torounit
 Tags:              posts, blocks
-Requires at least: 5.3
+Requires at least: 5.6
 Tested up to:      5.6
 Requires PHP:      7.2
 Stable tag:        1.0.3
@@ -96,6 +96,9 @@ endif;
 ```
 
 ## Changelog
+
+### 1.1.0
+* Refactaring release.
 
 ### 1.0.3
 * Taxonomy panel bug fix.

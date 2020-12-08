@@ -27,9 +27,12 @@
     }
   },
   "supports": {
-    "align": [ "wide", "full" ],
+    "align": [
+      "wide",
+      "full"
+    ],
     "html": false
   },
   "category": "widgets",
-  "editorScript": "file:../../build/index.js"
+  "editorScript": "file:../../../build/blocks/children/index.js"
 }

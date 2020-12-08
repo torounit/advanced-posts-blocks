@@ -22,27 +22,12 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	protected $dir = __DIR__;
 
 	/**
-	 * Name of Block.
-	 *
-	 * @var string
-	 */
-	protected $name = 'advanced-posts-blocks/posts';
-
-	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->setup_term_attributes();
 		new Matrix_Term_Query( 'advanced_posts_blocks_preview' );
 		parent::__construct();
-	}
-
-
-	protected function register() {
-		register_block_type(
-			'advanced-posts-blocks/posts',
-			$this->register_block_type_arguments()
-		);
 	}
 
 	/**
@@ -111,9 +96,9 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @param array $attributes block attributes.
 	 *
-	 * @return false|string
+	 * @return string|null
 	 */
-	public function render( $attributes ) {
+	public function render( array $attributes ): string {
 		$args      = array(
 			'posts_per_page'      => $attributes['postsToShow'],
 			'post_status'         => 'publish',
