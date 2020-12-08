@@ -33,7 +33,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 */
 	public function __construct() {
 		$this->setup_term_attributes();
-		new Matrix_Term_Query( 'advanced_posts_blocks' );
+		new Matrix_Term_Query( 'advanced_posts_blocks_preview' );
 		parent::__construct();
 	}
 

@@ -51,7 +51,7 @@ const Edit = ( props ) => {
 			offset,
 			orderby: orderBy,
 			per_page: postsToShow,
-			advanced_posts_blocks: true,
+			advanced_posts_blocks_preview: true,
 		},
 		( value ) => ! isUndefined( value )
 	);
