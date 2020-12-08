@@ -126,6 +126,8 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			}
 		}
 
+		$args['tax_query']['relation'] = 'AND';
+
 		$this->setup_query( $args );
 		$output = $this->get_content_from_template( $attributes );
 		if ( $output ) {
