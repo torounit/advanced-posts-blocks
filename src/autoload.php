@@ -7,9 +7,11 @@
 
 namespace Advanced_Posts_Blocks;
 
+use Exception;
+
 try {
 	spl_autoload_register( 'Advanced_Posts_Blocks\autoload_register' );
-} catch ( \Exception $e ) {
+} catch ( Exception $e ) {
 	wp_die( esc_html( $e->getMessage() ) );
 }
 

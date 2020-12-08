@@ -7,6 +7,10 @@
 
 namespace Advanced_Posts_Blocks\Blocks\Posts;
 
+use WP_Query;
+use WP_REST_Request;
+use WP_Tax_Query;
+
 /**
  * Class Query
  *
@@ -42,12 +46,12 @@ class Matrix_Term_Query {
 	/**
 	 * Add query parameter to rest api.
 	 *
-	 * @param  array            $args The query arguments.
-	 * @param  \WP_REST_Request $request Full details about the request.
+	 * @param array $args The query arguments.
+	 * @param WP_REST_Request $request Full details about the request.
 	 *
 	 * @return array $args.
 	 **/
-	public function rest_api_add_query_param( $args, $request ) {
+	public function rest_api_add_query_param( array $args, WP_REST_Request $request ) : array {
 		$args[ $this->query_var ] = ! empty( $request[ $this->query_var ] );
 
 		return $args;
@@ -56,9 +60,9 @@ class Matrix_Term_Query {
 	/**
 	 * Change tax_query `operator` in the_wp_query
 	 *
-	 * @param \WP_Query $query The WP_Query instance (passed by reference).
+	 * @param WP_Query $query The WP_Query instance (passed by reference).
 	 */
-	public function parse_tax_query( \WP_Query $query ) {
+	public function parse_tax_query( WP_Query $query ) {
 		$tax_query             = $query->get( 'tax_query' );
 		$advanced_posts_blocks = $query->get( $this->query_var );
 		if ( $advanced_posts_blocks && $tax_query ) {
@@ -88,7 +92,7 @@ class Matrix_Term_Query {
 			$new_tax_query['relation'] = 'AND';
 			$query->set( 'tax_query', $new_tax_query );
 			$query->set( $this->query_var, false );
-			$query->tax_query = new \WP_Tax_Query( $new_tax_query );
+			$query->tax_query = new WP_Tax_Query( $new_tax_query );
 		}
 	}
 }

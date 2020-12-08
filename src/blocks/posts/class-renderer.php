@@ -7,6 +7,9 @@
 
 namespace Advanced_Posts_Blocks\Blocks\Posts;
 
+use WP_Post;
+use WP_Taxonomy;
+
 /**
  * Class Renderer
  *
@@ -72,22 +75,22 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	/**
 	 * Get rest Base.
 	 *
-	 * @param \WP_Taxonomy $taxonomy Taxonomy object.
+	 * @param WP_Taxonomy $taxonomy Taxonomy object.
 	 *
-	 * @return bool|string
+	 * @return string
 	 */
-	public function get_rest_base( \WP_Taxonomy $taxonomy ) {
-		return ! empty( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
+	public function get_rest_base( WP_Taxonomy $taxonomy ) : string {
+		return ! empty( $taxonomy->rest_base ) && is_string( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
 	}
 
 	/**
 	 * Get taxonomies with connected.
 	 *
-	 * @param array|string|\WP_Post $post_type Name of the type of taxonomy object, or an object (row from posts).
+	 * @param array|string|WP_Post $post_type Name of the type of taxonomy object, or an object (row from posts).
 	 *
-	 * @return \WP_Taxonomy[]
+	 * @return WP_Taxonomy[]
 	 */
-	public function get_post_type_taxonomies( $post_type ) {
+	public function get_post_type_taxonomies( $post_type ) : array {
 		return array_map( 'get_taxonomy', get_object_taxonomies( $post_type ) );
 	}
 
@@ -98,7 +101,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return string|null
 	 */
-	public function render( array $attributes ): string {
+	public function render( array $attributes ) : string {
 		$args      = array(
 			'posts_per_page'      => $attributes['postsToShow'],
 			'post_status'         => 'publish',

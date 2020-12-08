@@ -8,7 +8,6 @@
 namespace Advanced_Posts_Blocks\Blocks;
 
 use WP_Query;
-use const Advanced_Posts_Blocks\PLUGIN_FILE;
 
 /**
  * Class Renderer
@@ -70,8 +69,7 @@ abstract class Renderer {
 	 */
 	protected function register() {
 		$block      = register_block_type_from_metadata(
-			$this->dir,
-			$this->register_block_type_arguments()
+			$this->dir
 		);
 		$this->name = $block->name;
 		$block->set_props(
@@ -88,7 +86,7 @@ abstract class Renderer {
 	 *
 	 * @return array
 	 */
-	public function get_attributes(): array {
+	public function get_attributes() : array {
 		return $this->attributes;
 	}
 
@@ -99,7 +97,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	abstract public function render( array $attributes ): string;
+	abstract public function render( array $attributes ) : string;
 
 	/**
 	 * Get html class names.
@@ -108,7 +106,7 @@ abstract class Renderer {
 	 *
 	 * @return array
 	 */
-	public function get_class_names( array $attributes ): array {
+	public function get_class_names( array $attributes ) : array {
 		$class_names = array();
 		if ( ! empty( $attributes['className'] ) ) {
 			$class_names = explode( ' ', $attributes['className'] );
@@ -126,7 +124,7 @@ abstract class Renderer {
 	 * @param string $key
 	 * @param $value
 	 */
-	public function set_template_args( $key, $value ) {
+	public function set_template_args( string $key, $value ) {
 		$this->args[ $key ] = $value;
 		set_query_var( $key, $value );
 	}
@@ -136,7 +134,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	public function get_template_part_dir() {
+	public function get_template_part_dir() : string {
 		$template_part_dir = apply_filters( 'advanced_posts_blocks_template_part_directory', 'template-parts/blocks', $this->name );
 
 		return trim( $template_part_dir, '/\\' );
@@ -150,7 +148,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	public function get_template_part( $slug, $name = null ) {
+	public function get_template_part( string $slug, $name = null ) : string {
 		ob_start();
 		get_template_part( $slug, $name, $this->args );
 		$output = ob_get_contents();
@@ -173,7 +171,7 @@ abstract class Renderer {
 	 *
 	 * @return false|string
 	 */
-	protected function get_content_from_template( $attributes ) {
+	protected function get_content_from_template( array $attributes ) {
 		$class_name = join( ' ', $this->get_class_names( $attributes ) );
 		$this->set_template_args( 'class_name', $class_name );
 		$path = array(
@@ -211,7 +209,7 @@ abstract class Renderer {
 	 *
 	 * @return string template path.
 	 */
-	private function get_default_template_path( $name ) {
+	private function get_default_template_path( string $name ) : string {
 		$block_path    = explode( '/', $name );
 		$block_dir     = end( $block_path );
 		$template_path = __DIR__ . '/' . $block_dir . '/template.php';
@@ -234,7 +232,7 @@ abstract class Renderer {
 	 *
 	 * @return false|string
 	 */
-	protected function get_content_from_default_template( $name ) {
+	protected function get_content_from_default_template( string $name ) {
 		$template = $this->get_default_template_path( $name );
 		ob_start();
 		load_template( $template, false, $this->args );
@@ -250,7 +248,7 @@ abstract class Renderer {
 	 * @param array $args URL query string or array of vars.
 	 * @param string $query_var query var.
 	 */
-	protected function setup_query( $args, $query_var = 'query' ) {
+	protected function setup_query( array $args, $query_var = 'query' ) {
 		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
 		$this->query = new WP_Query( $args );
 		$this->set_template_args( $query_var, $this->query );
@@ -263,7 +261,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	protected function get_style_name( $class_name ) {
+	protected function get_style_name( string $class_name ) : string {
 		$classes = explode( ' ', $class_name );
 		$styles  = array_filter(
 			$classes,

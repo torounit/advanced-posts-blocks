@@ -28,7 +28,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return string
 	 */
-	public function render( array $attributes ): string {
+	public function render( array $attributes ) : string {
 		$args = array(
 			'posts_per_page' => $attributes['postsToShow'],
 			'post_status'    => 'publish',
