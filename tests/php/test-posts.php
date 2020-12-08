@@ -5,6 +5,11 @@
  * @package Advanced_Posts_Blocks
  */
 
+namespace Advanced_Posts_Blocks\Tests;
+
+use WP_Query;
+use WP_UnitTestCase;
+
 /**
  * Sample test case.
  */
@@ -14,7 +19,6 @@ class Posts_Test extends WP_UnitTestCase {
 	 * A single example test.
 	 */
 	public function test_render() {
-		global $post;
 		$this->factory()->post->create_many( 2 );
 		ob_start();
 		$query      = new WP_Query( array( 'post_type' => 'post' ) );
@@ -31,20 +35,15 @@ class Posts_Test extends WP_UnitTestCase {
 				'post_content' => '<!-- wp:advanced-posts-blocks/posts {"postsToShow":2} /-->',
 			)
 		);
-		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) );
+		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) ); // phpcs:ignore
 		$this->assertXmlStringEqualsXmlString( $expect, $actual );
 	}
 
-	public function tearDown() {
-		parent::tearDown();
-		wp_reset_postdata();
-	}
 
 	/**
 	 * A single example test.
 	 */
-	public function test_render_with_category() {
-		global $post;
+	public function test_render_with_category_and_tags() {
 		$cat_ids = $this->factory()->category->create_many( 2 );
 		$tag_ids = $this->factory()->tag->create_many( 2 );
 		foreach ( $this->factory()->post->create_many( 2 ) as $post_id ) {
@@ -85,7 +84,7 @@ class Posts_Test extends WP_UnitTestCase {
 			)
 		);
 
-		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) );
+		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) ); // phpcs:ignore
 		$this->assertXmlStringEqualsXmlString( $expect, $actual );
 
 		$post = $this->factory()->post->create(
@@ -97,7 +96,7 @@ class Posts_Test extends WP_UnitTestCase {
 			)
 		);
 
-		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) );
+		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) ); // phpcs:ignore
 		$this->assertXmlStringEqualsXmlString( $expect, $actual );
 
 		$post = $this->factory()->post->create(
@@ -109,7 +108,12 @@ class Posts_Test extends WP_UnitTestCase {
 			)
 		);
 
-		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) );
+		$actual = apply_filters( 'the_content', get_the_content( null, false, $post ) ); // phpcs:ignore
 		$this->assertXmlStringEqualsXmlString( $expect, $actual );
+	}
+
+	public function tearDown() {
+		parent::tearDown();
+		wp_reset_postdata();
 	}
 }
