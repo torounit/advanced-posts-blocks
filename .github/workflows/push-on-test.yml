@@ -24,6 +24,12 @@ jobs:
     name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
     steps:
       - uses: actions/checkout@v2
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -38,25 +44,33 @@ jobs:
       - name: Composer install
         run: composer install --optimize-autoloader --prefer-dist
 
-      - name: Install WP Tests
-        run: bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 ${{ matrix.wp-versions }} true
-
       - name: Build
         run: |
           bash ./bin/build.sh
 
-      - name: phpunit tests
-        run: composer test
+      - name: Install WordPress
+        run: |
+          chmod -R 767 ./ # TODO: Possibly integrate in wp-env
+          npm run wp-env start
+
+      - name: Running lint check
+        run: npm run lint-php
+
+      - name: Running single site unit tests
+        run: npm run test-unit-php
+        if: ${{ success() || failure() }}
 
   lint:
     runs-on:  ubuntu-latest
     name: PHP lint
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 12.x
+
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: 14.x
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -86,6 +100,12 @@ jobs:
     needs: [test,lint]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
       - name: Build
         if: contains(github.ref, 'tags/')
         run: |
