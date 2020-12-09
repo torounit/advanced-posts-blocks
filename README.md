@@ -1,13 +1,13 @@
 # Advanced Posts Blocks
-Contributors:      Toro_Unit
-Donate link:       https://www.paypal.me/torounit
-Tags:              posts, blocks
-Requires at least: 5.6
-Tested up to:      5.6
-Requires PHP:      7.3
-Stable tag:        1.0.3
-License:           GPLv3 or later
-License URI:       https://www.gnu.org/licenses/gpl-3.0.html
+Contributors:      Toro_Unit  
+Donate link:       https://www.paypal.me/torounit  
+Tags:              posts, blocks  
+Requires at least: 5.6  
+Tested up to:      5.6  
+Requires PHP:      7.3  
+Stable tag:        1.0.3  
+License:           GPLv3 or later  
+License URI:       https://www.gnu.org/licenses/gpl-3.0.html  
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
