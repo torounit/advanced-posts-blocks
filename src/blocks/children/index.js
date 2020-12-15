@@ -20,7 +20,8 @@ import {
 	usePostTypes,
 } from '../../util/hooks';
 
-const name = 'advanced-posts-blocks/children';
+import metadata from './block.json';
+const { name } = metadata;
 const title = __( 'Child Posts', 'advanced-posts-blocks' );
 const EditComponent = getEditComponent( name, title );
 
@@ -69,6 +70,7 @@ const Edit = ( props ) => {
 };
 
 registerBlockType( name, {
+	...metadata,
 	title: `${ title } (Advanced Posts Blocks)`,
 	description: __(
 		'Display children of selected post.',

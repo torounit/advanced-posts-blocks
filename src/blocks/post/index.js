@@ -15,7 +15,8 @@ import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { usePosts, usePostType, usePostTypes } from '../../util/hooks';
 
-const name = 'advanced-posts-blocks/post';
+import metadata from './block.json';
+const { name } = metadata;
 const title = __( 'Single Post', 'advanced-posts-blocks' );
 const EditComponent = getEditComponent( name, title );
 
@@ -45,6 +46,7 @@ const Edit = ( props ) => {
 };
 
 registerBlockType( name, {
+	...metadata,
 	title: `${ title } (Advanced Posts Blocks)`,
 	description: __( 'Display single post.', 'advanced-posts-blocks' ),
 	keywords: [ 'single post', __( 'single post', 'advanced-posts-blocks' ) ],
@@ -60,10 +62,6 @@ registerBlockType( name, {
 			<Path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" />
 		</SVG>
 	),
-	category: 'widgets',
-	supports: {
-		html: false,
-	},
 	edit: Edit,
 	save() {
 		return null;
