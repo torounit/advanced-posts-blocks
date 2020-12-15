@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         php-versions: [ '7.3', '7.4' ]
-        wp-versions: [ 'latest', 'trunk' ]
+        wp-versions: [ '5.6', 'trunk' ]
     name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
     steps:
       - uses: actions/checkout@v2
