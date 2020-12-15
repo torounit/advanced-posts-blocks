@@ -68,9 +68,7 @@ abstract class Renderer {
 	 * Regsiter Block Type.
 	 */
 	protected function register() {
-		$block      = register_block_type_from_metadata(
-			$this->dir
-		);
+		$block      = register_block_type_from_metadata( $this->dir );
 		$this->name = $block->name;
 		$block->set_props(
 			array(
