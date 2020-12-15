@@ -23,7 +23,6 @@ import { buildTermsTree } from '../../util/terms';
 
 const getEditComponent = ( blockName, blockTitle ) => {
 	return ( {
-		className,
 		attributes,
 		setAttributes,
 		posts,
@@ -133,7 +132,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 				{ inspectorControls }
 				<Disabled>
 					<ServerSideRender
-						className={ className }
 						block={ blockName }
 						attributes={ attributes }
 					/>

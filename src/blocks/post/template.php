@@ -13,7 +13,7 @@
  */
 
 ?>
-<div class="wp-block-advanced-posts-block-post <?php echo esc_attr( $class_name ); ?>">
+<div <?php echo get_block_wrapper_attributes(); // phpcs:ignore ?>>
 	<?php if ( $query->have_posts() ) : ?>
 		<?php while ( $query->have_posts() ) : ?>
 			<?php $query->the_post(); ?>

@@ -7,13 +7,12 @@
  * @var string $class_name
  * @var WP_Query $query
  * @var array $args {
- *     @type string $class_name
- *     @type WP_Query $query
+ * @type string $class_name
+ * @type WP_Query $query
  * }
  */
-
 ?>
-<div class="wp-block-advanced-posts-block-posts <?php echo esc_attr( $class_name ); ?>">
+<div <?php echo get_block_wrapper_attributes(); // phpcs:ignore ?>>
 	<?php if ( $query->have_posts() ) : ?>
 		<?php while ( $query->have_posts() ) : ?>
 			<?php $query->the_post(); ?>
