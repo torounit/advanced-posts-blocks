@@ -15,18 +15,36 @@ use WP_UnitTestCase;
  */
 class Posts_Test extends WP_UnitTestCase {
 
+	private function render_test_template( $query ) {
+		ob_start();
+		?>
+		<div class="wp-block-advanced-posts-blocks-posts">
+			<?php if ( $query->have_posts() ) : ?>
+				<?php while ( $query->have_posts() ) : ?>
+					<?php $query->the_post(); ?>
+
+					<a href="<?php the_permalink(); ?>">
+						<article>
+							<h4><?php the_title(); ?></h4>
+							<?php the_excerpt(); ?>
+						</article>
+					</a>
+
+				<?php endwhile; ?>
+				<?php wp_reset_postdata(); ?>
+			<?php endif; ?>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
 	/**
 	 * A single example test.
 	 */
 	public function test_render() {
 		$this->factory()->post->create_many( 2 );
-		ob_start();
-		$query      = new WP_Query( array( 'post_type' => 'post' ) );
-		$class_name = '';
-		include dirname( __FILE__ ) . '/../../src/blocks/posts/template.php';
-		$expect = ob_get_clean();
-		wp_reset_postdata();
-
+		$query  = new WP_Query( array( 'post_type' => 'post' ) );
+		$expect = $this->render_test_template( $query );
 		$post   = $this->factory()->post->create(
 			array(
 				'post_type'    => 'page',
@@ -60,7 +78,6 @@ class Posts_Test extends WP_UnitTestCase {
 			wp_set_post_terms( $post_id, $tag_ids, 'post_tag', true );
 		}
 
-		ob_start();
 		$query = new WP_Query(
 			array(
 				'post_type' => 'post',
@@ -70,10 +87,7 @@ class Posts_Test extends WP_UnitTestCase {
 			)
 		);
 		$this->assertEquals( 2, $query->post_count );
-		$class_name = '';
-		include dirname( __FILE__ ) . '/../../src/blocks/posts/template.php';
-		$expect = ob_get_clean();
-		wp_reset_postdata();
+		$expect = $this->render_test_template( $query );
 
 		$post = $this->factory()->post->create(
 			array(
