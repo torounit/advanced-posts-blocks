@@ -1,5 +1,6 @@
 {
   "name": "advanced-posts-blocks/posts",
+  "apiVersion": 2,
   "title": "Multiple Posts",
   "description": "Display multiple posts.",
   "icon": "admin-post",

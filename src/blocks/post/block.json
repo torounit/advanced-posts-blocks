@@ -1,5 +1,6 @@
 {
   "name": "advanced-posts-blocks/post",
+  "apiVersion": 2,
   "title": "Single Posts",
   "description": "Display single post.",
   "icon": "admin-post",

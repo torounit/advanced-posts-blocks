@@ -1,5 +1,6 @@
 {
   "name": "advanced-posts-blocks/children",
+  "apiVersion": 2,
   "title": "Child Posts",
   "description": "Display children of selected post.",
   "icon": "admin-page",

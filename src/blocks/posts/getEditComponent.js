@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { Fragment } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
@@ -12,7 +11,7 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
 /**
@@ -163,7 +162,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
 		if ( ! hasPosts ) {
 			return (
-				<Fragment>
+				<div { ...useBlockProps() }>
 					{ inspectorControls }
 					<Placeholder icon="admin-post" label={ blockTitle }>
 						{ ! Array.isArray( latestPosts ) ? (
@@ -172,12 +171,11 @@ const getEditComponent = ( blockName, blockTitle ) => {
 							labels.not_found
 						) }
 					</Placeholder>
-				</Fragment>
+				</div>
 			);
 		}
-
 		return (
-			<Fragment>
+			<div { ...useBlockProps() }>
 				{ inspectorControls }
 				<Disabled>
 					<ServerSideRender
@@ -185,7 +183,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 						attributes={ attributes }
 					/>
 				</Disabled>
-			</Fragment>
+			</div>
 		);
 	};
 };

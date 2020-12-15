@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { Fragment } from '@wordpress/element';
 import {
 	PanelBody,
 	Placeholder,
@@ -10,7 +9,7 @@ import {
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 const getEditComponent = ( blockName, blockTitle ) => {
 	return ( {
@@ -71,17 +70,17 @@ const getEditComponent = ( blockName, blockTitle ) => {
 
 		if ( ! postId ) {
 			return (
-				<Fragment>
+				<div { ...useBlockProps() }>
 					{ inspectorControls }
 					<Placeholder icon="admin-post" label={ blockTitle }>
 						{ __( 'Post Not Found.', 'advanced-posts-blocks' ) }
 					</Placeholder>
-				</Fragment>
+				</div>
 			);
 		}
 
 		return (
-			<Fragment>
+			<div { ...useBlockProps() }>
 				{ inspectorControls }
 				<Disabled>
 					<ServerSideRender
@@ -89,7 +88,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 						attributes={ attributes }
 					/>
 				</Disabled>
-			</Fragment>
+			</div>
 		);
 	};
 };
