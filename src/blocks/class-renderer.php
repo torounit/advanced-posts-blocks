@@ -84,7 +84,7 @@ abstract class Renderer {
 	 *
 	 * @return array
 	 */
-	public function get_attributes() : array {
+	public function get_attributes(): array {
 		return $this->attributes;
 	}
 
@@ -95,7 +95,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	abstract public function render( array $attributes ) : string;
+	abstract public function render( array $attributes ): string;
 
 	/**
 	 * Get html class names.
@@ -104,7 +104,7 @@ abstract class Renderer {
 	 *
 	 * @return array
 	 */
-	public function get_class_names( array $attributes ) : array {
+	public function get_class_names( array $attributes ): array {
 		$class_names = array();
 		if ( ! empty( $attributes['className'] ) ) {
 			$class_names = explode( ' ', $attributes['className'] );
@@ -132,7 +132,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	public function get_template_part_dir() : string {
+	public function get_template_part_dir(): string {
 		$template_part_dir = apply_filters( 'advanced_posts_blocks_template_part_directory', 'template-parts/blocks', $this->name );
 
 		return trim( $template_part_dir, '/\\' );
@@ -146,7 +146,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	public function get_template_part( string $slug, $name = null ) : string {
+	public function get_template_part( string $slug, $name = null ): string {
 		ob_start();
 		get_template_part( $slug, $name, $this->args );
 		$output = ob_get_contents();
@@ -207,7 +207,7 @@ abstract class Renderer {
 	 *
 	 * @return string template path.
 	 */
-	private function get_default_template_path( string $name ) : string {
+	private function get_default_template_path( string $name ): string {
 		$block_path    = explode( '/', $name );
 		$block_dir     = end( $block_path );
 		$template_path = __DIR__ . '/' . $block_dir . '/template.php';
@@ -215,8 +215,10 @@ abstract class Renderer {
 		/**
 		 * Filters the fallback template file path.
 		 *
-		 * @param string $template_path The submenu file.
+		 * @param string $template_path The fallback template file.
 		 * @param string $name block name.
+		 * @param WP_Query $query WP_Query instance.
+		 * @param array $args Template arguments.
 		 *
 		 * @since 0.8.0
 		 */
@@ -259,7 +261,7 @@ abstract class Renderer {
 	 *
 	 * @return string
 	 */
-	protected function get_style_name( string $class_name ) : string {
+	protected function get_style_name( string $class_name ): string {
 		$classes = explode( ' ', $class_name );
 		$styles  = array_filter(
 			$classes,
