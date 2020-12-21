@@ -21,7 +21,7 @@ import {
 } from '../../util/hooks';
 
 import metadata from './block.json';
-const { name } = metadata;
+const { name, supports, category } = metadata;
 const title = __( 'Multiple Posts', 'advanced-posts-blocks' );
 const EditComponent = getEditComponent( name, title );
 
@@ -71,7 +71,8 @@ const Edit = ( props ) => {
 };
 
 registerBlockType( name, {
-	...metadata,
+	supports,
+	category,
 	title: `${ title } (Advanced Posts Blocks)`,
 	description: __( 'Display multiple posts.', 'advanced-posts-blocks' ),
 	keywords: [
