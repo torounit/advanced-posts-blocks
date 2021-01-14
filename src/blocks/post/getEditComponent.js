@@ -5,6 +5,7 @@ import {
 	PanelBody,
 	Placeholder,
 	SelectControl,
+	ComboboxControl,
 	Disabled,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -36,7 +37,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			/>
 		);
 		const PostControls = (
-			<SelectControl
+			<ComboboxControl
 				label={ __( 'Post' ) }
 				value={ postId }
 				options={ [
