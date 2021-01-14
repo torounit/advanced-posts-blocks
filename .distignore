@@ -9,6 +9,8 @@
 .gitlab-ci.yml
 .npmrc
 .git
+.idea
+.github
 .travis.yml
 .DS_Store
 Thumbs.db
