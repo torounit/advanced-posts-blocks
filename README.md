@@ -109,8 +109,9 @@ endif;
 ## Changelog
 
 ### 2.0.0
-* Refactaring release.
+* Refactoring release.
 * Drop WordPress 5.5 and PHP 7.2
+* Single post block: `Use ComboboxControl` for post selector.
 
 ### 1.0.3
 * Taxonomy panel bug fix.
@@ -120,10 +121,10 @@ endif;
 * WordPress 5.6-beta-4 tested.
 
 ### 0.9.0
-* Posts Block: fix react hooks violation.
+* Multiple posts block: fix react hooks violation.
 
 ### 0.8.3
-* Posts Block: block bug fix.
+* Multiple posts block: block bug fix.
 * add `block.json`.
 
 ### 0.8.2
