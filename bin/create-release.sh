@@ -19,8 +19,9 @@ sed -i.bak -e "s/^ \* Version: .*/ * Version: ${version}/g" ${pluginname}.php;
 sed -i.bak -e "s/^ \* @version .*/ * @version ${version}/g" ${pluginname}.php;
 rm ${pluginname}.php.bak
 
-echo 'Generate readme.'
-curl -L https://raw.githubusercontent.com/fumikito/wp-readme/master/wp-readme.php | php
+SCRIPT_DIR=$(dirname $0);
+
+. ${SCRIPT_DIR}/build.sh
 
 rsync -a --exclude-from=.distignore ./ ./distribution/
 
