@@ -108,6 +108,10 @@ endif;
 
 ## Changelog
 
+### 2.1.0
+* Multiple posts block: Support menu_order attributes.
+* Child posts block, Multiple posts block: Re-order query controls.
+
 ### 2.0.0
 * Refactoring release.
 * Drop WordPress 5.5 and PHP 7.2
