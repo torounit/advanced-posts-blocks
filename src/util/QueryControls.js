@@ -20,6 +20,7 @@ export default function QueryControls( {
 	maxItems = DEFAULT_MAX_ITEMS,
 	minItems = DEFAULT_MIN_ITEMS,
 	showAllPosts,
+	postType,
 	onNumberOfItemsChange,
 	onOrderChange,
 	onOrderByChange,
@@ -27,26 +28,34 @@ export default function QueryControls( {
 	onIgnoreStickyPostsChange,
 	onshowAllPostsChange,
 } ) {
+	const orderbyOptions = [
+		{
+			label: __( 'Date' ),
+			value: 'date',
+		},
+		{
+			label: __( 'Title' ),
+			value: 'title',
+		},
+	];
+
 	return [
 		onOrderByChange && (
 			<SelectControl
 				key="query-controls-order-by-select"
 				label={ __( 'Order by' ) }
 				value={ orderBy }
-				options={ [
-					{
-						label: __( 'Date' ),
-						value: 'date',
-					},
-					{
-						label: __( 'Title' ),
-						value: 'title',
-					},
-					{
-						label: __( 'Page Order' ),
-						value: 'menu_order',
-					},
-				] }
+				options={
+					postType?.supports[ 'page-attributes' ]
+						? [
+								...orderbyOptions,
+								{
+									label: __( 'Page Order' ),
+									value: 'menu_order',
+								},
+						  ]
+						: orderbyOptions
+				}
 				onChange={ ( newOrderBy ) => {
 					if ( newOrderBy !== orderBy ) {
 						onOrderByChange( newOrderBy );

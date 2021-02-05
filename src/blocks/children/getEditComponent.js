@@ -44,7 +44,10 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					value: type.slug,
 				} ) ) }
 				onChange={ ( postType ) => {
-					setAttributes( { postType } );
+					setAttributes( {
+						postType,
+						orderBy: '',
+					} );
 				} }
 			/>
 		);
@@ -92,7 +95,10 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		const inspectorControls = (
 			<InspectorControls>
 				<PanelBody title={ title }>
+					{ PostTypeControls }
+					{ ParentControls }
 					<QueryControls
+						postType={ selectedPostType }
 						showAllPosts={ true }
 						{ ...{ order, orderBy } }
 						numberOfItems={ postsToShow }
@@ -106,8 +112,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 							setAttributes( { postsToShow: value } )
 						}
 					/>
-					{ PostTypeControls }
-					{ ParentControls }
 				</PanelBody>
 			</InspectorControls>
 		);

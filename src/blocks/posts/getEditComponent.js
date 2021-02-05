@@ -95,7 +95,10 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					value: type.slug,
 				} ) ) }
 				onChange={ ( postType ) => {
-					setAttributes( { postType } );
+					setAttributes( {
+						postType,
+						orderBy: '',
+					} );
 				} }
 			/>
 		);
@@ -126,6 +129,8 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		const inspectorControls = (
 			<InspectorControls>
 				<PanelBody title={ title }>
+					{ PostTypeControls }
+					{ TermControls }
 					<QueryControls
 						{ ...{
 							order,
@@ -134,6 +139,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 							ignoreStickyPosts,
 							showAllPosts,
 						} }
+						postType={ selectedPostType }
 						numberOfItems={ postsToShow }
 						onOffsetChange={ ( value ) =>
 							setAttributes( { offset: value } )
@@ -154,8 +160,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 							setAttributes( { showAllPosts: value } );
 						} }
 					/>
-					{ PostTypeControls }
-					{ TermControls }
 				</PanelBody>
 			</InspectorControls>
 		);
