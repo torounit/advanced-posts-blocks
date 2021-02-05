@@ -28,38 +28,51 @@ export default function QueryControls( {
 	onshowAllPostsChange,
 } ) {
 	return [
-		onOrderChange && onOrderByChange && (
+		onOrderByChange && (
 			<SelectControl
-				key="query-controls-order-select"
+				key="query-controls-order-by-select"
 				label={ __( 'Order by' ) }
-				value={ `${ orderBy }/${ order }` }
+				value={ orderBy }
 				options={ [
 					{
-						label: __( 'Newest to Oldest' ),
-						value: 'date/desc',
+						label: __( 'Date' ),
+						value: 'date',
 					},
 					{
-						label: __( 'Oldest to Newest' ),
-						value: 'date/asc',
+						label: __( 'Title' ),
+						value: 'title',
 					},
 					{
-						/* translators: label for ordering posts by title in ascending order */
-						label: __( 'A → Z' ),
-						value: 'title/asc',
-					},
-					{
-						/* translators: label for ordering posts by title in descending order */
-						label: __( 'Z → A' ),
-						value: 'title/desc',
+						label: __( 'Page Order' ),
+						value: 'menu_order',
 					},
 				] }
-				onChange={ ( value ) => {
-					const [ newOrderBy, newOrder ] = value.split( '/' );
-					if ( newOrder !== order ) {
-						onOrderChange( newOrder );
-					}
+				onChange={ ( newOrderBy ) => {
 					if ( newOrderBy !== orderBy ) {
 						onOrderByChange( newOrderBy );
+					}
+				} }
+			/>
+		),
+
+		onOrderChange && (
+			<SelectControl
+				key="query-controls-order-select"
+				label={ __( 'Order' ) }
+				value={ order }
+				options={ [
+					{
+						label: __( 'DESC' ),
+						value: 'desc',
+					},
+					{
+						label: __( 'ASC' ),
+						value: 'asc',
+					},
+				] }
+				onChange={ ( newOrder ) => {
+					if ( newOrder !== order ) {
+						onOrderChange( newOrder );
 					}
 				} }
 			/>

@@ -17,7 +17,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import QueryControls from './QueryControls';
+import QueryControls from '../../util/QueryControls';
 import { buildTermsTree } from '../../util/terms';
 
 const getEditComponent = ( blockName, blockTitle ) => {
@@ -93,6 +93,7 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			<InspectorControls>
 				<PanelBody title={ title }>
 					<QueryControls
+						showAllPosts={ true }
 						{ ...{ order, orderBy } }
 						numberOfItems={ postsToShow }
 						onOrderChange={ ( value ) =>

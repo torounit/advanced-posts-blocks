@@ -17,7 +17,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import QueryControls from './QueryControls';
+import QueryControls from '../../util/QueryControls';
 
 const TermControl = ( { taxonomy, termIds, handleChange } ) => {
 	const categories =
