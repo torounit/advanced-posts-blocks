@@ -37,12 +37,13 @@ const Edit = ( props ) => {
 	const postTypes = usePostTypes();
 	const selectedPostType = usePostType( postTypeName );
 	const taxonomies = usePostTypeTaxonomies( selectedPostType );
-
 	const taxQuery = {};
 	for ( const taxonomy of taxonomies ) {
 		const taxonomyTerms = attributes[ taxonomy.rest_base ];
 		if ( Array.isArray( taxonomyTerms ) && taxonomyTerms.length > 0 ) {
 			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.filter( identity );
+		} else if ( taxonomyTerms?.terms && taxonomyTerms.terms?.length > 0 ) {
+			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.terms;
 		}
 	}
 	const latestPostsQuery = pickBy(
