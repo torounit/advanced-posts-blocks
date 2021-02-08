@@ -19,6 +19,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import QueryControls from '../../util/QueryControls';
 import { buildTermsTree } from '../../util/terms';
 import PostTypeControl from '../../util/PostTypeControl';
+import metadata from './block.json';
 
 const getEditComponent = ( blockName, blockTitle ) => {
 	return ( {
@@ -81,10 +82,15 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					<PostTypeControl
 						value={ selectedPostType }
 						onChange={ ( postType ) => {
-							setAttributes( {
-								postType: postType.slug,
-								orderBy: '',
-							} );
+							if (
+								! postType?.supports[ 'page-attributes' ] &&
+								orderBy === 'menu_order'
+							) {
+								setAttributes( {
+									orderBy:
+										metadata.attributes.orderBy.default,
+								} );
+							}
 						} }
 					/>
 					{ ParentControls }

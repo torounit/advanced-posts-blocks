@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
+import metadata from './block.json';
 
 /**
  * Internal dependencies
@@ -114,9 +115,17 @@ const getEditComponent = ( blockName, blockTitle ) => {
 					<PostTypeControl
 						value={ selectedPostType }
 						onChange={ ( postType ) => {
+							if (
+								! postType?.supports[ 'page-attributes' ] &&
+								orderBy === 'menu_order'
+							) {
+								setAttributes( {
+									orderBy:
+										metadata.attributes.orderBy.default,
+								} );
+							}
 							setAttributes( {
 								postType: postType.slug,
-								orderBy: '',
 							} );
 						} }
 					/>
