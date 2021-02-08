@@ -111,6 +111,7 @@ endif;
 ### 2.1.0
 * Multiple posts block: Support menu_order attributes.
 * Child posts block, Multiple posts block: Re-order query controls.
+* Refactoring components.
 
 ### 2.0.0
 * Refactoring release.
