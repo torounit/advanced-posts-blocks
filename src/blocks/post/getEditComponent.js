@@ -18,15 +18,12 @@ const getEditComponent = ( blockName, blockTitle ) => {
 
 		const PostControls = (
 			<ComboboxControl
+				help={ __( 'Select post' ) }
 				label={ __( 'Post' ) }
 				value={ postId }
 				options={ [
-					{
-						value: '',
-						label: __( 'Select Post', 'advanced-posts-blocks' ),
-					},
 					...posts.map( ( post ) => ( {
-						label: post.title.rendered,
+						label: `${ post.title.rendered } (ID: ${ post.id })`,
 						value: post.id,
 					} ) ),
 				] }
