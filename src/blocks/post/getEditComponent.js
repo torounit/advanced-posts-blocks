@@ -4,38 +4,18 @@
 import {
 	PanelBody,
 	Placeholder,
-	SelectControl,
 	ComboboxControl,
 	Disabled,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import PostTypeControl from '../../util/PostTypeControl';
 
 const getEditComponent = ( blockName, blockTitle ) => {
-	return ( {
-		attributes,
-		setAttributes,
-		posts,
-		selectedPostType,
-		postTypes,
-	} ) => {
+	return ( { attributes, setAttributes, posts, selectedPostType } ) => {
 		const { postId } = attributes;
 
-		const PostTypeControls = (
-			<SelectControl
-				label={ __( 'Post Type', 'advanced-posts-blocks' ) }
-				value={ selectedPostType.slug }
-				options={ postTypes.map( ( type ) => ( {
-					label: type.name,
-					value: type.slug,
-				} ) ) }
-				onChange={ ( postType ) => {
-					setAttributes( { postId: undefined } );
-					setAttributes( { postType } );
-				} }
-			/>
-		);
 		const PostControls = (
 			<ComboboxControl
 				label={ __( 'Post' ) }
@@ -63,7 +43,13 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		const inspectorControls = (
 			<InspectorControls>
 				<PanelBody title={ title }>
-					{ PostTypeControls }
+					<PostTypeControl
+						value={ selectedPostType }
+						onChange={ ( postType ) => {
+							setAttributes( { postId: undefined } );
+							setAttributes( { postType: postType.slug } );
+						} }
+					/>
 					{ PostControls }
 				</PanelBody>
 			</InspectorControls>

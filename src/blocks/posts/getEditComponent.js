@@ -5,7 +5,6 @@ import {
 	PanelBody,
 	Placeholder,
 	Spinner,
-	SelectControl,
 	Disabled,
 	FormTokenField,
 } from '@wordpress/components';
@@ -18,6 +17,7 @@ import { useSelect } from '@wordpress/data';
  * Internal dependencies
  */
 import QueryControls from '../../util/QueryControls';
+import PostTypeControl from '../../util/PostTypeControl';
 
 const TermControl = ( { taxonomy, termIds, handleChange } ) => {
 	const categories =
@@ -74,7 +74,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		latestPosts,
 		taxonomies,
 		selectedPostType,
-		postTypes,
 	} ) => {
 		const {
 			order,
@@ -85,23 +84,6 @@ const getEditComponent = ( blockName, blockTitle ) => {
 			showAllPosts,
 		} = attributes;
 		const labels = selectedPostType.labels || {};
-
-		const PostTypeControls = (
-			<SelectControl
-				label={ __( 'Post Type', 'advanced-posts-blocks' ) }
-				value={ selectedPostType.slug }
-				options={ postTypes.map( ( type ) => ( {
-					label: type.name,
-					value: type.slug,
-				} ) ) }
-				onChange={ ( postType ) => {
-					setAttributes( {
-						postType,
-						orderBy: '',
-					} );
-				} }
-			/>
-		);
 
 		const TermControls = taxonomies.map( ( taxonomy, i ) => {
 			const termIds =
@@ -129,7 +111,15 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		const inspectorControls = (
 			<InspectorControls>
 				<PanelBody title={ title }>
-					{ PostTypeControls }
+					<PostTypeControl
+						value={ selectedPostType }
+						onChange={ ( postType ) => {
+							setAttributes( {
+								postType: postType.slug,
+								orderBy: '',
+							} );
+						} }
+					/>
 					{ TermControls }
 					<QueryControls
 						{ ...{

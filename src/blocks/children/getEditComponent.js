@@ -5,7 +5,6 @@ import {
 	PanelBody,
 	Placeholder,
 	Spinner,
-	SelectControl,
 	Disabled,
 	TreeSelect,
 } from '@wordpress/components';
@@ -19,6 +18,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
  */
 import QueryControls from '../../util/QueryControls';
 import { buildTermsTree } from '../../util/terms';
+import PostTypeControl from '../../util/PostTypeControl';
 
 const getEditComponent = ( blockName, blockTitle ) => {
 	return ( {
@@ -28,29 +28,12 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		children,
 		postId,
 		selectedPostType,
-		postTypes,
 	} ) => {
 		const { order, orderBy, postsToShow } = attributes;
 		const labels = selectedPostType.labels || {};
 
 		const title = __( 'Query setting', 'advanced-posts-blocks' );
 
-		const PostTypeControls = (
-			<SelectControl
-				label={ __( 'Post Type', 'advanced-posts-blocks' ) }
-				value={ selectedPostType.slug }
-				options={ postTypes.map( ( type ) => ( {
-					label: type.name,
-					value: type.slug,
-				} ) ) }
-				onChange={ ( postType ) => {
-					setAttributes( {
-						postType,
-						orderBy: '',
-					} );
-				} }
-			/>
-		);
 		const pagesTree = buildTermsTree(
 			posts.map( ( item ) => ( {
 				id: item.id,
@@ -95,7 +78,15 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		const inspectorControls = (
 			<InspectorControls>
 				<PanelBody title={ title }>
-					{ PostTypeControls }
+					<PostTypeControl
+						value={ selectedPostType }
+						onChange={ ( postType ) => {
+							setAttributes( {
+								postType: postType.slug,
+								orderBy: '',
+							} );
+						} }
+					/>
 					{ ParentControls }
 					<QueryControls
 						postType={ selectedPostType }

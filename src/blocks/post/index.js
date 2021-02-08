@@ -13,7 +13,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import getEditComponent from './getEditComponent';
 import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { usePosts, usePostType, usePostTypes } from '../../util/hooks';
+import { usePosts, usePostType } from '../../util/hooks';
 
 import metadata from './block.json';
 
@@ -24,7 +24,6 @@ const EditComponent = getEditComponent( name, title );
 const Edit = ( props ) => {
 	const { attributes } = props;
 	const { postType: postTypeName } = attributes;
-	const postTypes = usePostTypes();
 	const selectedPostType = usePostType( postTypeName );
 	const PostsQuery = pickBy(
 		{
@@ -38,10 +37,6 @@ const Edit = ( props ) => {
 		...props,
 		posts: usePosts( selectedPostType, PostsQuery ),
 		selectedPostType,
-		postTypes: postTypes.filter(
-			( postType ) =>
-				! [ 'attachment', 'wp_block' ].includes( postType.slug )
-		),
 	};
 	return <EditComponent { ...newProps } />;
 };

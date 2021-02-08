@@ -17,7 +17,6 @@ import {
 	useCurrentPostType,
 	usePosts,
 	usePostType,
-	usePostTypes,
 } from '../../util/hooks';
 
 import metadata from './block.json';
@@ -29,7 +28,6 @@ const Edit = ( props ) => {
 	const { attributes } = props;
 	const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
 	const { postId } = attributes;
-	const postTypes = usePostTypes();
 	const currentPostType = useCurrentPostType();
 	const currentPostId = useCurrentPostId();
 	const selectedPostType = usePostType(
@@ -59,12 +57,6 @@ const Edit = ( props ) => {
 		posts: usePosts( selectedPostType, PostsQuery ),
 		children: usePosts( selectedPostType, childrenPostsQuery ),
 		selectedPostType,
-		postTypes: postTypes
-			.filter( ( postType ) => postType.hierarchical )
-			.filter(
-				( postType ) =>
-					! [ 'attachment', 'wp_block' ].includes( postType.slug )
-			),
 	};
 	return <EditComponent { ...newProps } />;
 };
