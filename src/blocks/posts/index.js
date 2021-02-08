@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isUndefined, pickBy, identity } from 'lodash';
+import { pickBy, identity } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -55,7 +55,7 @@ const Edit = ( props ) => {
 			per_page: postsToShow,
 			advanced_posts_blocks_preview: true,
 		},
-		( value ) => ! isUndefined( value )
+		( value ) => !! value
 	);
 
 	const newProps = {

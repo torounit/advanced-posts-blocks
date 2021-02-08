@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { isUndefined, pickBy } from 'lodash';
+import { pickBy } from 'lodash';
 /**
  * WordPress dependencies
  */
@@ -40,7 +40,7 @@ const Edit = ( props ) => {
 			orderby: orderBy,
 			per_page: -1,
 		},
-		( value ) => ! isUndefined( value )
+		( value ) => !! value
 	);
 
 	const childrenPostsQuery = pickBy(
@@ -50,7 +50,7 @@ const Edit = ( props ) => {
 			orderby: orderBy,
 			per_page: postsToShow,
 		},
-		( value ) => ! isUndefined( value )
+		( value ) => !! value
 	);
 
 	const newProps = {
