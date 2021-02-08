@@ -10,6 +10,7 @@ import {
 	FormTokenField,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
 import { ServerSideRender } from '@wordpress/editor';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
@@ -104,23 +105,41 @@ const getEditComponent = ( blockName, blockTitle ) => {
 		);
 
 		const TermControls = taxonomies.map( ( taxonomy, i ) => {
-			const termIds =
-				attributes[ taxonomy.rest_base ]?.terms ??
-				attributes[ taxonomy.rest_base ] ??
-				[];
+			let taxonomyAttributes = attributes[ taxonomy.rest_base ];
+			if ( Array.isArray( taxonomyAttributes ) ) {
+				taxonomyAttributes = {
+					terms: taxonomyAttributes,
+				};
+			}
 			return (
-				<TermControl
-					key={ i }
-					taxonomy={ taxonomy }
-					termIds={ termIds }
-					handleChange={ ( value ) => {
-						setAttributes( {
-							[ taxonomy.rest_base ]: {
-								terms: value,
+				<Fragment key={ i }>
+					<TermControl
+						taxonomy={ taxonomy }
+						termIds={ taxonomyAttributes.terms || [] }
+						handleChange={ ( value ) => {
+							setAttributes( {
+								[ taxonomy.rest_base ]: {
+									...taxonomyAttributes,
+									terms: value,
+								},
+							} );
+						} }
+					/>
+					<SelectControl
+						label={ __( 'Relation' ) }
+						value={ attributes[ taxonomy.rest_base ]?.relation }
+						options={ [
+							{
+								label: __( 'AND' ),
+								value: 'AND',
 							},
-						} );
-					} }
-				/>
+							{
+								label: __( 'OR' ),
+								value: 'OR',
+							},
+						] }
+					></SelectControl>
+				</Fragment>
 			);
 		} );
 
