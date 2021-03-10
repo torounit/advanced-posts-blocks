@@ -3,7 +3,7 @@ Contributors:      Toro_Unit
 Donate link:       https://www.paypal.me/torounit  
 Tags:              posts, blocks  
 Requires at least: 5.6  
-Tested up to:      5.6  
+Tested up to:      5.7  
 Requires PHP:      7.3  
 Stable tag:        2.1.0
 License:           GPLv3 or later  
