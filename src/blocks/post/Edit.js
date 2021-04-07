@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { isUndefined, pickBy } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import {
@@ -29,16 +24,10 @@ const Edit = ( { attributes, setAttributes } ) => {
 	const { postId } = attributes;
 	const { postType: postTypeName } = attributes;
 	const selectedPostType = usePostType( postTypeName );
-	const posts = usePosts(
-		selectedPostType,
-		pickBy(
-			{
-				per_page: -1,
-				advanced_posts_blocks: true,
-			},
-			( value ) => ! isUndefined( value )
-		)
-	);
+	const posts = usePosts( selectedPostType, {
+		per_page: -1,
+		advanced_posts_blocks: true,
+	} );
 
 	const PostControls = (
 		<ComboboxControl

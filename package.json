@@ -26,19 +26,22 @@
     "welcome-build-command": "npm run start"
   },
   "dependencies": {
-    "@wordpress/blocks": "^7.0.6",
-    "@wordpress/components": "^12.0.8",
-    "@wordpress/data": "^4.26.8",
-    "@wordpress/i18n": "^3.18.0",
-    "lodash": "^4.17.20",
-    "npm-check-updates": "^10.2.5"
+    "@wordpress/block-editor": "^5.3.1",
+    "@wordpress/blocks": "^8.0.1",
+    "@wordpress/components": "^13.0.1",
+    "@wordpress/compose": "^3.25.1",
+    "@wordpress/data": "^4.27.1",
+    "@wordpress/editor": "^9.26.1",
+    "@wordpress/i18n": "^3.19.1",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "@wordpress/browserslist-config": "^3.0.1",
-    "@wordpress/env": "^3.0.2",
-    "@wordpress/eslint-plugin": "^8.0.2",
-    "@wordpress/prettier-config": "^1.0.1",
-    "@wordpress/scripts": "^13.0.3",
+    "@wordpress/browserslist-config": "^3.0.2",
+    "@wordpress/env": "^4.0.1",
+    "@wordpress/eslint-plugin": "^9.0.2",
+    "@wordpress/prettier-config": "^1.0.2",
+    "@wordpress/scripts": "^14.1.0",
+    "glob": "^7.1.6",
     "husky": "^4.3.7",
     "lint-staged": "^10.5.3",
     "prettier": "npm:wp-prettier@^2.2.1-beta-1"
