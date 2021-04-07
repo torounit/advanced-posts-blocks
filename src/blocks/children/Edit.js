@@ -42,16 +42,10 @@ const Edit = ( { attributes, setAttributes } ) => {
 		postTypeName ? postTypeName : currentPostType
 	);
 
-	const posts = usePosts(
-		selectedPostType,
-		pickBy(
-			{
-				orderby: orderBy,
-				per_page: -1,
-			},
-			( value ) => !! value
-		)
-	);
+	const posts = usePosts( selectedPostType, {
+		orderby: orderBy,
+		per_page: -1,
+	} );
 	const children = usePosts(
 		selectedPostType,
 		pickBy(
