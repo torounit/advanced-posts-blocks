@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { noop } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import {
@@ -39,6 +44,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 					value: post.id,
 				} ) ),
 			] }
+			onFilterValueChange={ noop }
 			onChange={ ( value ) => {
 				setAttributes( {
 					postId: value ? parseInt( value ) : undefined,

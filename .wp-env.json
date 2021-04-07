@@ -1,5 +1,5 @@
 {
-  "core": "WordPress/WordPress#master",
+  "core": "https://wordpress.org/wordpress-5.7.zip",
   "plugins": [
     ".",
     "https://downloads.wordpress.org/plugin/wordpress-importer.0.7.zip"
