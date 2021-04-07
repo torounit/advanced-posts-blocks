@@ -15,7 +15,7 @@ import {
 } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
-import { ServerSideRender } from '@wordpress/editor';
+import ServerSideRender from '@wordpress/server-side-render';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 /**
@@ -86,7 +86,6 @@ const Edit = ( { attributes, setAttributes } ) => {
 			} )
 			.filter( ( term ) => term );
 	};
-
 	const ParentControls = (
 		<TreeSelect
 			label={ labels.parent_item_colon }
