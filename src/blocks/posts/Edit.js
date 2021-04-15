@@ -1,16 +1,16 @@
 /**
  * External dependencies
  */
-import { identity, pickBy } from 'lodash';
+import { identity } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import {
+	Disabled,
 	PanelBody,
 	Placeholder,
 	Spinner,
-	Disabled,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
@@ -50,21 +50,14 @@ const Edit = ( { attributes, setAttributes } ) => {
 			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.terms;
 		}
 	}
-
-	const latestPosts = usePosts(
-		selectedPostType,
-		pickBy(
-			{
-				...taxQuery,
-				order,
-				offset,
-				orderby: orderBy,
-				per_page: postsToShow,
-				advanced_posts_blocks_preview: true,
-			},
-			( value ) => !! value
-		)
-	);
+	const latestPosts = usePosts( selectedPostType, {
+		...taxQuery,
+		order,
+		offset,
+		orderby: orderBy,
+		per_page: postsToShow,
+		advanced_posts_blocks_preview: true,
+	} );
 
 	const labels = selectedPostType.labels || {};
 

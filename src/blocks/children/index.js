@@ -10,6 +10,7 @@ import { Path, SVG } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import metadata from './block.json';
+
 const { name, supports, category } = metadata;
 const title = __( 'Child Posts', 'advanced-posts-blocks' );
 

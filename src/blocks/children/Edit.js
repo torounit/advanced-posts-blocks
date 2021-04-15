@@ -7,10 +7,10 @@ import { pickBy } from 'lodash';
  * WordPress dependencies
  */
 import {
+	Disabled,
 	PanelBody,
 	Placeholder,
 	Spinner,
-	Disabled,
 	TreeSelect,
 } from '@wordpress/components';
 
@@ -31,6 +31,7 @@ import {
 	usePosts,
 	usePostType,
 } from '../../util/hooks';
+
 const { name } = metadata;
 
 const Edit = ( { attributes, setAttributes } ) => {

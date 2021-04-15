@@ -3,9 +3,9 @@
  */
 import { __ } from '@wordpress/i18n';
 import {
+	CheckboxControl,
 	RangeControl,
 	SelectControl,
-	CheckboxControl,
 } from '@wordpress/components';
 
 const DEFAULT_MIN_ITEMS = 1;
