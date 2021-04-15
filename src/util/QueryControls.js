@@ -46,7 +46,7 @@ export default function QueryControls( {
 				label={ __( 'Order by' ) }
 				value={ orderBy }
 				options={
-					postType?.supports[ 'page-attributes' ]
+					postType?.supports?.[ 'page-attributes' ]
 						? [
 								...orderbyOptions,
 								{
