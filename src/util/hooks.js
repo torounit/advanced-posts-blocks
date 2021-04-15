@@ -23,16 +23,24 @@ export const usePostTypeTaxonomies = ( postType ) =>
 		[ postType ]
 	);
 
-export const usePosts = ( postType, query ) =>
-	useSelect(
-		( select ) =>
-			select( 'core' ).getEntityRecords(
-				'postType',
-				postType.slug,
-				query
-			) || [],
-		[ postType, query ]
+export const usePosts = ( postType, query ) => {
+	return useSelect(
+		( select ) => {
+			if ( query.search === '' ) {
+				return [];
+			}
+
+			return (
+				select( 'core' ).getEntityRecords(
+					'postType',
+					postType.slug,
+					query
+				) || []
+			);
+		},
+		[ postType.slug, query ]
 	);
+};
 
 export const useCurrentPostId = () =>
 	useSelect( ( select ) => select( 'core/editor' ).getCurrentPostId(), [] );

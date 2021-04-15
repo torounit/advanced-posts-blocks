@@ -1,17 +1,18 @@
 /**
  * External dependencies
  */
-import { noop } from 'lodash';
+import { uniqBy } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import {
-	PanelBody,
-	Placeholder,
 	ComboboxControl,
 	Disabled,
+	PanelBody,
+	Placeholder,
 } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
@@ -21,17 +22,44 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import PostTypeControl from '../../util/PostTypeControl';
 import metadata from './block.json';
 import { usePosts, usePostType } from '../../util/hooks';
+import { useSelect } from '@wordpress/data';
 
 const { name } = metadata;
 
+const usePost = ( postType, id ) => {
+	return useSelect(
+		( select ) => {
+			if ( ! id ) {
+				return null;
+			}
+
+			return select( 'core' ).getEntityRecord(
+				'postType',
+				postType.slug,
+				id
+			);
+		},
+		[ postType, id ]
+	);
+};
+
 const Edit = ( { attributes, setAttributes } ) => {
+	const [ keyword, setKeyword ] = useState( '' );
 	const { postId } = attributes;
 	const { postType: postTypeName } = attributes;
 	const selectedPostType = usePostType( postTypeName );
-	const posts = usePosts( selectedPostType, {
+
+	const selectedPost = usePost( selectedPostType, postId );
+
+	let posts = usePosts( selectedPostType, {
 		per_page: -1,
 		advanced_posts_blocks: true,
+		search: keyword,
 	} );
+
+	if ( selectedPost ) {
+		posts = uniqBy( [ selectedPost, ...posts ], 'id' );
+	}
 
 	const PostControls = (
 		<ComboboxControl
@@ -44,7 +72,9 @@ const Edit = ( { attributes, setAttributes } ) => {
 					value: post.id,
 				} ) ),
 			] }
-			onFilterValueChange={ noop }
+			onFilterValueChange={ ( value ) => {
+				setKeyword( value );
+			} }
 			onChange={ ( value ) => {
 				setAttributes( {
 					postId: value ? parseInt( value ) : undefined,
