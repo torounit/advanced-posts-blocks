@@ -2,7 +2,7 @@
 Contributors:      Toro_Unit  
 Donate link:       https://www.paypal.me/torounit  
 Tags:              posts, blocks  
-Requires at least: 5.6  
+Requires at least: 5.7
 Tested up to:      5.7  
 Requires PHP:      7.3  
 Stable tag:        2.1.1
@@ -107,6 +107,10 @@ endif;
 ```
 
 ## Changelog
+
+### 3.0.0
+* Single Post Block: Changed to fetch the post after the keyword is entered.
+* Optimize code.
 
 ### 2.1.0
 * Multiple posts block: Support menu_order attributes.
