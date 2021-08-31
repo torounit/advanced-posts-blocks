@@ -1,39 +1,48 @@
 {
-  "name": "advanced-posts-blocks/children",
-  "apiVersion": 2,
-  "title": "Child Posts",
-  "description": "Display children of selected post.",
-  "icon": "admin-page",
-  "textdomain": "advanced-posts-blocks",
-  "attributes": {
-    "postType": {
-      "type": "string",
-      "default": "page"
+    "name": "advanced-posts-blocks/children",
+    "apiVersion": 2,
+    "title": "Child Posts",
+    "description": "Display children of selected post.",
+    "icon": "admin-page",
+    "textdomain": "advanced-posts-blocks",
+    "attributes": {
+        "align": {
+            "type": "string",
+            "enum": [
+                "center",
+                "wide",
+                "full"
+            ]
+        },
+        "postType": {
+            "type": "string",
+            "default": "page"
+        },
+        "postId": {
+            "type": "number",
+            "default": 0
+        },
+        "postsToShow": {
+            "type": "number",
+            "default": -1
+        },
+        "order": {
+            "type": "string",
+            "default": "asc"
+        },
+        "orderBy": {
+            "type": "string",
+            "default": "title"
+        }
     },
-    "postId": {
-      "type": "number",
-      "default": 0
+    "supports": {
+        "align": [
+            "center",
+            "wide",
+            "full"
+        ],
+        "html": false
     },
-    "postsToShow": {
-      "type": "number",
-      "default": -1
-    },
-    "order": {
-      "type": "string",
-      "default": "asc"
-    },
-    "orderBy": {
-      "type": "string",
-      "default": "title"
-    }
-  },
-  "supports": {
-    "align": [
-      "wide",
-      "full"
-    ],
-    "html": false
-  },
-  "category": "widgets",
-  "editorScript": "file:../../../build/blocks/children/index.js"
+    "category": "widgets",
+    "editorScript": "file:../../../build/blocks/children/index.js"
 }
