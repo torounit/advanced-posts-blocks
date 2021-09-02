@@ -17,7 +17,7 @@ indent_size = 4
 [*.md]
 trim_trailing_whitespace = false
 
-[{.jshintrc,*.json,*.yml}]
+[{.jshintrc,*.yml}]
 indent_style = space
 indent_size = 2
 
