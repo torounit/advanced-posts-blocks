@@ -2,10 +2,13 @@ import { SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { usePostTypes } from './hooks';
 
-const PostTypeControl = ( { onChange, value } ) => {
-	const postTypes = usePostTypes().filter(
-		( postType ) => ! [ 'attachment', 'wp_block' ].includes( postType.slug )
-	);
+const PostTypeControl = ( { onChange, value, filter = () => true } ) => {
+	const postTypes = usePostTypes()
+		.filter(
+			( postType ) =>
+				! [ 'attachment', 'wp_block' ].includes( postType.slug )
+		)
+		.filter( filter );
 
 	return (
 		<SelectControl

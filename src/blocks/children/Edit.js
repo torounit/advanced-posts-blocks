@@ -47,18 +47,20 @@ const Edit = ( { attributes, setAttributes } ) => {
 		orderby: orderBy,
 		per_page: -1,
 	} );
-	const children = usePosts(
-		selectedPostType,
-		pickBy(
-			{
-				order,
-				parent: postId ? postId : currentPostId,
-				orderby: orderBy,
-				per_page: postsToShow,
-			},
-			( value ) => !! value
-		)
-	);
+	const childPosts =
+		usePosts(
+			selectedPostType,
+			pickBy(
+				{
+					order,
+					parent: postId ? postId : currentPostId,
+					orderby: orderBy,
+					per_page: postsToShow,
+					ignore_sticky_posts: 1,
+				},
+				( value ) => !! value
+			)
+		) || [];
 
 	const labels = selectedPostType.labels || {};
 
@@ -109,7 +111,12 @@ const Edit = ( { attributes, setAttributes } ) => {
 			<PanelBody title={ title }>
 				<PostTypeControl
 					value={ selectedPostType }
+					filter={ ( { supports } ) => supports[ 'page-attributes' ] }
 					onChange={ ( postType ) => {
+						setAttributes( {
+							postType: postType.slug,
+						} );
+
 						if (
 							! postType?.supports[ 'page-attributes' ] &&
 							orderBy === 'menu_order'
@@ -139,7 +146,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 			</PanelBody>
 		</InspectorControls>
 	);
-	const hasPosts = Array.isArray( children ) && children.length;
+	const hasPosts = Array.isArray( childPosts ) && childPosts.length;
 	return (
 		<div { ...useBlockProps() }>
 			{ inspectorControls }
@@ -155,7 +162,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 					icon="admin-post"
 					label={ __( 'Child Posts', 'advanced-posts-blocks' ) }
 				>
-					{ ! Array.isArray( children ) ? (
+					{ ! Array.isArray( childPosts ) ? (
 						<Spinner />
 					) : (
 						labels.not_found
