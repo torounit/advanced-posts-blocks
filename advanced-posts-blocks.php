@@ -60,7 +60,6 @@ function get_plugin_data() {
 	return $data;
 }
 
-
 /**
  * Block Initializer.
  */
