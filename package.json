@@ -1,87 +1,87 @@
 {
-  "name": "advanced-posts-blocks",
-  "version": "3.0.0",
-  "author": "HIroshi Urabe <mail@torounit.com> (https://torounit.com)",
-  "license": "GPL-3.0+",
-  "main": "build/index.js",
-  "scripts": {
-    "wp-env": "wp-env",
-    "test": "wp-scripts test-unit-js --config tests/js/jest.config.json",
-    "start": "wp-scripts start",
-    "build": "wp-scripts build",
-    "format-js": "wp-scripts format-js",
-    "lint-js": "wp-scripts lint-js",
-    "lint-js:fix": "wp-scripts lint-js --fix",
-    "test-unit-php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/advanced-posts-blocks/phpunit.xml.dist --verbose'",
-    "packages-update": "wp-scripts packages-update",
-    "lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/torounit/advanced-posts-blocks.git"
-  },
-  "wp-env": {
-    "plugin-dir": "advanced-posts-blocks",
-    "plugin-name": "advanced-posts-blocks",
-    "welcome-build-command": "npm run start"
-  },
-  "dependencies": {
-    "@wordpress/block-editor": "^6.1.5",
-    "@wordpress/blocks": "^9.1.4",
-    "@wordpress/components": "^14.1.4",
-    "@wordpress/compose": "^4.1.2",
-    "@wordpress/data": "^5.1.2",
-    "@wordpress/editor": "^10.1.8",
-    "@wordpress/element": "^3.1.1",
-    "@wordpress/i18n": "^4.1.1",
-    "@wordpress/server-side-render": "^2.1.5",
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {
-    "@wordpress/browserslist-config": "^4.0.1",
-    "@wordpress/env": "^4.0.5",
-    "@wordpress/eslint-plugin": "^9.0.6",
-    "@wordpress/prettier-config": "^1.0.5",
-    "@wordpress/scripts": "^16.1.3",
-    "glob": "^7.1.7",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
-    "prettier": "npm:wp-prettier@^2.2.1-beta-1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "packages/*/package.json": [
-      "wp-scripts lint-pkg-json"
-    ],
-    "{*.css,*.scss}": [
-      "npm run lint-style"
-    ],
-    "*.js": [
-      "npm run format-js",
-      "npm run lint-js"
-    ],
-    "*.php": [
-      "npm run lint-php"
-    ]
-  },
-  "release-it": {
-    "hooks": {
-      "before:bump": "bash ./bin/create-release.sh advanced-posts-blocks ${version}",
-      "after:bump": "bash ./bin/create-zip.sh advanced-posts-blocks",
-      "after:release": "bash ./bin/cleanup.sh advanced-posts-blocks"
-    },
-    "github": {
-      "release": true,
-      "assets": [
-        "advanced-posts-blocks.zip"
-      ]
-    },
-    "npm": {
-      "publish": false
-    }
-  }
+	"name": "advanced-posts-blocks",
+	"version": "3.0.1",
+	"author": "HIroshi Urabe <mail@torounit.com> (https://torounit.com)",
+	"license": "GPL-3.0+",
+	"main": "build/index.js",
+	"scripts": {
+		"wp-env": "wp-env",
+		"test": "wp-scripts test-unit-js --config tests/js/jest.config.json",
+		"start": "wp-scripts start",
+		"build": "wp-scripts build",
+		"format-js": "wp-scripts format-js",
+		"lint-js": "wp-scripts lint-js",
+		"lint-js:fix": "wp-scripts lint-js --fix",
+		"test-unit-php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/advanced-posts-blocks/phpunit.xml.dist --verbose'",
+		"packages-update": "wp-scripts packages-update",
+		"lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/torounit/advanced-posts-blocks.git"
+	},
+	"wp-env": {
+		"plugin-dir": "advanced-posts-blocks",
+		"plugin-name": "advanced-posts-blocks",
+		"welcome-build-command": "npm run start"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^6.1.5",
+		"@wordpress/blocks": "^9.1.4",
+		"@wordpress/components": "^14.1.4",
+		"@wordpress/compose": "^4.1.2",
+		"@wordpress/data": "^5.1.2",
+		"@wordpress/editor": "^10.1.8",
+		"@wordpress/element": "^3.1.1",
+		"@wordpress/i18n": "^4.1.1",
+		"@wordpress/server-side-render": "^2.1.5",
+		"lodash": "^4.17.21"
+	},
+	"devDependencies": {
+		"@wordpress/browserslist-config": "^4.0.1",
+		"@wordpress/env": "^4.0.5",
+		"@wordpress/eslint-plugin": "^9.0.6",
+		"@wordpress/prettier-config": "^1.0.5",
+		"@wordpress/scripts": "^16.1.3",
+		"glob": "^7.1.7",
+		"husky": "^6.0.0",
+		"lint-staged": "^11.0.0",
+		"prettier": "npm:wp-prettier@^2.2.1-beta-1"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"packages/*/package.json": [
+			"wp-scripts lint-pkg-json"
+		],
+		"{*.css,*.scss}": [
+			"npm run lint-style"
+		],
+		"*.js": [
+			"npm run format-js",
+			"npm run lint-js"
+		],
+		"*.php": [
+			"npm run lint-php"
+		]
+	},
+	"release-it": {
+		"hooks": {
+			"before:bump": "bash ./bin/create-release.sh advanced-posts-blocks ${version}",
+			"after:bump": "bash ./bin/create-zip.sh advanced-posts-blocks",
+			"after:release": "bash ./bin/cleanup.sh advanced-posts-blocks"
+		},
+		"github": {
+			"release": true,
+			"assets": [
+				"advanced-posts-blocks.zip"
+			]
+		},
+		"npm": {
+			"publish": false
+		}
+	}
 }
