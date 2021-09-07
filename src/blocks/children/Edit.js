@@ -72,7 +72,10 @@ const Edit = ( { attributes, setAttributes } ) => {
 			parent: item.parent,
 			name: item.title.raw
 				? item.title.raw
-				: `#${ item.id } ${ __( '(no title)' ) }`,
+				: `#${ item.id } ${ __(
+						'(no title)',
+						'advanced-posts-blocks'
+				  ) }`,
 		} ) )
 	); //.filter( ( item ) => ( item.children.length ) );
 

@@ -30,11 +30,11 @@ export default function QueryControls( {
 } ) {
 	const orderbyOptions = [
 		{
-			label: __( 'Date' ),
+			label: __( 'Date', 'advanced-posts-blocks' ),
 			value: 'date',
 		},
 		{
-			label: __( 'Title' ),
+			label: __( 'Title', 'advanced-posts-blocks' ),
 			value: 'title',
 		},
 	];
@@ -43,14 +43,17 @@ export default function QueryControls( {
 		onOrderByChange && (
 			<SelectControl
 				key="query-controls-order-by-select"
-				label={ __( 'Order by' ) }
+				label={ __( 'Order by', 'advanced-posts-blocks' ) }
 				value={ orderBy }
 				options={
 					postType?.supports?.[ 'page-attributes' ]
 						? [
 								...orderbyOptions,
 								{
-									label: __( 'Page Order' ),
+									label: __(
+										'Page Order',
+										'advanced-posts-blocks'
+									),
 									value: 'menu_order',
 								},
 						  ]
@@ -67,15 +70,15 @@ export default function QueryControls( {
 		onOrderChange && (
 			<SelectControl
 				key="query-controls-order-select"
-				label={ __( 'Order' ) }
+				label={ __( 'Order', 'advanced-posts-blocks' ) }
 				value={ order }
 				options={ [
 					{
-						label: __( 'DESC' ),
+						label: __( 'DESC', 'advanced-posts-blocks' ),
 						value: 'desc',
 					},
 					{
-						label: __( 'ASC' ),
+						label: __( 'ASC', 'advanced-posts-blocks' ),
 						value: 'asc',
 					},
 				] }
@@ -90,7 +93,7 @@ export default function QueryControls( {
 		! showAllPosts && onNumberOfItemsChange && (
 			<RangeControl
 				key="query-controls-range-control"
-				label={ __( 'Number of items' ) }
+				label={ __( 'Number of items', 'advanced-posts-blocks' ) }
 				value={ numberOfItems }
 				onChange={ onNumberOfItemsChange }
 				min={ minItems }
@@ -101,7 +104,7 @@ export default function QueryControls( {
 		onIgnoreStickyPostsChange && (
 			<CheckboxControl
 				key="query-controls-nopaging-control"
-				label={ __( 'Show all posts' ) }
+				label={ __( 'Show all posts', 'advanced-posts-blocks' ) }
 				checked={ showAllPosts }
 				onChange={ onshowAllPostsChange }
 			/>
@@ -110,7 +113,7 @@ export default function QueryControls( {
 		onOffsetChange && (
 			<RangeControl
 				key="query-controls-offset-control"
-				label={ __( 'Offset' ) }
+				label={ __( 'Offset', 'advanced-posts-blocks' ) }
 				value={ offset }
 				onChange={ onOffsetChange }
 				min={ 0 }
@@ -120,7 +123,7 @@ export default function QueryControls( {
 		onIgnoreStickyPostsChange && (
 			<CheckboxControl
 				key="query-controls-ignore-sticky-posts-control"
-				label={ __( 'Ignore sticky posts' ) }
+				label={ __( 'Ignore sticky posts', 'advanced-posts-blocks' ) }
 				checked={ ignoreStickyPosts }
 				onChange={ onIgnoreStickyPostsChange }
 			/>

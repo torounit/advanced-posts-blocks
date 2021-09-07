@@ -63,8 +63,8 @@ const Edit = ( { attributes, setAttributes } ) => {
 
 	const PostControls = (
 		<ComboboxControl
-			help={ __( 'Select post' ) }
-			label={ __( 'Post' ) }
+			help={ __( 'Select post', 'advanced-posts-blocks' ) }
+			label={ __( 'Post', 'advanced-posts-blocks' ) }
 			value={ postId }
 			options={ [
 				...posts.map( ( post ) => ( {
