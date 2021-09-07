@@ -1,36 +1,36 @@
 {
-    "name": "advanced-posts-blocks/post",
-    "apiVersion": 2,
-    "title": "Single Posts",
-    "description": "Display single post.",
-    "icon": "admin-post",
-    "textdomain": "advanced-posts-blocks",
-    "attributes": {
-        "align": {
-            "type": "string",
-            "enum": [
-                "center",
-                "wide",
-                "full"
-            ]
-        },
-        "postType": {
-            "type": "string",
-            "default": "post"
-        },
-        "postId": {
-            "type": "number",
-            "default": 0
-        }
-    },
-    "supports": {
-        "align": [
-            "center",
-            "wide",
-            "full"
-        ],
-        "html": false
-    },
-    "category": "widgets",
-    "editorScript": "file:../../../build/blocks/post/index.js"
+	"name": "advanced-posts-blocks/post",
+	"apiVersion": 2,
+	"title": "Single Posts",
+	"description": "Display single post.",
+	"icon": "admin-post",
+	"textdomain": "advanced-posts-blocks",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"enum": [
+				"center",
+				"wide",
+				"full"
+			]
+		},
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"postId": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"supports": {
+		"align": [
+			"center",
+			"wide",
+			"full"
+		],
+		"html": false
+	},
+	"category": "widgets",
+	"editorScript": "file:../../../build/blocks/post/index.js"
 }

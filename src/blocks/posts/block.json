@@ -1,56 +1,56 @@
 {
-    "name": "advanced-posts-blocks/posts",
-    "apiVersion": 2,
-    "title": "Multiple Posts",
-    "description": "Display multiple posts.",
-    "icon": "admin-post",
-    "textdomain": "advanced-posts-blocks",
-    "attributes": {
-        "align": {
-            "type": "string",
-            "enum": [
-                "center",
-                "wide",
-                "full"
-            ]
-        },
-        "postType": {
-            "type": "string",
-            "default": "post"
-        },
-        "postsToShow": {
-            "type": "number",
-            "default": 5
-        },
-        "offset": {
-            "type": "number",
-            "default": 0
-        },
-        "order": {
-            "type": "string",
-            "default": "desc"
-        },
-        "orderBy": {
-            "type": "string",
-            "default": "date"
-        },
-        "ignoreStickyPosts": {
-            "type": "boolean",
-            "default": true
-        },
-        "showAllPosts": {
-            "type": "boolean",
-            "default": false
-        }
-    },
-    "supports": {
-        "align": [
-            "center",
-            "wide",
-            "full"
-        ],
-        "html": false
-    },
-    "category": "widgets",
-    "editorScript": "file:../../../build/blocks/posts/index.js"
+	"name": "advanced-posts-blocks/posts",
+	"apiVersion": 2,
+	"title": "Multiple Posts",
+	"description": "Display multiple posts.",
+	"icon": "admin-post",
+	"textdomain": "advanced-posts-blocks",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"enum": [
+				"center",
+				"wide",
+				"full"
+			]
+		},
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"postsToShow": {
+			"type": "number",
+			"default": 5
+		},
+		"offset": {
+			"type": "number",
+			"default": 0
+		},
+		"order": {
+			"type": "string",
+			"default": "desc"
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"ignoreStickyPosts": {
+			"type": "boolean",
+			"default": true
+		},
+		"showAllPosts": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"align": [
+			"center",
+			"wide",
+			"full"
+		],
+		"html": false
+	},
+	"category": "widgets",
+	"editorScript": "file:../../../build/blocks/posts/index.js"
 }
