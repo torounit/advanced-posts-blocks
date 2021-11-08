@@ -6,6 +6,14 @@
 	"icon": "admin-page",
 	"textdomain": "advanced-posts-blocks",
 	"attributes": {
+		"align": {
+			"type": "string",
+			"enum": [
+				"center",
+				"wide",
+				"full"
+			]
+		},
 		"postType": {
 			"type": "string",
 			"default": "page"
@@ -29,6 +37,7 @@
 	},
 	"supports": {
 		"align": [
+			"center",
 			"wide",
 			"full"
 		],
