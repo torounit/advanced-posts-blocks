@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Posts Renderer Class.
  *
@@ -15,7 +16,8 @@ use WP_Taxonomy;
  *
  * Posts blocks.
  */
-class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
+class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer
+{
 
 	/**
 	 * Path to the block.json dir.
@@ -27,19 +29,21 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		$this->setup_term_attributes();
-		new Matrix_Term_Query( 'advanced_posts_blocks_preview' );
+		new Matrix_Term_Query('advanced_posts_blocks_preview');
 		parent::__construct();
 	}
 
 	/**
 	 * Set term attributes.
 	 */
-	private function setup_term_attributes() {
-		foreach ( get_taxonomies( array(), 'objects' ) as $taxonomy ) {
-			$base                      = $this->get_rest_base( $taxonomy );
-			$this->attributes[ $base ] = array(
+	private function setup_term_attributes()
+	{
+		foreach (get_taxonomies(array(), 'objects') as $taxonomy) {
+			$base                      = $this->get_rest_base($taxonomy);
+			$this->attributes[$base] = array(
 				'anyOf'   => array(
 					array(
 						'title' => 'Term ids (v1)',
@@ -79,8 +83,9 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return string
 	 */
-	public function get_rest_base( WP_Taxonomy $taxonomy ) : string {
-		return ! empty( $taxonomy->rest_base ) && is_string( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
+	public function get_rest_base(WP_Taxonomy $taxonomy): string
+	{
+		return !empty($taxonomy->rest_base) && is_string($taxonomy->rest_base) ? $taxonomy->rest_base : $taxonomy->name;
 	}
 
 	/**
@@ -90,8 +95,9 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return WP_Taxonomy[]
 	 */
-	public function get_post_type_taxonomies( $post_type ) : array {
-		return array_map( 'get_taxonomy', get_object_taxonomies( $post_type ) );
+	public function get_post_type_taxonomies($post_type): array
+	{
+		return array_map('get_taxonomy', get_object_taxonomies($post_type));
 	}
 
 	/**
@@ -101,7 +107,8 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return string|null
 	 */
-	public function render( array $attributes ) : string {
+	public function render(array $attributes): string
+	{
 		$args      = array(
 			'posts_per_page'      => $attributes['postsToShow'],
 			'post_status'         => 'publish',
@@ -111,37 +118,38 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'post_type'           => $attributes['postType'],
 			'offset'              => $attributes['offset'],
 			'nopaging'            => $attributes['showAllPosts'],
+			'post__not_in'           => array(get_the_ID())
 		);
 		$post_type = $attributes['postType'];
 
 		$args['tax_query'] = array();
-		foreach ( $this->get_post_type_taxonomies( $post_type ) as $taxonomy ) {
-			$base = $this->get_rest_base( $taxonomy );
-			if ( ! $base ) {
+		foreach ($this->get_post_type_taxonomies($post_type) as $taxonomy) {
+			$base = $this->get_rest_base($taxonomy);
+			if (!$base) {
 				continue;
 			}
 
-			if ( ! isset( $attributes[ $base ] ) ) {
+			if (!isset($attributes[$base])) {
 				continue;
 			}
 
-			if ( ! isset( $attributes[ $base ]['terms'] ) && is_array( $attributes[ $base ] ) ) {
-				$attributes[ $base ] = array(
-					'terms'    => $attributes[ $base ],
+			if (!isset($attributes[$base]['terms']) && is_array($attributes[$base])) {
+				$attributes[$base] = array(
+					'terms'    => $attributes[$base],
 					'relation' => 'AND',
 				);
 			}
 
-			$terms = array_filter( $attributes[ $base ]['terms'] );
+			$terms = array_filter($attributes[$base]['terms']);
 
-			if ( ! empty( $terms ) ) {
+			if (!empty($terms)) {
 				$query = array();
-				foreach ( $terms as $term ) {
+				foreach ($terms as $term) {
 					$query[] = array(
 						array(
 							'taxonomy' => $taxonomy->name,
 							'field'    => 'term_id',
-							'terms'    => $term,
+							'terms'    => $term
 						),
 					);
 				}
@@ -153,13 +161,13 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 
 		$args['tax_query']['relation'] = 'AND';
 
-		$this->setup_query( $args );
-		$output = $this->get_content_from_template( $attributes );
-		if ( $output ) {
+		$this->setup_query($args);
+		$output = $this->get_content_from_template($attributes);
+		if ($output) {
 			return $output;
 		}
 
-		$output = $this->get_content_from_default_template( $this->name );
+		$output = $this->get_content_from_default_template($this->name);
 
 		return $output;
 	}
