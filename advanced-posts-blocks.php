@@ -7,7 +7,7 @@
  * Author URI:      https://torounit.com
  * Text Domain:     advanced-posts-blocks
  * Domain Path:     /languages
- * Version: 3.0.1
+ * Version: 3.0.2
  *
  * @package         Advanced_Posts_Blocks
  */
