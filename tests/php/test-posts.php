@@ -126,8 +126,8 @@ class Posts_Test extends WP_UnitTestCase {
 		$this->assertXmlStringEqualsXmlString( $expect, $actual );
 	}
 
-	public function tearDown() {
-		parent::tearDown();
+	public function tear_down() {
+		parent::tear_down();
 		wp_reset_postdata();
 	}
 }
