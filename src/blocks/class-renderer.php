@@ -8,6 +8,7 @@
 namespace Advanced_Posts_Blocks\Blocks;
 
 use WP_Query;
+use const Advanced_Posts_Blocks\PLUGIN_FILE;
 
 /**
  * Class Renderer
@@ -15,6 +16,7 @@ use WP_Query;
  * Posts blocks.
  */
 abstract class Renderer {
+
 
 	/**
 	 * Name of Block.
@@ -29,7 +31,7 @@ abstract class Renderer {
 	 *
 	 * @var string
 	 */
-	protected $dir = '';
+	protected $dirname = '';
 
 
 	/**
@@ -68,7 +70,7 @@ abstract class Renderer {
 	 * Regsiter Block Type.
 	 */
 	protected function register() {
-		$block      = register_block_type_from_metadata( $this->dir );
+		$block      = register_block_type( dirname( PLUGIN_FILE ) . '/build/blocks/' . $this->dirname );
 		$this->name = $block->name;
 		$block->set_props(
 			array(

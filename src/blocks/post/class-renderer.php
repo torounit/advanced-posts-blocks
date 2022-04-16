@@ -19,7 +19,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @var string
 	 */
-	protected $dir = __DIR__;
+	protected $dirname = 'post';
 
 	/**
 	 * Render callback

@@ -6,7 +6,7 @@
 	"main": "build/index.js",
 	"scripts": {
 		"wp-env": "wp-env",
-		"test": "wp-scripts test-unit-js --config tests/js/jest.config.json",
+		"test": "wp-scripts test-unit-js",
 		"start": "wp-scripts start",
 		"build": "wp-scripts build",
 		"format-js": "wp-scripts format-js",
@@ -14,7 +14,8 @@
 		"lint-js:fix": "wp-scripts lint-js --fix",
 		"test-unit-php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/advanced-posts-blocks/phpunit.xml.dist --verbose'",
 		"packages-update": "wp-scripts packages-update",
-		"lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist"
+		"lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist",
+		"prepare": "husky install"
 	},
 	"repository": {
 		"type": "git",
@@ -26,25 +27,22 @@
 		"welcome-build-command": "npm run start"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^6.1.5",
-		"@wordpress/blocks": "^9.1.4",
-		"@wordpress/components": "^14.1.4",
-		"@wordpress/compose": "^4.1.2",
-		"@wordpress/data": "^5.1.2",
-		"@wordpress/editor": "^10.1.8",
-		"@wordpress/element": "^3.1.1",
-		"@wordpress/i18n": "^4.1.1",
-		"@wordpress/server-side-render": "^2.1.5",
+		"@wordpress/block-editor": "^8.0.0",
+		"@wordpress/blocks": "^11.1.0",
+		"@wordpress/components": "^19.2.0",
+		"@wordpress/compose": "^5.0.7",
+		"@wordpress/data": "^6.1.5",
+		"@wordpress/editor": "^12.0.21",
+		"@wordpress/element": "^4.0.4",
+		"@wordpress/i18n": "^4.2.4",
+		"@wordpress/server-side-render": "^3.0.20",
 		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
-		"@wordpress/browserslist-config": "^4.0.1",
-		"@wordpress/env": "^4.0.5",
-		"@wordpress/eslint-plugin": "^9.0.6",
-		"@wordpress/prettier-config": "^1.0.5",
-		"@wordpress/scripts": "^19.0.0",
+		"@wordpress/env": "^4.5.0",
+		"@wordpress/scripts": "^22.0.0",
 		"glob": "^7.1.7",
-		"husky": "^6.0.0",
+		"husky": "^7.0.0",
 		"lint-staged": "^11.0.0",
 		"prettier": "npm:wp-prettier@^2.2.1-beta-1"
 	},

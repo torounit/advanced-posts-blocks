@@ -44,5 +44,5 @@
 		"html": false
 	},
 	"category": "widgets",
-	"editorScript": "file:../../../build/blocks/children/index.js"
+	"editorScript": "file:./index.js"
 }

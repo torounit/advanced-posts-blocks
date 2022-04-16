@@ -52,5 +52,5 @@
 		"html": false
 	},
 	"category": "widgets",
-	"editorScript": "file:../../../build/blocks/posts/index.js"
+	"editorScript": "file:./index.js"
 }

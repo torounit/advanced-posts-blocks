@@ -14,7 +14,7 @@ export function buildTermsTree( flatTerms ) {
 	const flatTermsWithParentAndChildren = flatTerms.map( ( term ) => {
 		return {
 			children: [],
-			parent: null,
+			parent: 0,
 			...term,
 		};
 	} );

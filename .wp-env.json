@@ -1,17 +1,14 @@
 {
-  "core": "https://wordpress.org/wordpress-5.7.zip",
-  "plugins": [
-    ".",
-    "https://downloads.wordpress.org/plugin/wordpress-importer.0.7.zip"
-  ],
-  "port": 18888,
-  "config": {
-    "WP_ENVIRONMENT_TYPE": "local",
-    "WP_DEBUG": true
-  },
-  "env": {
-    "tests": {
-      "port": 18889
-    }
-  }
+	"core": "https://wordpress.org/wordpress-5.9.zip",
+	"plugins": [
+		".",
+		"https://downloads.wordpress.org/plugin/wordpress-importer.zip",
+		"https://downloads.wordpress.org/plugin/gutenberg.zip"
+	],
+	"port": 18888,
+	"env": {
+		"tests": {
+			"port": 18889
+		}
+	}
 }
