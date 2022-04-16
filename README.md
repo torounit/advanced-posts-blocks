@@ -2,8 +2,8 @@
 Contributors:      Toro_Unit  
 Donate link:       https://www.paypal.me/torounit  
 Tags:              posts, blocks  
-Requires at least: 5.7
-Tested up to:      5.8  
+Requires at least: 5.9
+Tested up to:      5.9  
 Requires PHP:      7.3  
 Stable tag:        3.0.2
 License:           GPLv3 or later  
@@ -107,6 +107,9 @@ endif;
 ```
 
 ## Changelog
+
+### 4.0.0
+* add `advanced_posts_blocks_use_fallback_template` filter.
 
 ### 3.0.1
 * Child Posts Block: Bug fix for post type selector.
