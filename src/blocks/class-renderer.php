@@ -144,17 +144,17 @@ abstract class Renderer {
 	 * Loads a template part into a template.
 	 *
 	 * @param string $slug The slug name for the generic template.
-	 * @param string $name The name of the specialised template.
+	 * @param string|null $name The name of the specialised template.
 	 *
 	 * @return string
 	 */
-	public function get_template_part( string $slug, $name = null ): string {
+	public function get_template_part( string $slug, ?string $name = null ): string {
 		ob_start();
 		get_template_part( $slug, $name, $this->args );
 		$output = ob_get_contents();
 		ob_end_clean();
 
-		return $output;
+		return trim( $output );
 	}
 
 	/**
@@ -169,9 +169,9 @@ abstract class Renderer {
 	 *
 	 * @param array $attributes Block attributes.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
-	protected function get_content_from_template( array $attributes ) {
+	protected function get_content_from_template( array $attributes ): string {
 		$class_name = join( ' ', $this->get_class_names( $attributes ) );
 		$this->set_template_args( 'class_name', $class_name );
 		$path = array(
@@ -250,7 +250,7 @@ abstract class Renderer {
 	 * @param array $args URL query string or array of vars.
 	 * @param string $query_var query var.
 	 */
-	protected function setup_query( array $args, $query_var = 'query' ) {
+	protected function setup_query( array $args, string $query_var = 'query' ) {
 		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
 		$this->query = new WP_Query( $args );
 		$this->set_template_args( $query_var, $this->query );
@@ -272,7 +272,7 @@ abstract class Renderer {
 			}
 		);
 
-		if ( ! empty( $styles ) && is_array( $styles ) ) {
+		if ( ! empty( $styles ) ) {
 			$style = reset( $styles );
 
 			return str_replace( 'is-style-', '', $style );

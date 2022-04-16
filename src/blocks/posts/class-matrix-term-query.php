@@ -32,7 +32,7 @@ class Matrix_Term_Query {
 	 *
 	 * @param string $query_var Query var.
 	 */
-	public function __construct( $query_var = 'advanced_posts_blocks_preview' ) {
+	public function __construct( string $query_var = 'advanced_posts_blocks_preview' ) {
 		if ( $query_var ) {
 			$this->query_var = $query_var;
 		}
