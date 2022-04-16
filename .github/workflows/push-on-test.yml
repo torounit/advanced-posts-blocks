@@ -3,93 +3,91 @@ name: Test
 on: [push, pull_request]
 
 jobs:
+    test:
+        runs-on: ubuntu-latest
+        services:
+            mysql:
+                image: mysql:5.7
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: true
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_DATABASE: wordpress_test
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        strategy:
+            matrix:
+                php-versions: ['7.3', '7.4']
+                wp-versions: ['5.6', 'trunk']
+        name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
+        steps:
+            - uses: actions/checkout@v2
 
-  test:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: wordpress_test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    strategy:
-      matrix:
-        php-versions: [ '7.3', '7.4' ]
-        wp-versions: [ '5.6', 'trunk' ]
-    name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
-    steps:
-      - uses: actions/checkout@v2
+            - name: Use Node.js 12.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12.x
 
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-versions }}
+                  extensions: mbstring, intl #optional, setup extensions
+                  ini-values: post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
+                  coverage: xdebug #optional, setup coverage driver
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, intl #optional, setup extensions
-          ini-values: post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
-          coverage: xdebug #optional, setup coverage driver
+            - name: Check PHP Version
+              run: php -v
 
-      - name: Check PHP Version
-        run: php -v
+            - name: Composer install
+              run: composer install --optimize-autoloader --prefer-dist
 
-      - name: Composer install
-        run: composer install --optimize-autoloader --prefer-dist
+            - name: npm install
+              run: npm ci
 
-      - name: npm install
-        run: npm ci
+            - name: Build
+              run: |
+                  bash ./bin/build.sh
 
-      - name: Build
-        run: |
-          bash ./bin/build.sh
+            - name: Install WordPress
+              run: |
+                  chmod -R 767 ./ # TODO: Possibly integrate in wp-env
+                  npm run wp-env start
 
-      - name: Install WordPress
-        run: |
-          chmod -R 767 ./ # TODO: Possibly integrate in wp-env
-          npm run wp-env start
+            - name: Running lint check
+              run: npm run lint-php
 
-      - name: Running lint check
-        run: npm run lint-php
+            - name: Running single site unit tests
+              run: npm run test-unit-php
+              if: ${{ success() || failure() }}
 
-      - name: Running single site unit tests
-        run: npm run test-unit-php
-        if: ${{ success() || failure() }}
+    release:
+        name: Release
+        runs-on: ubuntu-latest
+        needs: [test]
+        steps:
+            - uses: actions/checkout@v2
+              if: contains(github.ref, 'tags/')
 
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - uses: actions/checkout@v2
-        if: contains(github.ref, 'tags/')
+            - name: Use Node.js 12.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12.x
+              if: contains(github.ref, 'tags/')
 
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-        if: contains(github.ref, 'tags/')
+            - name: npm install
+              run: npm ci
+              if: contains(github.ref, 'tags/')
 
-      - name: npm install
-        run: npm ci
-        if: contains(github.ref, 'tags/')
+            - name: Build
+              if: contains(github.ref, 'tags/')
+              run: |
+                  bash ./bin/build.sh
 
-
-      - name: Build
-        if: contains(github.ref, 'tags/')
-        run: |
-          bash ./bin/build.sh
-
-      - name: WordPress Plugin Deploy
-        if: contains(github.ref, 'tags/')
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SLUG: advanced-posts-blocks
+            - name: WordPress Plugin Deploy
+              if: contains(github.ref, 'tags/')
+              uses: 10up/action-wordpress-plugin-deploy@stable
+              env:
+                  SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                  SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+                  SLUG: advanced-posts-blocks
