@@ -47,3 +47,4 @@ node_modules
 *.zip
 .wp-env.json
 .wp-env.override.json
+.husky
