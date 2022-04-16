@@ -109,7 +109,7 @@ endif;
 ## Changelog
 
 ### 4.0.0
-* add `advanced_posts_blocks_use_fallback_template` filter.
+* add `advanced_posts_blocks_use_default_template` filter.
 
 ### 3.0.1
 * Child Posts Block: Bug fix for post type selector.
