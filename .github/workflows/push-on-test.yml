@@ -80,6 +80,7 @@ jobs:
         run: npm ci
         if: contains(github.ref, 'tags/')
 
+
       - name: Build
         if: contains(github.ref, 'tags/')
         run: |
@@ -87,7 +88,7 @@ jobs:
 
       - name: WordPress Plugin Deploy
         if: contains(github.ref, 'tags/')
-        uses: 10up/action-wordpress-plugin-deploy@master
+        uses: 10up/action-wordpress-plugin-deploy@stable
         env:
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
