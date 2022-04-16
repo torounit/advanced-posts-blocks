@@ -17,8 +17,8 @@ jobs:
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         strategy:
             matrix:
-                php-versions: ['7.3', '7.4']
-                wp-versions: ['5.6', 'trunk']
+                php-versions: ['7.4', '8.0']
+                wp-versions: ['5.8.4', '5.9.3']
         name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
         steps:
             - uses: actions/checkout@v3
@@ -27,20 +27,6 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version: '14'
-
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php-versions }}
-                  extensions: mbstring, intl #optional, setup extensions
-                  ini-values: post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
-                  coverage: xdebug #optional, setup coverage driver
-
-            - name: Check PHP Version
-              run: php -v
-
-            - name: Composer install
-              run: composer install --optimize-autoloader --prefer-dist
 
             - name: npm install
               run: npm ci
@@ -52,7 +38,8 @@ jobs:
             - name: Install WordPress
               run: |
                   chmod -R 767 ./ # TODO: Possibly integrate in wp-env
-                  npm run wp-env start
+                  echo '{ "core": "https://wordpress.org/wordpress-${{ matrix.wp-versions }}.zip" }' > .wp-env.override.json
+                  WP_ENV_PHP_VERSION=${{ matrix.php-versions }} npm run wp-env start
 
             - name: Running lint check
               run: npm run lint-php

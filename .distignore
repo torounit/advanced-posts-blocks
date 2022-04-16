@@ -46,3 +46,4 @@ node_modules
 *.tar.gz
 *.zip
 .wp-env.json
+.wp-env.override.json

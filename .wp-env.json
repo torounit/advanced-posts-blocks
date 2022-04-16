@@ -1,6 +1,5 @@
 {
 	"core": "https://wordpress.org/wordpress-5.9.zip",
-	"phpVersion": "8.0",
 	"plugins": [
 		".",
 		"https://downloads.wordpress.org/plugin/wordpress-importer.zip",
