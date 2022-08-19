@@ -15,6 +15,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { getBlockDefaultClassName } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -24,6 +25,7 @@ import PostTypeControl from '../../util/PostTypeControl';
 import TermControl from './TermControl';
 import { usePosts, usePostType, usePostTypeTaxonomies } from '../../util/hooks';
 import metadata from './block.json';
+import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
 
 const { name } = metadata;
 
@@ -36,6 +38,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 		offset,
 		ignoreStickyPosts,
 		showAllPosts,
+		className,
 	} = attributes;
 
 	const selectedPostType = usePostType( postTypeName );
@@ -137,8 +140,14 @@ const Edit = ( { attributes, setAttributes } ) => {
 		</InspectorControls>
 	);
 	const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
+
+	const blockDefaultClassName = getBlockDefaultClassName( name );
+	const blockProps = omitClassNamesFromBlockProps( useBlockProps(), [
+		blockDefaultClassName,
+		className,
+	] );
 	return (
-		<div { ...useBlockProps() }>
+		<div { ...blockProps }>
 			{ inspectorControls }
 			{ hasPosts ? (
 				<Disabled>

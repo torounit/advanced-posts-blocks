@@ -1,5 +1,5 @@
 {
-	"core": "https://wordpress.org/wordpress-5.9.zip",
+	"core": null,
 	"plugins": [
 		".",
 		"https://downloads.wordpress.org/plugin/wordpress-importer.zip",

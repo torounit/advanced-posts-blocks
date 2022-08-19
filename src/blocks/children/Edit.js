@@ -31,12 +31,20 @@ import {
 	usePosts,
 	usePostType,
 } from '../../util/hooks';
+import { getBlockDefaultClassName } from '@wordpress/blocks';
+import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
 
 const { name } = metadata;
 
 const Edit = ( { attributes, setAttributes } ) => {
-	const { postsToShow, order, orderBy, postType: postTypeName } = attributes;
-	const { postId } = attributes;
+	const {
+		postId,
+		postsToShow,
+		order,
+		orderBy,
+		postType: postTypeName,
+		className,
+	} = attributes;
 	const currentPostType = useCurrentPostType();
 	const currentPostId = useCurrentPostId();
 	const selectedPostType = usePostType(
@@ -150,8 +158,15 @@ const Edit = ( { attributes, setAttributes } ) => {
 		</InspectorControls>
 	);
 	const hasPosts = Array.isArray( childPosts ) && childPosts.length;
+
+	const blockDefaultClassName = getBlockDefaultClassName( name );
+	const blockProps = omitClassNamesFromBlockProps( useBlockProps(), [
+		blockDefaultClassName,
+		className,
+	] );
+
 	return (
-		<div { ...useBlockProps() }>
+		<div { ...blockProps }>
 			{ inspectorControls }
 			{ hasPosts ? (
 				<Disabled>
