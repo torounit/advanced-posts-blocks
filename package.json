@@ -27,20 +27,20 @@
 		"welcome-build-command": "npm run start"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^8.0.0",
-		"@wordpress/blocks": "^11.1.0",
-		"@wordpress/components": "^19.2.0",
-		"@wordpress/compose": "^5.0.7",
-		"@wordpress/data": "^6.1.5",
-		"@wordpress/editor": "^12.0.21",
-		"@wordpress/element": "^4.0.4",
-		"@wordpress/i18n": "^4.2.4",
-		"@wordpress/server-side-render": "^3.0.20",
+		"@wordpress/block-editor": "^9.7.0",
+		"@wordpress/blocks": "^11.14.0",
+		"@wordpress/components": "^19.17.0",
+		"@wordpress/compose": "^5.13.0",
+		"@wordpress/data": "^6.15.0",
+		"@wordpress/editor": "^12.14.0",
+		"@wordpress/element": "^4.13.0",
+		"@wordpress/i18n": "^4.15.0",
+		"@wordpress/server-side-render": "^3.13.0",
 		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
-		"@wordpress/env": "^4.5.0",
-		"@wordpress/scripts": "^22.0.0",
+		"@wordpress/env": "^5.2.0",
+		"@wordpress/scripts": "^23.7.2",
 		"husky": "^7.0.0",
 		"lint-staged": "^12.0.0"
 	},
@@ -58,7 +58,8 @@
 		],
 		"*.js": [
 			"npm run format",
-			"npm run lint-js"
+			"npm run lint-js",
+			"npm run test"
 		],
 		"*.php": [
 			"npm run lint-php"
