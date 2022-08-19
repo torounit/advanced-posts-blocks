@@ -8,15 +8,15 @@ jobs:
         strategy:
             matrix:
                 php-versions: ['7.4', '8.0']
-                wp-versions: ['5.8.4', '5.9.3']
+                wp-versions: ['5.9', '6.0']
         name: PHP ${{ matrix.php-versions }} / WP ${{ matrix.wp-versions }} Test on ${{ matrix.operating-system }}
         steps:
             - uses: actions/checkout@v3
 
-            - name: Use Node.js 14.x
+            - name: Use Node.js 16.x
               uses: actions/setup-node@v3
               with:
-                  node-version: '14'
+                  node-version: '16'
 
             - name: npm install
               run: npm ci
@@ -38,7 +38,9 @@ jobs:
               run: |
                   chmod -R 767 ./ # TODO: Possibly integrate in wp-env
                   echo '{ "core": "https://wordpress.org/wordpress-${{ matrix.wp-versions }}.zip" }' > .wp-env.override.json
-                  WP_ENV_PHP_VERSION=${{ matrix.php-versions }} npm run wp-env start
+                  WP_ENV_CORE=WordPress/WordPress#${{ matrix.wp-versions }} WP_ENV_PHP_VERSION=${{ matrix.php-versions }} npm run wp-env start
+                  npm run wp-env run cli wp core version
+                  npm run wp-env run cli wp cli info
 
             - name: Running lint check
               run: npm run lint-php
@@ -55,10 +57,10 @@ jobs:
             - uses: actions/checkout@v3
               if: contains(github.ref, 'tags/')
 
-            - name: Use Node.js 14.x
+            - name: Use Node.js 16.x
               uses: actions/setup-node@v3
               with:
-                  node-version: '14'
+                  node-version: '16'
               if: contains(github.ref, 'tags/')
 
             - name: npm install
