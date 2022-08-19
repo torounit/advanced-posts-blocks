@@ -7,9 +7,10 @@ export const usePostTypes = () =>
 	);
 
 export const usePostType = ( postType ) =>
-	useSelect( ( select ) => select( 'core' ).getPostType( postType ) || {}, [
-		postType,
-	] );
+	useSelect(
+		( select ) => select( 'core' ).getPostType( postType ) || {},
+		[ postType ]
+	);
 
 export const usePostTypeTaxonomies = ( postType ) =>
 	useSelect(

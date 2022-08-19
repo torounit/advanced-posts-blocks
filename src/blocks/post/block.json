@@ -8,11 +8,7 @@
 	"attributes": {
 		"align": {
 			"type": "string",
-			"enum": [
-				"center",
-				"wide",
-				"full"
-			]
+			"enum": [ "center", "wide", "full" ]
 		},
 		"postType": {
 			"type": "string",
@@ -24,11 +20,7 @@
 		}
 	},
 	"supports": {
-		"align": [
-			"center",
-			"wide",
-			"full"
-		],
+		"align": [ "center", "wide", "full" ],
 		"html": false
 	},
 	"category": "widgets",
