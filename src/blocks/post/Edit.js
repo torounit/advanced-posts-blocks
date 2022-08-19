@@ -23,6 +23,8 @@ import PostTypeControl from '../../util/PostTypeControl';
 import metadata from './block.json';
 import { usePosts, usePostType } from '../../util/hooks';
 import { useSelect } from '@wordpress/data';
+import { getBlockDefaultClassName } from '@wordpress/blocks';
+import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
 
 const { name } = metadata;
 
@@ -45,8 +47,7 @@ const usePost = ( postType, id ) => {
 
 const Edit = ( { attributes, setAttributes } ) => {
 	const [ keyword, setKeyword ] = useState( '' );
-	const { postId } = attributes;
-	const { postType: postTypeName } = attributes;
+	const { postId, className, postType: postTypeName } = attributes;
 	const selectedPostType = usePostType( postTypeName );
 
 	const selectedPost = usePost( selectedPostType, postId );
@@ -100,8 +101,14 @@ const Edit = ( { attributes, setAttributes } ) => {
 		</InspectorControls>
 	);
 
+	const blockDefaultClassName = getBlockDefaultClassName( name );
+	const blockProps = omitClassNamesFromBlockProps( useBlockProps(), [
+		blockDefaultClassName,
+		className,
+	] );
+
 	return (
-		<div { ...useBlockProps() }>
+		<div { ...blockProps }>
 			{ inspectorControls }
 			{ postId ? (
 				<Disabled>
