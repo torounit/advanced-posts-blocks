@@ -29,8 +29,10 @@ export const omitClassNamesFromBlockProps = ( blockProps, classNames = [] ) => {
 
 	return {
 		...blockProps,
-		className: blockClassNames.filter(
-			( className ) => ! flattenClassNames.includes( className )
-		),
+		className: blockClassNames
+			.filter(
+				( className ) => ! flattenClassNames.includes( className )
+			)
+			.join( ' ' ),
 	};
 };
