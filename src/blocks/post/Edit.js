@@ -6,15 +6,9 @@ import { uniqBy } from 'lodash';
 /**
  * WordPress dependencies
  */
-import {
-	ComboboxControl,
-	Disabled,
-	PanelBody,
-	Placeholder,
-} from '@wordpress/components';
+import { ComboboxControl, Disabled, PanelBody } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import ServerSideRender from '@wordpress/server-side-render';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
@@ -25,6 +19,7 @@ import { usePosts, usePostType } from '../../util/hooks';
 import { useSelect } from '@wordpress/data';
 import { getBlockDefaultClassName } from '@wordpress/blocks';
 import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
+import Render from '../../components/Render';
 
 const { name, title } = metadata;
 
@@ -108,18 +103,17 @@ const Edit = ( { attributes, setAttributes } ) => {
 	return (
 		<div { ...blockProps }>
 			{ inspectorControls }
-			{ postId ? (
-				<Disabled>
-					<ServerSideRender
-						block={ name }
-						attributes={ attributes }
-					/>
-				</Disabled>
-			) : (
-				<Placeholder icon="admin-post" label={ title }>
-					{ __( 'Post Not Found.', 'advanced-posts-blocks' ) }
-				</Placeholder>
-			) }
+			<Disabled>
+				<Render
+					name={ name }
+					attributes={ attributes }
+					title={ title }
+					emptyResponseLabel={ __(
+						'Post Not Found.',
+						'advanced-posts-blocks'
+					) }
+				/>
+			</Disabled>
 		</div>
 	);
 };
