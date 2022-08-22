@@ -26,7 +26,7 @@ import { useSelect } from '@wordpress/data';
 import { getBlockDefaultClassName } from '@wordpress/blocks';
 import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
 
-const { name } = metadata;
+const { name, title } = metadata;
 
 const usePost = ( postType, id ) => {
 	return useSelect(
@@ -84,11 +84,9 @@ const Edit = ( { attributes, setAttributes } ) => {
 		/>
 	);
 
-	const title = __( 'Query setting', 'advanced-posts-blocks' );
-
 	const inspectorControls = (
 		<InspectorControls>
-			<PanelBody title={ title }>
+			<PanelBody title={ __( 'Query setting', 'advanced-posts-blocks' ) }>
 				<PostTypeControl
 					value={ selectedPostType }
 					onChange={ ( postType ) => {
@@ -118,10 +116,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 					/>
 				</Disabled>
 			) : (
-				<Placeholder
-					icon="admin-post"
-					label={ __( 'Single Post', 'advanced-posts-blocks' ) }
-				>
+				<Placeholder icon="admin-post" label={ title }>
 					{ __( 'Post Not Found.', 'advanced-posts-blocks' ) }
 				</Placeholder>
 			) }

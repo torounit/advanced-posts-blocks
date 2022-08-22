@@ -3,7 +3,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 import BlockPlaceholder from './BlockPlaceholder';
 import { Spinner } from '@wordpress/components';
 
-const Render = memo( ( { name, attributes, emptyResponseLabel } ) => (
+const Render = memo( ( { name, attributes, title, emptyResponseLabel } ) => (
 	<ServerSideRender
 		block={ name }
 		attributes={ attributes }
@@ -13,7 +13,9 @@ const Render = memo( ( { name, attributes, emptyResponseLabel } ) => (
 			</BlockPlaceholder>
 		) }
 		EmptyResponsePlaceholder={ () => (
-			<BlockPlaceholder>{ emptyResponseLabel }</BlockPlaceholder>
+			<BlockPlaceholder title={ title }>
+				{ emptyResponseLabel }
+			</BlockPlaceholder>
 		) }
 	/>
 ) );

@@ -22,7 +22,7 @@ import metadata from './block.json';
 import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
 import Render from '../../components/Render';
 
-const { name } = metadata;
+const { name, title } = metadata;
 
 const Edit = ( { attributes, setAttributes } ) => {
 	const {
@@ -72,11 +72,9 @@ const Edit = ( { attributes, setAttributes } ) => {
 		);
 	} );
 
-	const title = __( 'Query setting', 'advanced-posts-blocks' );
-
 	const inspectorControls = (
 		<InspectorControls>
-			<PanelBody title={ title }>
+			<PanelBody title={ __( 'Query setting', 'advanced-posts-blocks' ) }>
 				<PostTypeControl
 					value={ selectedPostType }
 					onChange={ ( postType ) => {
@@ -140,6 +138,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 				<Render
 					name={ name }
 					attributes={ attributes }
+					title={ title }
 					emptyResponseLabel={ labels.not_found }
 				/>
 			</Disabled>
