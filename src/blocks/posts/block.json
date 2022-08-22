@@ -1,4 +1,5 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"name": "advanced-posts-blocks/posts",
 	"apiVersion": 2,
 	"title": "Multiple Posts",

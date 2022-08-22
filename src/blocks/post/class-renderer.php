@@ -38,6 +38,11 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		);
 
 		$this->setup_query( $args );
+
+		if ( ! $this->query->found_posts ) {
+			return '';
+		}
+
 		$output = $this->get_content_from_template( $attributes );
 		if ( $output ) {
 			return $output;

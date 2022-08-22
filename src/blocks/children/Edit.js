@@ -1,40 +1,24 @@
 /**
- * External dependencies
- */
-import { pickBy } from 'lodash';
-
-/**
  * WordPress dependencies
  */
-import {
-	Disabled,
-	PanelBody,
-	Placeholder,
-	Spinner,
-	TreeSelect,
-} from '@wordpress/components';
+import { Disabled, PanelBody, TreeSelect } from '@wordpress/components';
 
 import { __ } from '@wordpress/i18n';
-import ServerSideRender from '@wordpress/server-side-render';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
  */
-import QueryControls from '../../util/QueryControls';
+import QueryControls from '../../components/QueryControls';
 import { buildTermsTree } from '../../util/terms';
-import PostTypeControl from '../../util/PostTypeControl';
+import PostTypeControl from '../../components/PostTypeControl';
 import metadata from './block.json';
-import {
-	useCurrentPostId,
-	useCurrentPostType,
-	usePosts,
-	usePostType,
-} from '../../util/hooks';
+import { useCurrentPostType, usePosts, usePostType } from '../../util/hooks';
 import { getBlockDefaultClassName } from '@wordpress/blocks';
 import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
+import Render from '../../components/Render';
 
-const { name } = metadata;
+const { name, title } = metadata;
 
 const Edit = ( { attributes, setAttributes } ) => {
 	const {
@@ -46,7 +30,6 @@ const Edit = ( { attributes, setAttributes } ) => {
 		className,
 	} = attributes;
 	const currentPostType = useCurrentPostType();
-	const currentPostId = useCurrentPostId();
 	const selectedPostType = usePostType(
 		postTypeName ? postTypeName : currentPostType
 	);
@@ -55,24 +38,8 @@ const Edit = ( { attributes, setAttributes } ) => {
 		orderby: orderBy,
 		per_page: -1,
 	} );
-	const childPosts =
-		usePosts(
-			selectedPostType,
-			pickBy(
-				{
-					order,
-					parent: postId ? postId : currentPostId,
-					orderby: orderBy,
-					per_page: postsToShow,
-					ignore_sticky_posts: 1,
-				},
-				( value ) => !! value
-			)
-		) || [];
 
 	const labels = selectedPostType.labels || {};
-
-	const title = __( 'Query setting', 'advanced-posts-blocks' );
 
 	const pagesTree = buildTermsTree(
 		posts.map( ( item ) => ( {
@@ -119,7 +86,7 @@ const Edit = ( { attributes, setAttributes } ) => {
 
 	const inspectorControls = (
 		<InspectorControls>
-			<PanelBody title={ title }>
+			<PanelBody title={ __( 'Query setting', 'advanced-posts-blocks' ) }>
 				<PostTypeControl
 					value={ selectedPostType }
 					filter={ ( { supports } ) => supports[ 'page-attributes' ] }
@@ -157,7 +124,6 @@ const Edit = ( { attributes, setAttributes } ) => {
 			</PanelBody>
 		</InspectorControls>
 	);
-	const hasPosts = Array.isArray( childPosts ) && childPosts.length;
 
 	const blockDefaultClassName = getBlockDefaultClassName( name );
 	const blockProps = omitClassNamesFromBlockProps( useBlockProps(), [
@@ -168,25 +134,14 @@ const Edit = ( { attributes, setAttributes } ) => {
 	return (
 		<div { ...blockProps }>
 			{ inspectorControls }
-			{ hasPosts ? (
-				<Disabled>
-					<ServerSideRender
-						block={ name }
-						attributes={ attributes }
-					/>
-				</Disabled>
-			) : (
-				<Placeholder
-					icon="admin-post"
-					label={ __( 'Child Posts', 'advanced-posts-blocks' ) }
-				>
-					{ ! Array.isArray( childPosts ) ? (
-						<Spinner />
-					) : (
-						labels.not_found
-					) }
-				</Placeholder>
-			) }
+			<Disabled>
+				<Render
+					name={ name }
+					attributes={ attributes }
+					title={ title }
+					emptyResponseLabel={ labels.not_found }
+				/>
+			</Disabled>
 		</div>
 	);
 };
