@@ -21,9 +21,9 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import QueryControls from '../../util/QueryControls';
+import QueryControls from '../../components/QueryControls';
 import { buildTermsTree } from '../../util/terms';
-import PostTypeControl from '../../util/PostTypeControl';
+import PostTypeControl from '../../components/PostTypeControl';
 import metadata from './block.json';
 import {
 	useCurrentPostId,

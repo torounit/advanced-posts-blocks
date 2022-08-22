@@ -19,7 +19,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import PostTypeControl from '../../util/PostTypeControl';
+import PostTypeControl from '../../components/PostTypeControl';
 import metadata from './block.json';
 import { usePosts, usePostType } from '../../util/hooks';
 import { useSelect } from '@wordpress/data';

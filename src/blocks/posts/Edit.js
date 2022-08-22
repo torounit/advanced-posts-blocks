@@ -6,26 +6,21 @@ import { identity } from 'lodash';
 /**
  * WordPress dependencies
  */
-import {
-	Disabled,
-	PanelBody,
-	Placeholder,
-	Spinner,
-} from '@wordpress/components';
+import { Disabled, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import ServerSideRender from '@wordpress/server-side-render';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { getBlockDefaultClassName } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
-import QueryControls from '../../util/QueryControls';
-import PostTypeControl from '../../util/PostTypeControl';
+import QueryControls from '../../components/QueryControls';
+import PostTypeControl from '../../components/PostTypeControl';
 import TermControl from './TermControl';
-import { usePosts, usePostType, usePostTypeTaxonomies } from '../../util/hooks';
+import { usePostType, usePostTypeTaxonomies } from '../../util/hooks';
 import metadata from './block.json';
 import { omitClassNamesFromBlockProps } from '../../util/omitClassNamesFromBlockProps';
+import Render from '../../components/Render';
 
 const { name } = metadata;
 
@@ -53,14 +48,6 @@ const Edit = ( { attributes, setAttributes } ) => {
 			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.terms;
 		}
 	}
-	const latestPosts = usePosts( selectedPostType, {
-		...taxQuery,
-		order,
-		offset,
-		orderby: orderBy,
-		per_page: postsToShow,
-		advanced_posts_blocks_preview: true,
-	} );
 
 	const labels = selectedPostType.labels || {};
 
@@ -139,35 +126,23 @@ const Edit = ( { attributes, setAttributes } ) => {
 			</PanelBody>
 		</InspectorControls>
 	);
-	const hasPosts = Array.isArray( latestPosts ) && latestPosts.length;
 
 	const blockDefaultClassName = getBlockDefaultClassName( name );
 	const blockProps = omitClassNamesFromBlockProps( useBlockProps(), [
 		blockDefaultClassName,
 		className,
 	] );
+
 	return (
 		<div { ...blockProps }>
 			{ inspectorControls }
-			{ hasPosts ? (
-				<Disabled>
-					<ServerSideRender
-						block={ name }
-						attributes={ attributes }
-					/>
-				</Disabled>
-			) : (
-				<Placeholder
-					icon="admin-post"
-					label={ __( 'Multiple Posts', 'advanced-posts-blocks' ) }
-				>
-					{ ! Array.isArray( latestPosts ) ? (
-						<Spinner />
-					) : (
-						labels.not_found
-					) }
-				</Placeholder>
-			) }
+			<Disabled>
+				<Render
+					name={ name }
+					attributes={ attributes }
+					emptyResponseLabel={ labels.not_found }
+				/>
+			</Disabled>
 		</div>
 	);
 };

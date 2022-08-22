@@ -1,6 +1,6 @@
 import { SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { usePostTypes } from './hooks';
+import { usePostTypes } from '../util/hooks';
 
 const PostTypeControl = ( { onChange, value, filter = () => true } ) => {
 	const postTypes = usePostTypes()

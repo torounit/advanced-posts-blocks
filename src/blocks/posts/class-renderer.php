@@ -79,7 +79,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return string
 	 */
-	public function get_rest_base( WP_Taxonomy $taxonomy ) : string {
+	public function get_rest_base( WP_Taxonomy $taxonomy ): string {
 		return ! empty( $taxonomy->rest_base ) && is_string( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
 	}
 
@@ -90,7 +90,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return WP_Taxonomy[]
 	 */
-	public function get_post_type_taxonomies( $post_type ) : array {
+	public function get_post_type_taxonomies( $post_type ): array {
 		return array_map( 'get_taxonomy', get_object_taxonomies( $post_type ) );
 	}
 
@@ -101,7 +101,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 *
 	 * @return string|null
 	 */
-	public function render( array $attributes ) : string {
+	public function render( array $attributes ): string {
 		$args      = array(
 			'posts_per_page'      => $attributes['postsToShow'],
 			'post_status'         => 'publish',
@@ -154,6 +154,11 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 		$args['tax_query']['relation'] = 'AND';
 
 		$this->setup_query( $args );
+
+		if ( ! $this->query->found_posts ) {
+			return '';
+		}
+
 		$output = $this->get_content_from_template( $attributes );
 		if ( $output ) {
 			return $output;
