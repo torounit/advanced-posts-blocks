@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { identity } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { Disabled, PanelBody } from '@wordpress/components';
@@ -38,16 +33,6 @@ const Edit = ( { attributes, setAttributes } ) => {
 
 	const selectedPostType = usePostType( postTypeName );
 	const taxonomies = usePostTypeTaxonomies( selectedPostType );
-
-	const taxQuery = {};
-	for ( const taxonomy of taxonomies ) {
-		const taxonomyTerms = attributes[ taxonomy.rest_base ];
-		if ( Array.isArray( taxonomyTerms ) && taxonomyTerms.length > 0 ) {
-			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.filter( identity );
-		} else if ( taxonomyTerms?.terms && taxonomyTerms.terms?.length > 0 ) {
-			taxQuery[ taxonomy.rest_base ] = taxonomyTerms.terms;
-		}
-	}
 
 	const labels = selectedPostType.labels || {};
 
