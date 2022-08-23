@@ -131,8 +131,10 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 				);
 			}
 
+			/**
+			 * @var int[] $terms
+			 */
 			$terms = array_filter( $attributes[ $base ]['terms'] );
-
 			if ( ! empty( $terms ) ) {
 				$tax_query = array();
 				foreach ( $terms as $term ) {
@@ -141,14 +143,16 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 							'taxonomy' => $taxonomy->name,
 							'field'    => 'term_id',
 							'terms'    => $term,
+							'operator' => $term > 0 ? 'IN' : 'NOT IN',
 						),
 					);
 				}
-				$tax_query['relation'] = 'AND';
 
-				$args['tax_query'] = $tax_query;
+				$args['tax_query'][] = $tax_query;
 			}
 		}
+
+		$args['tax_query']['relation'] = 'AND';
 
 		$this->setup_query( $args );
 

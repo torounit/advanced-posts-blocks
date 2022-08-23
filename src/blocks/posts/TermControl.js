@@ -2,7 +2,7 @@ import { useSelect } from '@wordpress/data';
 import { FormTokenField } from '@wordpress/components';
 
 const TermControl = ( { taxonomy, termIds, handleChange } ) => {
-	const categories =
+	const categories = (
 		useSelect(
 			( select ) => {
 				return select( 'core' ).getEntityRecords(
@@ -14,8 +14,19 @@ const TermControl = ( { taxonomy, termIds, handleChange } ) => {
 				);
 			},
 			[ taxonomy ]
-		) ?? [];
-
+		) ?? []
+	).flatMap( ( category ) => {
+		return [
+			{
+				id: category.id,
+				name: category.name,
+			},
+			{
+				id: category.id * -1,
+				name: `- ${ category.name }`,
+			},
+		];
+	} );
 	const categoriesMapById = categories.reduce( ( acc, category ) => {
 		return {
 			...acc,
