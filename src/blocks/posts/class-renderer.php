@@ -139,20 +139,17 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 				$tax_query = array();
 				foreach ( $terms as $term ) {
 					$tax_query[] = array(
-						array(
-							'taxonomy' => $taxonomy->name,
-							'field'    => 'term_id',
-							'terms'    => $term,
-							'operator' => $term > 0 ? 'IN' : 'NOT IN',
-						),
+						'taxonomy' => $taxonomy->name,
+						'field'    => 'term_id',
+						'terms'    => $term,
+						'operator' => $term > 0 ? 'IN' : 'NOT IN',
 					);
 				}
 
-				$args['tax_query'][] = $tax_query;
+				$args['tax_query'][]           = $tax_query;
+				$args['tax_query']['relation'] = 'AND';
 			}
 		}
-
-		$args['tax_query']['relation'] = 'AND';
 
 		$this->setup_query( $args );
 
