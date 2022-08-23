@@ -134,9 +134,9 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			$terms = array_filter( $attributes[ $base ]['terms'] );
 
 			if ( ! empty( $terms ) ) {
-				$query = array();
+				$tax_query = array();
 				foreach ( $terms as $term ) {
-					$query[] = array(
+					$tax_query[] = array(
 						array(
 							'taxonomy' => $taxonomy->name,
 							'field'    => 'term_id',
@@ -144,13 +144,11 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 						),
 					);
 				}
-				$query['relation'] = 'AND';
+				$tax_query['relation'] = 'AND';
 
-				$args['tax_query'][] = $query;
+				$args['tax_query'] = $tax_query;
 			}
 		}
-
-		$args['tax_query']['relation'] = 'AND';
 
 		$this->setup_query( $args );
 
