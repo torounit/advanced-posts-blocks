@@ -1,13 +1,13 @@
 # Advanced Posts Blocks
-Contributors:      Toro_Unit  
-Donate link:       https://www.paypal.me/torounit  
-Tags:              posts, blocks  
-Requires at least: 5.9  
-Tested up to:      5.9  
-Requires PHP:      7.3  
+Contributors:      Toro_Unit
+Donate link:       https://www.paypal.me/torounit
+Tags:              posts, blocks
+Requires at least: 5.9
+Tested up to:      6.0
+Requires PHP:      7.4
 Stable tag:        4.0.0
-License:           GPLv3 or later  
-License URI:       https://www.gnu.org/licenses/gpl-3.0.html  
+License:           GPLv3 or later
+License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
@@ -107,6 +107,12 @@ endif;
 ```
 
 ## Changelog
+
+### 5.0.0
+* Refactor code.
+* Tested WP 6.0.
+* Use SSR only for Preview.
+* Support query for ignore terms.
 
 ### 4.0.0
 * add `advanced_posts_blocks_use_default_template` filter.
