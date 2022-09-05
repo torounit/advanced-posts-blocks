@@ -4,7 +4,7 @@
 	"apiVersion": 2,
 	"title": "Single Post",
 	"description": "Display single post.",
-	"icon": "admin-post",
+	"icon": "text-page",
 	"textdomain": "advanced-posts-blocks",
 	"attributes": {
 		"align": {

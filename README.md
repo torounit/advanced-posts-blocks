@@ -64,12 +64,6 @@ Support template hierarchy. The templates are searched in the following order.
 * `$class_name` (string) Block style class names.
 * `$query` (WP_Query) Query for block.
 
-
-### Credits
-
-* [css.gg](https://css.gg/)
-* [feathericon](https://feathericon.com/)
-
 ## Screenshots
 
 1. Blocks

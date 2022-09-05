@@ -4,7 +4,7 @@
 	"apiVersion": 2,
 	"title": "Child Posts",
 	"description": "Display children of selected post.",
-	"icon": "admin-page",
+	"icon": "networking",
 	"textdomain": "advanced-posts-blocks",
 	"attributes": {
 		"align": {
