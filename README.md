@@ -6,8 +6,8 @@ Requires at least: 5.9
 Tested up to:      6.0
 Requires PHP:      7.3
 Stable tag:        4.0.0
-License:           GPLv3 or later
-License URI:       https://www.gnu.org/licenses/gpl-3.0.html
+License:           GPLv2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
 Create Blocks filtered by any post type and any categories, tags or custom taxonomy terms.
 
@@ -67,7 +67,7 @@ Support template hierarchy. The templates are searched in the following order.
 
 ### Credits
 
-* [Icons - Material Design](https://material.io/tools/icons/) (Apache License Version 2.0)
+* [css.gg](https://css.gg/)
 * [feathericon](https://feathericon.com/)
 
 ## Screenshots
@@ -109,6 +109,7 @@ endif;
 ## Changelog
 
 ### 5.0.0
+* Change icons.
 * Refactor code.
 * Tested WP 6.0.
 * Use SSR only for Preview.
