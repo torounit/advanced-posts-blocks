@@ -12,7 +12,7 @@
 		"format": "wp-scripts format",
 		"lint-js": "wp-scripts lint-js",
 		"lint-js:fix": "wp-scripts lint-js --fix",
-		"test-unit-php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/advanced-posts-blocks/phpunit.xml.dist --verbose'",
+		"test-unit-php": "wp-env run --env-cwd='wp-content/plugins/advanced-posts-blocks' tests-wordpress vendor/bin/phpunit -c phpunit.xml.dist --verbose",
 		"packages-update": "wp-scripts packages-update",
 		"lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist",
 		"prepare": "husky install"
