@@ -5,6 +5,7 @@
 		"https://downloads.wordpress.org/plugin/wordpress-importer.zip",
 		"https://downloads.wordpress.org/plugin/gutenberg.zip"
 	],
+	"phpVersion": "8.2",
 	"port": 18888,
 	"env": {
 		"tests": {

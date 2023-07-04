@@ -2,8 +2,8 @@
 Contributors:      Toro_Unit
 Donate link:       https://www.paypal.me/torounit
 Tags:              posts, blocks
-Requires at least: 5.9
-Tested up to:      6.0
+Requires at least: 6.1
+Tested up to:      6.2
 Requires PHP:      7.3
 Stable tag:        5.0.0
 License:           GPLv2 or later
@@ -101,6 +101,10 @@ endif;
 ```
 
 ## Changelog
+
+### 5.1.0
+* Tested on WP 6.2 and PHP 8.2.
+* add `attributes` parameter to `advanced_posts_blocks_posts_query` filter.
 
 ### 5.0.0
 * Change icons.
