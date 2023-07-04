@@ -17,7 +17,9 @@ Create Blocks filtered by any post type and any categories, tags or custom taxon
 [![Downloads](https://img.shields.io/wordpress/plugin/dt/advanced-posts-blocks.svg?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
 [![Tested up](https://img.shields.io/wordpress/v/advanced-posts-blocks.svg?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
 [![wp.org rating](https://img.shields.io/wordpress/plugin/r/advanced-posts-blocks.svg?style=for-the-badge)](https://wordpress.org/plugins/advanced-posts-blocks/)
-[![Build Status](https://img.shields.io/github/workflow/status/torounit/advanced-posts-blocks/Test?style=for-the-badge)](https://github.com/torounit/advanced-posts-blocks/actions)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/torounit/advanced-posts-blocks/push-on-test.yml?branch=main&style=for-the-badge)](https://github.com/torounit/advanced-posts-blocks/actions)
+
+
 
 [![](https://ps.w.org/advanced-posts-blocks/assets/banner-1544x500.png?rev=1044335)](https://wordpress.org/plugins/advanced-posts-blocks/)
 <!-- /only:github -->
