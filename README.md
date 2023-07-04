@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.me/torounit
 Tags:              posts, blocks
 Requires at least: 6.1
 Tested up to:      6.2
-Requires PHP:      7.3
+Requires PHP:      7.4
 Stable tag:        5.0.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
