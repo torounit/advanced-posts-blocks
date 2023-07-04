@@ -67,7 +67,7 @@ abstract class Renderer {
 	}
 
 	/**
-	 * Regsiter Block Type.
+	 * Register Block Type.
 	 */
 	protected function register() {
 		$block      = register_block_type( dirname( PLUGIN_FILE ) . '/build/blocks/' . $this->dirname );
@@ -82,7 +82,7 @@ abstract class Renderer {
 
 
 	/**
-	 * Getter for attirbutes.
+	 * Getter for attributes.
 	 *
 	 * @return array
 	 */
@@ -251,7 +251,16 @@ abstract class Renderer {
 	 * @param string $query_var query var.
 	 */
 	protected function setup_query( array $args, string $query_var = 'query' ) {
-		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name );
+		/**
+		 * Filters query arguments.
+		 *
+		 * @param array $args query arguments.
+		 * @param string $name block name.
+		 * @param array $attributes block attributes.
+		 *
+		 * @since 0.6.0
+		 */
+		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name, $this->attributes );
 		$this->query = new WP_Query( $args );
 		$this->set_template_args( $query_var, $this->query );
 	}
