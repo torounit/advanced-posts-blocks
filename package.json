@@ -12,7 +12,7 @@
 		"format": "wp-scripts format",
 		"lint-js": "wp-scripts lint-js",
 		"lint-js:fix": "wp-scripts lint-js --fix",
-		"test-unit-php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/advanced-posts-blocks/phpunit.xml.dist --verbose'",
+		"test-unit-php": "wp-env run --env-cwd='wp-content/plugins/advanced-posts-blocks' tests-wordpress vendor/bin/phpunit -c phpunit.xml.dist --verbose",
 		"packages-update": "wp-scripts packages-update",
 		"lint-php": "./vendor/bin/phpcs --standard=./.phpcs.xml.dist",
 		"prepare": "husky install"
@@ -27,23 +27,23 @@
 		"welcome-build-command": "npm run start"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^9.7.0",
-		"@wordpress/blocks": "^11.14.0",
-		"@wordpress/components": "^19.17.0",
-		"@wordpress/compose": "^5.13.0",
-		"@wordpress/data": "^6.15.0",
-		"@wordpress/editor": "^12.14.0",
-		"@wordpress/element": "^4.13.0",
-		"@wordpress/i18n": "^4.15.0",
-		"@wordpress/server-side-render": "^3.13.0",
-		"prettier": "npm:wp-prettier@2.6.2",
+		"@wordpress/block-editor": "^12.4.0",
+		"@wordpress/blocks": "^12.13.0",
+		"@wordpress/components": "^25.2.0",
+		"@wordpress/compose": "^6.13.0",
+		"@wordpress/data": "^9.6.0",
+		"@wordpress/editor": "^13.13.0",
+		"@wordpress/element": "^5.13.0",
+		"@wordpress/i18n": "^4.36.0",
+		"@wordpress/server-side-render": "^4.13.0",
+		"prettier": "npm:wp-prettier@2.8.5",
 		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
-		"@wordpress/env": "^5.2.0",
-		"@wordpress/scripts": "^23.7.2",
-		"husky": "^8.0.1",
-		"lint-staged": "^13.0.3"
+		"@wordpress/env": "^8.2.0",
+		"@wordpress/scripts": "^26.7.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.3"
 	},
 	"lint-staged": {
 		"{*.css,*.scss}": [
