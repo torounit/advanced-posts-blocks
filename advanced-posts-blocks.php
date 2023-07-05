@@ -7,7 +7,7 @@
  * Author URI:      https://torounit.com
  * Text Domain:     advanced-posts-blocks
  * Domain Path:     /languages
- * Version: 5.1.0
+ * Version: 5.1.1
  * Requires at least: 6.1
  * Requires PHP: 7.4
  *
