@@ -8,6 +8,8 @@
  * Text Domain:     advanced-posts-blocks
  * Domain Path:     /languages
  * Version: 5.1.0
+ * Requires at least: 6.1
+ * Requires PHP: 7.4
  *
  * @package         Advanced_Posts_Blocks
  */
