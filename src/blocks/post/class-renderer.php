@@ -37,7 +37,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'post_type' => $attributes['postType'],
 		);
 
-		$this->setup_query( $args );
+		$this->setup_query( $args, $attributes );
 
 		if ( ! $this->query->found_posts ) {
 			return '';

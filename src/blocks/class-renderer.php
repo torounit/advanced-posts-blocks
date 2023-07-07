@@ -248,9 +248,10 @@ abstract class Renderer {
 	 * Create \WP_Query and set $query.
 	 *
 	 * @param array $args URL query string or array of vars.
+	 * @param array $attributes Block attributes.
 	 * @param string $query_var query var.
 	 */
-	protected function setup_query( array $args, string $query_var = 'query' ) {
+	protected function setup_query( array $args, array $attributes = array(), string $query_var = 'query' ) {
 		/**
 		 * Filters query arguments.
 		 *
@@ -260,7 +261,7 @@ abstract class Renderer {
 		 *
 		 * @since 0.6.0
 		 */
-		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name, $this->attributes );
+		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name, $attributes );
 		$this->query = new WP_Query( $args );
 		$this->set_template_args( $query_var, $this->query );
 	}
