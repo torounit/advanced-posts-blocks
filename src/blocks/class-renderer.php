@@ -72,6 +72,9 @@ abstract class Renderer {
 	protected function register() {
 		$block      = register_block_type( dirname( PLUGIN_FILE ) . '/build/blocks/' . $this->dirname );
 		$this->name = $block->name;
+		if ( ! $block ) {
+			return;
+		}
 		$block->set_props(
 			array(
 				'attributes'      => array_merge( $block->attributes, $this->get_attributes() ),
@@ -94,10 +97,12 @@ abstract class Renderer {
 	 * Render callback
 	 *
 	 * @param array $attributes block attributes.
+	 * @param string $block_content block content.
+	 * @param \WP_Block $block_instance block instance.
 	 *
 	 * @return string
 	 */
-	abstract public function render( array $attributes ): string;
+	abstract public function render( array $attributes, string $block_content, \WP_Block $block_instance ): string;
 
 	/**
 	 * Get html class names.
@@ -249,19 +254,21 @@ abstract class Renderer {
 	 *
 	 * @param array $args URL query string or array of vars.
 	 * @param array $attributes Block attributes.
+	 * @param \WP_Block|null $block_instance Block instance.
 	 * @param string $query_var query var.
 	 */
-	protected function setup_query( array $args, array $attributes = array(), string $query_var = 'query' ) {
+	protected function setup_query( array $args, array $attributes = array(), \WP_Block $block_instance = null, string $query_var = 'query' ) {
 		/**
 		 * Filters query arguments.
 		 *
 		 * @param array $args query arguments.
 		 * @param string $name block name.
 		 * @param array $attributes block attributes.
+		 * @param \WP_Block $block_instance Block instance.
 		 *
 		 * @since 0.6.0
 		 */
-		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name, $attributes );
+		$args        = apply_filters( 'advanced_posts_blocks_posts_query', $args, $this->name, $attributes, $block_instance );
 		$this->query = new WP_Query( $args );
 		$this->set_template_args( $query_var, $this->query );
 	}

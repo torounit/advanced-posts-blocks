@@ -25,10 +25,12 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 	 * Render callback
 	 *
 	 * @param array $attributes block attributes.
+	 * @param string $block_content block content.
+	 * @param \WP_Block $block_instance block instance.
 	 *
 	 * @return string
 	 */
-	public function render( array $attributes ) : string {
+	public function render( array $attributes, string $block_content, \WP_Block $block_instance ) : string {
 		$args = array(
 			'posts_per_page' => $attributes['postsToShow'],
 			'post_status'    => 'publish',
@@ -38,7 +40,7 @@ class Renderer extends \Advanced_Posts_Blocks\Blocks\Renderer {
 			'post_type'      => $attributes['postType'] ? $attributes['postType'] : get_post_type(),
 		);
 
-		$this->setup_query( $args, $attributes );
+		$this->setup_query( $args, $attributes, $block_instance );
 
 		if ( ! $this->query->found_posts ) {
 			return '';
