@@ -70,11 +70,11 @@ abstract class Renderer {
 	 * Register Block Type.
 	 */
 	protected function register() {
-		$block      = register_block_type( dirname( PLUGIN_FILE ) . '/build/blocks/' . $this->dirname );
-		$this->name = $block->name;
+		$block = register_block_type( dirname( PLUGIN_FILE ) . '/build/blocks/' . $this->dirname );
 		if ( ! $block ) {
 			return;
 		}
+		$this->name = $block->name;
 		$block->set_props(
 			array(
 				'attributes'      => array_merge( $block->attributes, $this->get_attributes() ),
