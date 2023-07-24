@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"name": "advanced-posts-blocks/post",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"title": "Single Post",
 	"description": "Display single post.",
 	"icon": "text-page",
